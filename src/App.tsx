@@ -31,9 +31,9 @@ const App = (): JSX.Element => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/*" element={<Layout />}>
+        <Route path="/" element={<Layout />}>
+          <Route path="editor" element={<GraphiqlPage />} />
           <Route index element={<WelcomePage />} />
-          <Route path="/editor" element={<GraphiqlPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
