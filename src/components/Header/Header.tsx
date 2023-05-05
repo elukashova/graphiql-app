@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './Header.module.css';
 import Logo from './components/Logo/Logo';
 import ButtonLink from './components/ButtonLink/ButtonLink';
+import ButtonLang from './components/ButtonLang/ButtonLang';
 
 const Header = (): JSX.Element => {
   const [scroll, setScroll] = useState(false);
@@ -26,9 +27,7 @@ const Header = (): JSX.Element => {
           {/* нужно будет поставить условие, кнопка входа в приложение будет появляться когда пользоватеь авторизован */}
           <ButtonLink to={'/auth'}>Auth</ButtonLink>
           <ButtonLink to={'/editor'}>Editor</ButtonLink>
-          <button type="button" className={styles.button}>
-            Lang
-          </button>
+          <ButtonLang />
         </div>
       </div>
     </header>
