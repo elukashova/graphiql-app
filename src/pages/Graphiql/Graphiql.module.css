@@ -13,13 +13,13 @@
   flex-direction: column;
 }
 
-.editorWrapper {
+.editor-wrapper {
   width: 100%;
   display: flex;
   gap: calc(0.5rem + 4%);
 }
 
-.editorSection {
+.editor-section {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);

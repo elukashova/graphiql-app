@@ -3,7 +3,7 @@ import styles from './Editor.module.css';
 
 const Editor = (): JSX.Element => {
   return (
-    <section className={`${styles.editorWrapper}`}>
+    <section className={`${styles['editor-wrapper']}`}>
       <textarea
         defaultValue={`query {\n  test {\n    id\n  }\n}`}
         className={`${styles.textarea}`}

@@ -11,8 +11,8 @@ const GraphiqlPage = (): JSX.Element => {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
-        <div className={styles.editorWrapper}>
-          <section className={`${styles.editorSection}`}>
+        <div className={styles['editor-wrapper']}>
+          <section className={`${styles['editor-section']}`}>
             <Editor />
             <section className={`${styles.response}`}>
               <textarea className={`${styles.textarea}`} disabled>
