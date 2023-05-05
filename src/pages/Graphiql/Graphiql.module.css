@@ -1,0 +1,34 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 2em 0 4em;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.editorWrapper,
+.editorSection {
+  display: flex;
+  gap: calc(1rem + 10%);
+}
+
+.docs {
+  height: fit-content;
+  background-color: transparent;
+  padding: 0;
+}
+
+textarea[disabled] {
+  resize: none;
+  height: 100px;
+  width: 300px;
+  background-color: #f2f2f2;
+  color: var(--background-dark);
+  cursor: text;
+}
