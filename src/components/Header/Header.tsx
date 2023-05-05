@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import styles from './Header.module.css';
 import Logo from './components/Logo/Logo';
 import ButtonLink from './components/ButtonLink/ButtonLink';
+import ButtonLang from './components/ButtonLang/ButtonLang';
+import { useAppSelector } from '../../store/hooks';
+import { selectAuth } from '../../store/slices/auth';
 
 const Header = (): JSX.Element => {
   const [scroll, setScroll] = useState(false);
+  const { isAuth } = useAppSelector(selectAuth);
 
   const scrollHeader = () => {
     if (window.scrollY >= 50) setScroll(true);
@@ -18,17 +22,15 @@ const Header = (): JSX.Element => {
       <div className={styles.wrapper}>
         <Logo />
         <div className={styles.buttons}>
+          {!isAuth && <ButtonLink to={'/auth'}>Auth</ButtonLink>}
           {/* {token && (
               <ButtonLink to={'/}>
                 Go to App
               </ButtonLink>
             )} */}
           {/* нужно будет поставить условие, кнопка входа в приложение будет появляться когда пользоватеь авторизован */}
-          <ButtonLink to={'/auth'}>Auth</ButtonLink>
           <ButtonLink to={'/editor'}>Editor</ButtonLink>
-          <button type="button" className={styles.button}>
-            Lang
-          </button>
+          <ButtonLang />
         </div>
       </div>
     </header>
