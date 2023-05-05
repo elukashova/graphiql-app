@@ -10,10 +10,9 @@ const App = (): JSX.Element => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout content={<WelcomePage />} />}>
-          <Route path="/editor" element={<Layout content={<GraphiqlPage />} />} />
-          <Route path="*" element={<Layout content={<NotFound />} />} />
-        </Route>
+        <Route path="/" element={<Layout content={<WelcomePage />} />} />
+        <Route path="/editor" element={<Layout content={<GraphiqlPage />} />} />
+        <Route path="*" element={<Layout content={<NotFound />} />} />
       </Routes>
     </BrowserRouter>
   );
