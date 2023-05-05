@@ -1,0 +1,47 @@
+.container {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2em 0 4em;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.editor-wrapper {
+  width: 100%;
+  display: flex;
+  gap: calc(0.5rem + 4%);
+}
+
+.editor-section {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5%;
+}
+
+.response {
+  width: 100%;
+}
+
+.docs {
+  height: fit-content;
+  background-color: transparent;
+  padding: 0;
+}
+
+.textarea {
+  resize: none;
+  width: 100%;
+  min-height: 5rem;
+  height: max-content;
+  border-radius: 10px;
+  padding: 15px;
+  cursor: text;
+}

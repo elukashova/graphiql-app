@@ -1,0 +1,40 @@
+.button {
+  width: 10rem;
+  height: 3rem;
+  margin: 0.7rem 0;
+  border: none;
+  border-radius: 10px;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.7s ease-in-out;
+  border: 1px solid transparent;
+  outline: none;
+}
+
+.button:focus {
+  outline: none;
+  transition: border 0.3s ease-in-out;
+  border: 1px solid var(--grey-light-1);
+}
+
+.active {
+  background: var(--purple-dark);
+  color: var(--background-light);
+}
+
+.active:hover {
+  color: var(--white);
+}
+
+.disabled {
+  color: var(--greyDark);
+  cursor: auto;
+}
+
+.button p {
+  font-size: 1.6rem;
+  transition: all 0.5s ease-in-out;
+}
