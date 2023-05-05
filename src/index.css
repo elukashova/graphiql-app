@@ -1,18 +1,7 @@
-:root {
+/* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  --purple-light: #c7b9ff;
-  --purple-dark: #a259ff;
-  --yellow: #ffc700;
-  --background-dark: #323232;
-  --background-light: #e2e2e2;
-  --white: #ffffff;
-  --grey-light-1: #e4ebf5;
-  --grey-light-2: #c8d0e7;
-  --grey-light-3: #bec8e4;
-  --grey-dark: #9baacf;
 
   color-scheme: light dark;
 
@@ -22,8 +11,8 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
-
-a {
+ */
+/* a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
@@ -31,7 +20,7 @@ a {
 
 a:hover {
   color: #535bf2;
-}
+} */
 
 body {
   margin: 0;

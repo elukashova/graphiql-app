@@ -15,7 +15,9 @@ const GraphiqlPage = (): JSX.Element => {
           <section className={`${styles.editorSection}`}>
             <Editor />
             <section className={`${styles.response}`}>
-              <textarea disabled>Best response ever</textarea>
+              <textarea className={`${styles.textarea}`} disabled>
+                Best response ever
+              </textarea>
             </section>
           </section>
           <button className={`${styles.docs}`} type="button">
