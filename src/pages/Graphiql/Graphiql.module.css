@@ -14,34 +14,12 @@
 }
 
 .editor-wrapper {
-  width: 100%;
   display: flex;
-  gap: calc(0.5rem + 4%);
-}
-
-.editor-section {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 5%;
-}
-
-.response {
-  width: 100%;
+  gap: calc(0.7rem + 4%);
 }
 
 .docs {
   height: fit-content;
   background-color: transparent;
   padding: 0;
-}
-
-.textarea {
-  resize: none;
-  width: 100%;
-  min-height: 5rem;
-  height: max-content;
-  border-radius: 10px;
-  padding: 15px;
-  cursor: text;
 }
