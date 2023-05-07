@@ -6,6 +6,7 @@
   display: flex;
   flex: 0 0 auto;
   align-items: center;
+  justify-content: center;
 }
 
 .wrapper {
@@ -55,11 +56,11 @@
 
 .rss {
   font-size: 0;
-  width: 100px;
+  width: 80px;
   height: 50px;
   background-image: url('./rss.svg');
   background-repeat: no-repeat;
-  background-size: 100px 50px;
+  background-size: 80px 50px;
 }
 
 .rss:hover {
