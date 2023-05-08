@@ -9,7 +9,7 @@ export interface EditorState {
 
 const initialState: EditorState = {
   formValue: 'query { characters(filter: { name: "Morty" }) { results { name status species } } }',
-  formResponse: 'Please, submit for response',
+  formResponse: 'Please, submit for response.',
   status: 'idle',
   error: null,
 };
