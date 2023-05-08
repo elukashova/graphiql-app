@@ -1,31 +1,19 @@
 import React from 'react';
 import styles from './Graphiql.module.css';
 import Editor from './Editor/Editor';
+import ApiInput from './ApiInput/ApiInput';
+import Docs from './Docs/Docs';
 
 const GraphiqlPage = (): JSX.Element => {
   return (
     <div className={styles.container}>
+      <ApiInput />
       <div className={styles.wrapper}>
         <div className={styles['editor-wrapper']}>
           <Editor />
-          {/* <section className={`${styles.response}`}>
-              <textarea
-                className={`${styles.textarea}`}
-                disabled
-                defaultValue="Best response ever"
-              ></textarea>
-            </section> */}
-
-          <button className={`${styles.docs}`} type="button">
-            <img
-              src="https://img.icons8.com/color/48/null/story-book.png"
-              alt="Documents"
-              title="Docs"
-            />
-          </button>
+          <Docs />
         </div>
       </div>
-
       <aside>
         <section className={`${styles.panel}`}>
           <h2>Variables</h2>

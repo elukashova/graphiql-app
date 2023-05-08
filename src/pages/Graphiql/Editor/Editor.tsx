@@ -1,37 +1,27 @@
 import Button from '../../../components/Button/Button';
-import React, { useState } from 'react';
+import React, { ChangeEvent, FormEvent } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchFormResponse, updateFormValue } from '../../../store/slices/editor';
 import styles from './Editor.module.css';
+import { AppDispatch, RootState } from '../../../store/store';
 
-const Editor = (): JSX.Element => {
-  const url = 'https://rickandmortyapi.com/graphql';
-  const [response, setResponse] = useState('response');
-  const [formValue, setFormValue] = useState(
-    'query { characters(filter: { name: "Morty" }) { results { name status species } } }'
-  );
+export const useAppDispatch = () => useDispatch<AppDispatch>();
 
-  const makeRequest = async (query: string): Promise<string> => {
-    console.log('makeRequest');
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify({ query }),
-    });
-    const result = await res.json();
-    console.log(result);
-    setResponse(JSON.stringify(result));
-    return JSON.stringify(result);
-  };
+const Editor: React.FC = (): JSX.Element => {
+  const dispatch = useDispatch<AppDispatch>();
+  const formValue = useSelector((state: RootState) => state.editor.formValue);
+  const formResponse = useSelector((state: RootState) => state.editor.formResponse);
+  /* const formStatus = useSelector((state: RootState) => state.editor.status);
+  const formError = useSelector((state: RootState) => state.editor.error); */
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    console.log('handleSubmit');
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    makeRequest(formValue);
+    const url = localStorage.getItem('apiUrl') || 'https://rickandmortyapi.com/graphql';
+    dispatch(fetchFormResponse({ query: formValue, url }));
   };
 
-  const handleFormChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setFormValue(e.target.value);
+  const handleFormValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch(updateFormValue(e.target.value));
   };
 
   return (
@@ -40,11 +30,11 @@ const Editor = (): JSX.Element => {
         <textarea
           name="query"
           value={formValue}
-          onChange={handleFormChange}
+          onChange={handleFormValue}
           className={`${styles.textarea}`}
         ></textarea>
         <section className={`${styles.response}`}>
-          <textarea className={`${styles.textarea}`} disabled value={response}></textarea>
+          <textarea className={`${styles.textarea}`} disabled value={formResponse}></textarea>
         </section>
         <Button text="Submit" type="submit" disabled={false} />
       </form>

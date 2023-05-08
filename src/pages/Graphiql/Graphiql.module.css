@@ -17,9 +17,3 @@
   display: flex;
   gap: calc(0.7rem + 4%);
 }
-
-.docs {
-  height: fit-content;
-  background-color: transparent;
-  padding: 0;
-}
