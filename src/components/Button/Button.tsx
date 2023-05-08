@@ -4,19 +4,14 @@ import styles from './Button.module.css';
 type ButtonProps = {
   text: string;
   disabled: boolean;
-  onClick: () => void;
+  type: 'button' | 'submit' | 'reset' | undefined;
 };
 
-const Button = ({ text, disabled = false, onClick }: ButtonProps): JSX.Element => {
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    onClick();
-  };
-
+const Button = ({ text, disabled = false, type = 'button' }: ButtonProps): JSX.Element => {
   const buttonClassNames = `${styles.button} ${disabled ? styles.disabled : styles.active}`;
 
   return (
-    <button className={buttonClassNames} onClick={handleClick} type="button">
+    <button className={buttonClassNames} type={type}>
       <p>{text}</p>
     </button>
   );
