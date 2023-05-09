@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../store/hooks';
-import { setRoute } from '../store/slices/routeSlice';
+import { setRoute } from '../store/slices/route';
 import { AuthHook } from './hooks.types';
 
 const useAuth = (): AuthHook => {

@@ -1,4 +1,4 @@
-import { setIsAuth } from '../store/slices/authSlice';
+import { setIsAuth } from '../store/slices/auth';
 import { store } from '../store/store';
 import {
   createUserWithEmailAndPassword,

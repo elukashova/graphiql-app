@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppSelector } from '../../store/hooks';
-import { selectRoute } from '../../store/slices/routeSlice';
+import { selectRoute } from '../../store/slices/route';
 import styles from './Auth.module.css';
 import AuthForm from './components/Form';
 import useAuth from '../../hooks/authHook';

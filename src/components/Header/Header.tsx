@@ -4,7 +4,7 @@ import Logo from './components/Logo/Logo';
 import ButtonLink from './components/ButtonLink/ButtonLink';
 import ButtonLang from './components/ButtonLang/ButtonLang';
 import { useAppSelector } from '../../store/hooks';
-import { selectAuth } from '../../store/slices/authSlice';
+import { selectAuth } from '../../store/slices/auth';
 import { logOut } from '../../auth/auth';
 import useAuth from '../../hooks/authHook';
 
