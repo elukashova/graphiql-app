@@ -1,4 +1,4 @@
-export type Auth = {
+export interface Auth {
   isAuth: boolean;
   userEmail?: string | null;
-};
+}

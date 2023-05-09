@@ -1,7 +1,7 @@
 import React from 'react';
 import { signIn, signUp, logOut } from '../../auth/auth';
 import { useAppSelector } from '../../store/hooks';
-import { selectAuth } from '../../store/slices/auth';
+import { selectAuth } from '../../store/slices/authSlice';
 import styles from '../Layout.module.css';
 
 const WelcomePage = (): JSX.Element => {
