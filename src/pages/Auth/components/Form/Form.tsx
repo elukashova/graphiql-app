@@ -5,18 +5,24 @@ import { UserData } from '../../Auth.types';
 import { useAppSelector } from '../../../../store/hooks';
 import { selectRoute } from '../../../../store/slices/route';
 import { signIn, signUp } from '../../../../auth/auth';
+// import { selectAuth } from '../../../../store/slices/auth';
+// import { useNavigate } from 'react-router-dom';
 
 const AuthForm = (): JSX.Element => {
   const { handleSubmit, register } = useForm<UserData>();
   const { isSignUp } = useAppSelector(selectRoute);
+  // const { isAuth } = useAppSelector(selectAuth);
+  // const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<UserData> = async ({ email, password }: UserData) => {
-    console.log(email, password);
     const authorizeUser = isSignUp ? signUp : signIn;
 
     try {
-      const response = await authorizeUser(email, password);
-      console.log(response);
+      await authorizeUser(email, password);
+      // console.log(isAuth);
+      // if (isAuth) {
+      //   navigate('/editor');
+      // }
     } catch (e) {
       console.log(e);
     }
