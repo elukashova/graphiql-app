@@ -22,6 +22,7 @@ const Editor: React.FC = (): JSX.Element => {
 
   const handleFormValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
     dispatch(updateFormValue(e.target.value));
+    localStorage.setItem('request', formValue);
   };
 
   return (
