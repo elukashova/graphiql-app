@@ -3,6 +3,7 @@ import styles from './Graphiql.module.css';
 import Editor from './Editor/Editor';
 import ApiInput from './ApiInput/ApiInput';
 import Docs from './Docs/Docs';
+import Variables from './Variables/Variables';
 
 const GraphiqlPage = (): JSX.Element => {
   return (
@@ -16,7 +17,7 @@ const GraphiqlPage = (): JSX.Element => {
       </div>
       <aside>
         <section className={`${styles.panel}`}>
-          <h2>Variables</h2>
+          <Variables />
         </section>
         <section className={`${styles.panel}`}>
           <h2>Headers</h2>

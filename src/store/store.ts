@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { authReducer } from './slices/auth';
 import { editorReducer } from './slices/editor';
+import variablesReducer from './variablesReducer';
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
     editor: editorReducer,
+    variables: variablesReducer,
   },
 });
 

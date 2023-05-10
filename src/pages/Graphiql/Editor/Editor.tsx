@@ -17,7 +17,7 @@ const Editor: React.FC = (): JSX.Element => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const url = localStorage.getItem('apiUrl') || 'https://rickandmortyapi.com/graphql';
-    dispatch(fetchFormResponse({ query: formValue, url }));
+    dispatch(fetchFormResponse({ query: formValue, url /* , variables */ }));
   };
 
   const handleFormValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
