@@ -1,18 +1,18 @@
 import React from 'react';
-import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './ButtonLink.module.css';
 
 type ButtonLinkProps = {
   readonly to: string;
-  readonly children: ReactNode;
+  readonly label: string;
+  clickCallback?: () => void;
 };
 
-const ButtonLink = ({ to, children }: ButtonLinkProps) => {
+const ButtonLink = ({ to, label, clickCallback }: ButtonLinkProps) => {
   return (
-    <Link to={to}>
+    <Link to={to} onClick={clickCallback}>
       <button type="button" className={styles.button}>
-        {children}
+        {label}
       </button>
     </Link>
   );
