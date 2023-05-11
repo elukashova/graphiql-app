@@ -1,0 +1,21 @@
+.error-wrapper {
+  display: flex;
+  gap: .3em;
+  align-items: center;
+}
+
+.error,
+.exclamation {
+  margin-top: .3em;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: calc(.4em + .3vw);
+}
+
+.error {
+  color: #89B0AE;
+}
+
+.exclamation {
+  color: red;
+}

@@ -6,6 +6,8 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  AuthError,
+  User,
 } from 'firebase/auth';
 import firebaseApp from './firebase.config';
 
@@ -18,7 +20,7 @@ export async function signUp(email: string, password: string) {
   try {
     result = await createUserWithEmailAndPassword(auth, email, password);
   } catch (e) {
-    error = e as Error;
+    error = e as AuthError;
   }
 
   return { result, error };
@@ -31,7 +33,7 @@ export async function signIn(email: string, password: string) {
   try {
     result = await signInWithEmailAndPassword(auth, email, password);
   } catch (e) {
-    error = e as Error;
+    error = e as AuthError;
   }
 
   return { result, error };
@@ -45,12 +47,12 @@ export async function logOut() {
     await signOut(auth);
     result = true as const;
   } catch (e) {
-    error = e as Error;
+    error = e as AuthError;
   }
 
   return { result, error };
 }
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, (user: User | null) => {
   store.dispatch(setIsAuth({ isAuth: !!user, userEmail: user?.email }));
 });

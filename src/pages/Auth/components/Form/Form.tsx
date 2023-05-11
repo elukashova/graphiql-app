@@ -1,32 +1,50 @@
 import styles from './Form.module.css';
-import React from 'react';
+import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { UserData } from '../../Auth.types';
 import { useAppSelector } from '../../../../store/hooks';
 import { selectRoute } from '../../../../store/slices/route';
 import { signIn, signUp } from '../../../../auth/auth';
-// import { selectAuth } from '../../../../store/slices/auth';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../../Graphiql/Editor/Editor';
+import { setIsLoading } from '../../../../store/slices/auth';
+import { AuthError, User } from 'firebase/auth';
+import { defineErrorMessage } from './Error/Error.utils';
+import { ErrorMessages } from './Error/Error.types';
+import ErrorMessage from './Error/Error';
 
 const AuthForm = (): JSX.Element => {
   const { handleSubmit, register } = useForm<UserData>();
   const { isSignUp } = useAppSelector(selectRoute);
-  // const { isAuth } = useAppSelector(selectAuth);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [error, setError] = useState<string | undefined>(undefined);
 
   const onSubmit: SubmitHandler<UserData> = ({ email, password }: UserData) => {
     const authorizeUser = isSignUp ? signUp : signIn;
 
+    dispatch(setIsLoading(true));
     authorizeUser(email, password)
       .then((userCredential) => {
-        const user = userCredential.result?.user;
-        console.log(user);
-        navigate('/editor');
+        const user: User | undefined = userCredential.result?.user;
+        if (user) {
+          navigate('/editor');
+        }
+
+        const authError: AuthError | null = userCredential.error;
+        if (authError) {
+          const errorCode: string = authError.code;
+          const message: string = defineErrorMessage(errorCode);
+          setError(message);
+          setTimeout(() => setError(undefined), 1500);
+        }
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+      .catch(() => {
+        setError(ErrorMessages.genericMessage);
+        setTimeout(() => setError(undefined), 1500);
+      })
+      .finally(() => {
+        dispatch(setIsLoading(false));
       });
   };
 
@@ -52,6 +70,7 @@ const AuthForm = (): JSX.Element => {
           data-cy="submit"
         />
       </div>
+      {error && <ErrorMessage message={error} />}
     </form>
   );
 };
