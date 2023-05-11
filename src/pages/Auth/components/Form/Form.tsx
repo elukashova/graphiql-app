@@ -6,26 +6,28 @@ import { useAppSelector } from '../../../../store/hooks';
 import { selectRoute } from '../../../../store/slices/route';
 import { signIn, signUp } from '../../../../auth/auth';
 // import { selectAuth } from '../../../../store/slices/auth';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const AuthForm = (): JSX.Element => {
   const { handleSubmit, register } = useForm<UserData>();
   const { isSignUp } = useAppSelector(selectRoute);
   // const { isAuth } = useAppSelector(selectAuth);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<UserData> = async ({ email, password }: UserData) => {
+  const onSubmit: SubmitHandler<UserData> = ({ email, password }: UserData) => {
     const authorizeUser = isSignUp ? signUp : signIn;
 
-    try {
-      await authorizeUser(email, password);
-      // console.log(isAuth);
-      // if (isAuth) {
-      //   navigate('/editor');
-      // }
-    } catch (e) {
-      console.log(e);
-    }
+    authorizeUser(email, password)
+      .then((userCredential) => {
+        const user = userCredential.result?.user;
+        console.log(user);
+        navigate('/editor');
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
   };
 
   return (

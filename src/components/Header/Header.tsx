@@ -7,11 +7,13 @@ import { useAppSelector } from '../../store/hooks';
 import { selectAuth } from '../../store/slices/auth';
 import { logOut } from '../../auth/auth';
 import useAuth from '../../hooks/authHook';
+import { useLocation } from 'react-router-dom';
 
 const Header = (): JSX.Element => {
   const [scroll, setScroll] = useState(false);
   const { isAuth } = useAppSelector(selectAuth);
   const { toggleSignUp, toggleSignIn } = useAuth();
+  const location = useLocation();
 
   const scrollHeader = () => {
     if (window.scrollY >= 50) setScroll(true);
@@ -42,7 +44,7 @@ const Header = (): JSX.Element => {
               </ButtonLink>
             )} */}
           {/* нужно будет поставить условие, кнопка входа в приложение будет появляться когда пользоватеь авторизован */}
-          <ButtonLink to={'/editor'} label="Editor" />
+          {location.pathname !== '/editor' && <ButtonLink to={'/editor'} label="Editor" />}
           {isAuth && <ButtonLink to={'/'} clickCallback={handleLogOut} label="Log out" />}
           <ButtonLang />
         </div>
