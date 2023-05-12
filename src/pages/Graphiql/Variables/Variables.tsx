@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from 'store/store';
 import styles from './Variables.module.css';
 import { setVariables } from '../../../store/variablesReducer';
+import cross from '../../../assets/cross.svg';
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 
@@ -22,19 +23,25 @@ const Variables: React.FC = (): JSX.Element => {
   }
 
   return (
-    <div className={styles['docs-container']}>
-      <button onClick={() => changeShowVariables()}>Variables</button>
-      {showVariables && (
-        <div className={styles.variablesPanel}>
+    <section className={styles['variables-section']}>
+      {showVariables ? (
+        <div className={styles['variables-container']}>
           <textarea
+            className={styles.textarea}
             value={variables || ''}
             onChange={(e) => handleVariablesChange(e)}
             placeholder="Enter variables in JSON format"
           />
-          <button onClick={() => changeShowVariables()}>Close</button>
+          <button className={styles['button-cross']} onClick={() => changeShowVariables()}>
+            <img className={styles.cross} src={cross} alt="cross" />
+          </button>
         </div>
+      ) : (
+        <button className={styles.title} onClick={() => changeShowVariables()}>
+          Variables
+        </button>
       )}
-    </div>
+    </section>
   );
 };
 export default Variables;

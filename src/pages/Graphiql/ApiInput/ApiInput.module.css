@@ -1,12 +1,15 @@
 .api-container {
   display: flex;
-  width: 80%;
+  width: 100%;
   gap: 2%;
-  margin: 1rem;
+  padding: 3rem 1rem 1rem 1rem;
+  box-sizing: border-box;
+  justify-content: center;
 }
 
 .api-label {
   width: max-content;
+  box-sizing: border-box;
 }
 
 .api-input {
@@ -15,4 +18,5 @@
   padding: 0.2rem;
   border-radius: 5px;
   border: 1px solid var(--purple-dark);
+  box-sizing: border-box;
 }
