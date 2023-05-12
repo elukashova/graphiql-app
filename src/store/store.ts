@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import { authReducer } from './slices/auth';
 import { editorReducer } from './slices/editor';
 import { routeReducer } from './slices/route';
+import { docsReducer } from './slices/docs';
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
     route: routeReducer,
     editor: editorReducer,
+    docs: docsReducer,
   },
 });
 

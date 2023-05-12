@@ -3,3 +3,9 @@
   background-color: transparent;
   padding: 0;
 }
+
+.docs,
+.docs:active,
+.docs:focus {
+  outline: none;
+}
