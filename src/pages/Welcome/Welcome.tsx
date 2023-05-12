@@ -25,8 +25,8 @@ const WelcomePage = (): JSX.Element => {
   return (
     <section className={styles.section}>
       <div>
-        <a href="/auth">Auth</a>
-        <a href="/editor">Editor</a>
+        The welcome page should contain general information about the developers, project, and
+        course.
       </div>
 
       <div>
