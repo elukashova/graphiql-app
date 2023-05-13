@@ -7,9 +7,19 @@ import Variables from './Variables/Variables';
 import { useAppSelector } from '../../store/hooks';
 import { selectDocs } from '../../store/slices/docs';
 import Schema from './Docs/components/Schema/Schema';
+import { Navigate } from 'react-router-dom';
 
-const GraphiqlPage = (): JSX.Element => {
+type Props = {
+  auth: boolean;
+};
+
+const GraphiqlPage = ({ auth }: Props): JSX.Element => {
   const { isDocs } = useAppSelector(selectDocs);
+
+  if (!auth) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <div className={styles.container}>
       <ApiInput />
