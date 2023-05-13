@@ -3,6 +3,7 @@ import { authReducer } from './slices/auth';
 import { editorReducer } from './slices/editor';
 import variablesReducer from './variablesReducer';
 import { routeReducer } from './slices/route';
+import { docsReducer } from './slices/docs';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     route: routeReducer,
     editor: editorReducer,
     variables: variablesReducer,
+    docs: docsReducer,
   },
 });
 
