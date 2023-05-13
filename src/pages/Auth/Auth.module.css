@@ -1,0 +1,41 @@
+.section {
+  width: calc(50rem + 5vw);
+  height: calc(33rem + 5vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  align-self: center;
+  background-image: url(../../assets/auth-background2.png);
+  background-repeat: no-repeat;
+  background-size: calc(50rem + 5vw);
+  background-position: center center;
+}
+
+.title-wrapper {
+  display: flex;
+  width: 10%;
+  flex-direction: row;
+  gap: .5rem;
+  justify-content: center;
+}
+
+.sign {
+  align-self: flex-start;
+}
+
+.sign,
+.title {
+  margin: 0;
+  font-size: calc(1.2rem + .8vw);
+}
+
+.title {
+  margin-top: .5rem;
+  align-self: flex-end;
+  background-color: var(--yellow);
+  padding: .5rem 1rem;
+  color: var(--background-dark);
+  transform: rotate(-10deg);
+}

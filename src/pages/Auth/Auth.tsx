@@ -24,8 +24,18 @@ const AuthPage = (): JSX.Element => {
 
   return (
     <section className={styles.section}>
-      {isSignUp && <h3>Sign up</h3>}
-      {isSignIn && <h3>Sign in</h3>}
+      {isSignUp && (
+        <div className={styles['title-wrapper']}>
+          <h2 className={styles.sign}>Sign</h2>
+          <h2 className={styles.title}>up</h2>
+        </div>
+      )}
+      {isSignIn && (
+        <div className={styles['title-wrapper']}>
+          <h2 className={styles.sign}>Sign</h2>
+          <h2 className={styles.title}>in</h2>
+        </div>
+      )}
       <AuthForm />
       <div>
         {isSignUp && (

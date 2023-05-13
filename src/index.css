@@ -1,9 +1,14 @@
+html {
+  height: 100vw;
+}
+
 :root {
   margin: 0 auto;
   text-align: center;
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   width: 100%;
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;

@@ -58,8 +58,8 @@ const AuthForm = (): JSX.Element => {
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
       <div className={styles.wrapper}>
-        <label className={styles.label}>
-          Email
+        <div className={styles['input-wrapper']}>
+          <label className={styles.label}>Email</label>
           <input
             className={styles.input}
             type="email"
@@ -71,9 +71,9 @@ const AuthForm = (): JSX.Element => {
               },
             })}
           />
-        </label>
-        <label className={styles.label}>
-          Password
+        </div>
+        <div className={styles['input-wrapper']}>
+          <label className={styles.label}>Password</label>
           <input
             className={styles.input}
             type="password"
@@ -89,17 +89,11 @@ const AuthForm = (): JSX.Element => {
               },
             })}
           />
-        </label>
+        </div>
       </div>
 
       <div>
-        <input
-          className={styles.submit}
-          type="submit"
-          value="submit"
-          data-testid="submit"
-          data-cy="submit"
-        />
+        <input className={styles.submit} type="submit" value="submit" />
       </div>
       {errors.email?.types && <ErrorMessage message={errors.email.message} />}
       {errors.password?.types && <ErrorMessage message={errors.password.message} />}

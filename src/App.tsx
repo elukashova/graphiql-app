@@ -21,13 +21,6 @@ const App = (): JSX.Element => {
         <Route path="*" element={<Layout content={<NotFound />} />} />
       </Routes>
     </BrowserRouter>
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route path="/" element={<Layout content={<WelcomePage />} />} />
-    //     <Route path="/editor" element={<Layout content={<GraphiqlPage />} />} />
-    //     <Route path="*" element={<Layout content={<NotFound />} />} />
-    //   </Routes>
-    //  </BrowserRouter>
   );
 };
 

@@ -14,7 +14,7 @@
 }
 
 .checkbox-wrapper .slider {
-  background-color: var(--purple-light);
+  background-color: var(--purple-dark);;
   bottom: 0;
   cursor: pointer;
   left: 0;
@@ -22,6 +22,7 @@
   right: 0;
   top: 0;
   transition: 0.4s;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .checkbox-wrapper .slider:before {
@@ -48,12 +49,8 @@
   height: 26px;
   left: 4px;
   position: absolute;
-  transition: 0.4s;
+  transition: all 0.4s;
   width: 26px;
-}
-
-.checkbox-wrapper input:checked + .slider {
-  background-color: var(--purple-light);
 }
 
 .checkbox-wrapper input:checked + .slider:before {
