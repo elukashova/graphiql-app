@@ -1,7 +1,40 @@
+.docs-container {
+  width: auto;
+  padding: 1rem 0 0 0;
+}
+
 .docs {
   height: fit-content;
   background-color: transparent;
   padding: 0;
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+  height: 2rem;
+}
+
+.docs:hover .book {
+  animation: rotate 1s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.book {
+  width: 2rem;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(10deg);
+  }
+  75% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .docs,

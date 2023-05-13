@@ -39,7 +39,6 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-
   background-color: var(--background-light);
   color: var(--background-dark);
 }
@@ -62,7 +61,30 @@ button {
 
 button:focus,
 button:focus-visible {
-  outline: 1px auto transparent;
+  outline: none;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+textarea {
+  resize: none;
+  box-sizing: border-box;
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+textarea::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: #f3f3f3;
+  border: 1px solid var(--background-light);
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background-color: var(--purple-light);
 }
 
 @media (prefers-color-scheme: light) {

@@ -2,6 +2,7 @@ import { GraphQLSchema } from 'graphql';
 import { buildClientSchema, getIntrospectionQuery, IntrospectionQuery } from 'graphql/utilities';
 import React from 'react';
 import styles from './Docs.module.css';
+import book from '../../../assets/book.svg';
 
 import useDocs from '../../../hooks/docsHook';
 
@@ -32,17 +33,11 @@ const Docs: React.FC = (): JSX.Element => {
 
   const { toggleDocs } = useDocs();
   return (
-    <>
-      <div className={styles['docs-container']}>
-        <button className={`${styles.docs}`} type="button" onClick={toggleDocs}>
-          <img
-            src="https://img.icons8.com/color/48/null/story-book.png"
-            alt="Documents"
-            title="Docs"
-          />
-        </button>
-      </div>
-    </>
+    <div className={styles['docs-container']}>
+      <button className={`${styles.docs}`} type="button" onClick={toggleDocs}>
+        <img className={styles.book} src={book} alt="Documents" title="Docs" />
+      </button>
+    </div>
   );
 };
 

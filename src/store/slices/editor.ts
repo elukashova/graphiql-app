@@ -16,14 +16,23 @@ const initialState: EditorState = {
 
 export const fetchFormResponse = createAsyncThunk(
   'editor/fetchFormResponse',
-  async ({ query, url }: { query: string; url: string }) => {
+  async ({
+    query,
+    url,
+    variables,
+  }: {
+    query: string;
+    url: string;
+    variables?: Record<string, unknown>;
+  }) => {
+    const body = variables ? JSON.stringify({ query, variables }) : JSON.stringify({ query });
     const res = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
         'Access-Control-Allow-Origin': '*',
       },
-      body: JSON.stringify({ query }),
+      body,
     });
     const result = await res.json();
     return JSON.stringify(result);
