@@ -6,7 +6,7 @@ import ButtonLang from './components/ButtonLang/ButtonLang';
 import { useAppSelector } from '../../store/hooks';
 import { selectAuth } from '../../store/slices/auth';
 import { logOut } from '../../auth/auth';
-import useAuth from '../../pages/Auth/Auth.hook';
+import useAuth from '../../hooks/authHook';
 import { useLocation } from 'react-router-dom';
 
 const Header = (): JSX.Element => {

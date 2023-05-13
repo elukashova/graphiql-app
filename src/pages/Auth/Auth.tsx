@@ -3,10 +3,10 @@ import { useAppSelector } from '../../store/hooks';
 import { selectRoute } from '../../store/slices/route';
 import styles from './Auth.module.css';
 import AuthForm from './components/Form/Form';
-import useAuth from './Auth.hook';
+import useAuth from '../../hooks/authHook';
 import AuthLink from './components/Link/Link';
 import { selectAuth } from '../../store/slices/auth';
-import Loader from './components/Loader/Loader';
+import Loader from '../../components/Loader/Loader';
 
 const AuthPage = (): JSX.Element => {
   const { isSignIn, isSignUp } = useAppSelector(selectRoute);

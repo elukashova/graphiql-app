@@ -5,10 +5,9 @@ import { UserData } from '../../Auth.types';
 import { useAppSelector } from '../../../../store/hooks';
 import { selectRoute } from '../../../../store/slices/route';
 import { signIn, signUp } from '../../../../auth/auth';
-import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../Graphiql/Editor/Editor';
 import { setIsLoading } from '../../../../store/slices/auth';
-import { AuthError, User } from 'firebase/auth';
+import { AuthError } from 'firebase/auth';
 import { defineErrorMessage } from './ErrorMessage/ErrorMessage.utils';
 import { FirebaseErrors, ValidationErrors } from './ErrorMessage/ErrorMessage.types';
 import ErrorMessage from './ErrorMessage/ErrorMessage';
@@ -31,7 +30,6 @@ const AuthForm = (): JSX.Element => {
   });
   const { isSignUp } = useAppSelector(selectRoute);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const [error, setError] = useState<string | undefined>(undefined);
 
   const onSubmit: SubmitHandler<UserData> = ({ email, password }: UserData) => {
@@ -40,11 +38,6 @@ const AuthForm = (): JSX.Element => {
     dispatch(setIsLoading(true));
     authorizeUser(email, password)
       .then((userCredential) => {
-        const user: User | undefined = userCredential.result?.user;
-        if (user) {
-          navigate('/editor');
-        }
-
         const authError: AuthError | null = userCredential.error;
         if (authError) {
           const errorCode: string = authError.code;

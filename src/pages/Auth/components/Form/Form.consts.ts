@@ -11,4 +11,4 @@ export const VALID_EMAIL =
 
 export const PASSWORD_LETTERS = /[a-zA-Z]/;
 export const PASSWORD_DIGIT = /[0-9]/;
-export const PASSWORD_SPECIAL_CHAR = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+export const PASSWORD_SPECIAL_CHAR = /[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/;
