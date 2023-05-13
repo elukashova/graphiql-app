@@ -13,18 +13,13 @@ const GraphiqlPage = (): JSX.Element => {
   return (
     <div className={styles.container}>
       <ApiInput />
-      <div className={styles.wrapper}>
-        <div className={styles['main-block']}>
-          <Editor />
-          <Docs />
-          {isDocs && <Schema />}
-        </div>
+      <div className={styles['main-block']}>
+        <Editor />
+        <Docs />
+        {isDocs && <Schema />}
       </div>
-      <aside>
+      <aside className={`${styles['aside-section']}`}>
         <Variables />
-        <section className={`${styles.panel}`}>
-          <h2>Variables</h2>
-        </section>
         <section className={`${styles.panel}`}>
           <h2>Headers</h2>
         </section>
