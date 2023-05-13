@@ -1,30 +1,60 @@
 .editor-wrapper {
   width: 100%;
-  height: max-content;
   display: flex;
-  flex-direction: column;
-  gap: calc(0.5rem + 4%);
+  gap: 3%;
 }
 
 .editor-section {
   width: 100%;
-  height: max-content;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 5%;
+  grid-template-columns: 1fr 1fr max-content;
+  gap: 1%;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
-.editor-wrapper,
 .response {
   width: 100%;
-  height: max-content;
+  box-sizing: border-box;
+}
+
+.button-submit {
+  background-color: transparent;
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+  height: 2rem;
+}
+
+.submit {
+  width: 2rem;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.button-submit:hover .submit {
+  animation: bounce 2s infinite;
 }
 
 .textarea {
-  resize: none;
   width: 100%;
   min-height: 15rem;
-  border-radius: 10px;
-  padding: 15px;
+  height: 100%;
   cursor: text;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+@keyframes bounce {
+  0% {
+    bottom: 0;
+  }
+  50% {
+    bottom: 5px;
+  }
+  100% {
+    bottom: 0;
+  }
 }

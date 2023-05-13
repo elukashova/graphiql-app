@@ -2,6 +2,7 @@ import { GraphQLSchema } from 'graphql';
 import { buildClientSchema, getIntrospectionQuery, IntrospectionQuery } from 'graphql/utilities';
 import React from 'react';
 import styles from './Docs.module.css';
+import book from '../../../assets/book.svg';
 
 const Docs: React.FC = (): JSX.Element => {
   const apiUrlFromStorage: string =
@@ -29,11 +30,7 @@ const Docs: React.FC = (): JSX.Element => {
   return (
     <div className={styles['docs-container']}>
       <button className={`${styles.docs}`} type="button">
-        <img
-          src="https://img.icons8.com/color/48/null/story-book.png"
-          alt="Documents"
-          title="Docs"
-        />
+        <img className={styles.book} src={book} alt="Documents" title="Docs" />
       </button>
     </div>
   );
