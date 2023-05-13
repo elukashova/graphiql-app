@@ -5,7 +5,7 @@ import ApiInput from './ApiInput/ApiInput';
 import Docs from './Docs/Docs';
 import { useAppSelector } from '../../store/hooks';
 import { selectDocs } from '../../store/slices/docs';
-import ModalWindow from './Docs/components/modalWindow/modalWindow';
+import Schema from './Docs/components/Schema/Schema';
 
 const GraphiqlPage = (): JSX.Element => {
   const { isDocs } = useAppSelector(selectDocs);
@@ -16,7 +16,7 @@ const GraphiqlPage = (): JSX.Element => {
         <div className={styles['editor-wrapper']}>
           <Editor />
           <Docs />
-          {isDocs && <ModalWindow />}
+          {isDocs && <Schema />}
         </div>
       </div>
       <aside>
