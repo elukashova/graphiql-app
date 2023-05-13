@@ -1,4 +1,4 @@
-import styles from './Error.module.css';
+import styles from './ErrorMessage.module.css';
 import React from 'react';
 
 type Props = {

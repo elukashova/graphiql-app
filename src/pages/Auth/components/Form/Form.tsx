@@ -9,12 +9,26 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../Graphiql/Editor/Editor';
 import { setIsLoading } from '../../../../store/slices/auth';
 import { AuthError, User } from 'firebase/auth';
-import { defineErrorMessage } from './Error/Error.utils';
-import { ErrorMessages } from './Error/Error.types';
-import ErrorMessage from './Error/Error';
+import { defineErrorMessage } from './ErrorMessage/ErrorMessage.utils';
+import { FirebaseErrors, ValidationErrors } from './ErrorMessage/ErrorMessage.types';
+import ErrorMessage from './ErrorMessage/ErrorMessage';
+import {
+  PASSWORD_DIGIT,
+  PASSWORD_LETTERS,
+  PASSWORD_SPECIAL_CHAR,
+  VALID_EMAIL,
+} from './Form.consts';
 
 const AuthForm = (): JSX.Element => {
-  const { handleSubmit, register } = useForm<UserData>();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<UserData>({
+    criteriaMode: 'all',
+    mode: 'onSubmit',
+    reValidateMode: 'onChange',
+  });
   const { isSignUp } = useAppSelector(selectRoute);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -40,7 +54,7 @@ const AuthForm = (): JSX.Element => {
         }
       })
       .catch(() => {
-        setError(ErrorMessages.genericMessage);
+        setError(FirebaseErrors.genericMessage);
         setTimeout(() => setError(undefined), 1500);
       })
       .finally(() => {
@@ -49,15 +63,39 @@ const AuthForm = (): JSX.Element => {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
       <div className={styles.wrapper}>
         <label className={styles.label}>
           Email
-          <input className={styles.input} type="email" {...register('email')} />
+          <input
+            className={styles.input}
+            type="email"
+            {...register('email', {
+              required: ValidationErrors.emptyEmail,
+              pattern: {
+                value: VALID_EMAIL,
+                message: ValidationErrors.email,
+              },
+            })}
+          />
         </label>
         <label className={styles.label}>
           Password
-          <input className={styles.input} type="password" {...register('password')} />
+          <input
+            className={styles.input}
+            type="password"
+            {...register('password', {
+              required: ValidationErrors.emptyPassword,
+              validate: {
+                minLength: (value) => value.length >= 8 || ValidationErrors.passwordLength,
+                oneLetter: (value) =>
+                  PASSWORD_LETTERS.test(value) || ValidationErrors.passwordLetters,
+                oneDigit: (value) => PASSWORD_DIGIT.test(value) || ValidationErrors.passwordDigit,
+                oneSpecialChar: (value) =>
+                  PASSWORD_SPECIAL_CHAR.test(value) || ValidationErrors.passwordSpecialChar,
+              },
+            })}
+          />
         </label>
       </div>
 
@@ -70,6 +108,8 @@ const AuthForm = (): JSX.Element => {
           data-cy="submit"
         />
       </div>
+      {errors.email?.types && <ErrorMessage message={errors.email.message} />}
+      {errors.password?.types && <ErrorMessage message={errors.password.message} />}
       {error && <ErrorMessage message={error} />}
     </form>
   );

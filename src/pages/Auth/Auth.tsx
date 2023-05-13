@@ -3,7 +3,7 @@ import { useAppSelector } from '../../store/hooks';
 import { selectRoute } from '../../store/slices/route';
 import styles from './Auth.module.css';
 import AuthForm from './components/Form/Form';
-import useAuth from '../../hooks/authHook';
+import useAuth from './Auth.hook';
 import AuthLink from './components/Link/Link';
 import { selectAuth } from '../../store/slices/auth';
 import Loader from './components/Loader/Loader';
