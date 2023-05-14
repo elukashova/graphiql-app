@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import styles from './Header.module.css';
-import Logo from './components/Logo/Logo';
-import ButtonLink from './components/ButtonLink/ButtonLink';
 import ButtonLang from './components/ButtonLang/ButtonLang';
 import { useAppSelector } from '../../store/hooks';
 import { selectAuth } from '../../store/slices/auth';
 import { logOut } from '../../auth/auth';
 import useAuth from '../../hooks/authHook';
+import { NavLink, useLocation } from 'react-router-dom';
+import logo from '../../assets/logo.svg';
 
 const Header = (): JSX.Element => {
   const [scroll, setScroll] = useState(false);
   const { isAuth } = useAppSelector(selectAuth);
   const { toggleSignUp, toggleSignIn } = useAuth();
+  const location = useLocation();
 
   const scrollHeader = () => {
     if (window.scrollY >= 50) setScroll(true);
@@ -26,26 +27,34 @@ const Header = (): JSX.Element => {
   };
 
   return (
-    <header className={!scroll ? styles.header : `${styles.header} ${styles.active}`}>
+    <header className={!scroll ? styles.header : `${styles.header} ${styles.fixed}`}>
       <div className={styles.wrapper}>
-        <Logo />
-        <div className={styles.buttons}>
+        <NavLink to="/">
+          <img className={styles.logo} src={logo} alt="logo" />
+        </NavLink>
+        <nav className={styles.nav}>
           {!isAuth && (
             <>
-              <ButtonLink to={'/auth'} clickCallback={toggleSignUp} label="Sign up" />
-              <ButtonLink to={'/auth'} clickCallback={toggleSignIn} label="Sign in" />
+              <NavLink to="/auth" onClick={toggleSignUp} className={styles.link}>
+                sign up
+              </NavLink>
+              <NavLink to="/auth" onClick={toggleSignIn} className={styles.link}>
+                sign in
+              </NavLink>
             </>
           )}
-          {/* {token && (
-              <ButtonLink to={'/}>
-                Go to App
-              </ButtonLink>
-            )} */}
-          {/* нужно будет поставить условие, кнопка входа в приложение будет появляться когда пользоватеь авторизован */}
-          <ButtonLink to={'/editor'} label="Editor" />
-          {isAuth && <ButtonLink to={'/'} clickCallback={handleLogOut} label="Log out" />}
+          {isAuth && location.pathname !== '/editor' && (
+            <NavLink to="/editor" className={styles.link}>
+              editor
+            </NavLink>
+          )}
+          {isAuth && (
+            <NavLink to="/" end onClick={handleLogOut} className={styles.link}>
+              log out
+            </NavLink>
+          )}
           <ButtonLang />
-        </div>
+        </nav>
       </div>
     </header>
   );

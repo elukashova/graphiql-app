@@ -1,0 +1,48 @@
+.form,
+.wrapper {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.input-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+}
+
+.input {
+  width: 70%;
+  padding: .3rem .5rem;
+  background: var(--white);
+  border: none;
+  outline: none;
+  font-size: calc(.6rem + .5vw);
+  color: var(--background-dark);
+}
+
+.submit {
+  margin-top: .5rem;
+  border: none;
+  outline: none;
+  padding: .3rem .5rem;
+  font-size: calc(.5rem + .4vw);
+  color: var(--background-dark);
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: var(--purple-dark);
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  transition: all .3s;
+}
+
+.submit:hover {
+  box-shadow: none;
+}
+
+.submit:active {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
