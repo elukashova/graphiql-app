@@ -10,6 +10,8 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 const Editor: React.FC = (): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
   const variables = useSelector((state: RootState) => state.variables.variables);
+  const headers = localStorage.getItem('headers')?.trim() || '';
+
   const formValue = useSelector((state: RootState) => state.editor.formValue);
   const formResponse = useSelector((state: RootState) => state.editor.formResponse);
   /* const formStatus = useSelector((state: RootState) => state.editor.status);
@@ -19,7 +21,12 @@ const Editor: React.FC = (): JSX.Element => {
     e.preventDefault();
     const url = localStorage.getItem('apiUrl') || 'https://rickandmortyapi.com/graphql';
     const variablesObj = variables ? JSON.parse(variables) : undefined;
-    dispatch(fetchFormResponse({ query: formValue, url, variables: variablesObj }));
+    const headersObj: Record<string, string> | undefined = headers
+      ? JSON.parse(headers)
+      : undefined;
+    dispatch(
+      fetchFormResponse({ query: formValue, url, variables: variablesObj, headers: headersObj })
+    );
   };
 
   const handleFormValue = (e: ChangeEvent<HTMLTextAreaElement>) => {

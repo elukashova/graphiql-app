@@ -20,10 +20,12 @@ export const fetchFormResponse = createAsyncThunk(
     query,
     url,
     variables,
+    headers,
   }: {
     query: string;
     url: string;
     variables?: Record<string, unknown>;
+    headers?: Record<string, string>;
   }) => {
     const body = variables ? JSON.stringify({ query, variables }) : JSON.stringify({ query });
     const res = await fetch(url, {
@@ -31,6 +33,7 @@ export const fetchFormResponse = createAsyncThunk(
       headers: {
         'Content-type': 'application/json',
         'Access-Control-Allow-Origin': '*',
+        ...headers,
       },
       body,
     });

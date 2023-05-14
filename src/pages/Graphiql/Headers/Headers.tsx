@@ -5,30 +5,29 @@ import styles from './Headers.module.css';
 import { setVariables } from '../../../store/variablesReducer';
 import cross from '../../../assets/cross.svg';
 
-export const useAppDispatch = () => useDispatch<AppDispatch>();
-
 const Headers: React.FC = (): JSX.Element => {
-  const variables = useSelector((state: RootState) => state.variables.variables);
-  const [showVariables, setShowVariables] = useState(variables ? variables.trim() !== '' : false);
-  const dispatch = useDispatch<AppDispatch>();
+  const [showHeaders, setShowHeaders] = useState(false);
+  const headers = JSON.parse(localStorage.getItem('headers') || '{}');
+  const [headersValue, setHeadersValue] = useState<string>(JSON.stringify(headers));
 
   function handleVariablesChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     const newVariables = event.target.value;
-    dispatch(setVariables(newVariables));
+    setHeadersValue(newVariables);
+    localStorage.setItem('headers', newVariables);
   }
 
   function changeShowVariables() {
-    const updatedShowStatus = !showVariables;
-    setShowVariables(updatedShowStatus);
+    const updatedShowStatus = !showHeaders;
+    setShowHeaders(updatedShowStatus);
   }
 
   return (
     <section className={styles['variables-section']}>
-      {showVariables ? (
+      {showHeaders ? (
         <div className={styles['variables-container']}>
           <textarea
             className={styles.textarea}
-            value={variables || ''}
+            value={headersValue || ''}
             onChange={(e) => handleVariablesChange(e)}
             placeholder="Enter variables in JSON format"
           />
@@ -38,7 +37,7 @@ const Headers: React.FC = (): JSX.Element => {
         </div>
       ) : (
         <button className={styles.title} onClick={() => changeShowVariables()}>
-          Variables
+          Headers
         </button>
       )}
     </section>
