@@ -1,6 +1,5 @@
 .variables-section {
   width: 100%;
-  padding: 1rem;
 }
 
 .title {
@@ -9,19 +8,23 @@
 
 .variables-container {
   width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 2rem;
   align-items: flex-start;
   gap: 1%;
 }
 
 .textarea {
+  width: 100%;
   resize: none;
   min-height: max-content;
+  height: auto;
   padding: 15px;
   cursor: text;
 }
 
 .button-cross {
+  width: 100%;
   background-color: transparent;
   padding: 0.3rem;
   margin: 0;
@@ -41,4 +44,25 @@
 
 .button-cross:hover .cross {
   transform: rotate(360deg) scale(0.7);
+}
+
+.error {
+  color: red;
+  position: relative;
+}
+
+.error::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: red;
+  transition: 0s;
+}
+
+.headers-section:hover .error::after {
+  width: 100%;
+  transition: width 1s ease-in-out;
 }
