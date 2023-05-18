@@ -1,0 +1,18 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.link {
+  color: var(--purple-dark);
+  text-decoration: none;
+  transition: all .3s;
+  transform: scale(1);
+}
+
+.link:hover {
+  transform: scale(1.06);
+  background-color: var(--yellow);
+}

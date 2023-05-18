@@ -1,55 +1,103 @@
 import styles from './Form.module.css';
-import React from 'react';
+import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { UserData } from '../../Auth.types';
 import { useAppSelector } from '../../../../store/hooks';
 import { selectRoute } from '../../../../store/slices/route';
 import { signIn, signUp } from '../../../../auth/auth';
-// import { selectAuth } from '../../../../store/slices/auth';
-// import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../../Graphiql/Editor/Editor';
+import { setIsLoading } from '../../../../store/slices/auth';
+import { AuthError } from 'firebase/auth';
+import { defineErrorMessage } from './ErrorMessage/ErrorMessage.utils';
+import { FirebaseErrors, ValidationErrors } from './ErrorMessage/ErrorMessage.types';
+import ErrorMessage from './ErrorMessage/ErrorMessage';
+import {
+  PASSWORD_DIGIT,
+  PASSWORD_LETTERS,
+  PASSWORD_SPECIAL_CHAR,
+  VALID_EMAIL,
+} from './Form.consts';
 
 const AuthForm = (): JSX.Element => {
-  const { handleSubmit, register } = useForm<UserData>();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<UserData>({
+    criteriaMode: 'all',
+    mode: 'onSubmit',
+    reValidateMode: 'onChange',
+  });
   const { isSignUp } = useAppSelector(selectRoute);
-  // const { isAuth } = useAppSelector(selectAuth);
-  // const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const [error, setError] = useState<string | undefined>(undefined);
 
-  const onSubmit: SubmitHandler<UserData> = async ({ email, password }: UserData) => {
+  const onSubmit: SubmitHandler<UserData> = ({ email, password }: UserData) => {
     const authorizeUser = isSignUp ? signUp : signIn;
 
-    try {
-      await authorizeUser(email, password);
-      // console.log(isAuth);
-      // if (isAuth) {
-      //   navigate('/editor');
-      // }
-    } catch (e) {
-      console.log(e);
-    }
+    dispatch(setIsLoading(true));
+    authorizeUser(email, password)
+      .then((userCredential) => {
+        const authError: AuthError | null = userCredential.error;
+        if (authError) {
+          const errorCode: string = authError.code;
+          const message: string = defineErrorMessage(errorCode);
+          setError(message);
+          setTimeout(() => setError(undefined), 1500);
+        }
+      })
+      .catch(() => {
+        setError(FirebaseErrors.genericMessage);
+        setTimeout(() => setError(undefined), 1500);
+      })
+      .finally(() => {
+        dispatch(setIsLoading(false));
+      });
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
       <div className={styles.wrapper}>
-        <label className={styles.label}>
-          Email
-          <input className={styles.input} type="email" {...register('email')} />
-        </label>
-        <label className={styles.label}>
-          Password
-          <input className={styles.input} type="password" {...register('password')} />
-        </label>
+        <div className={styles['input-wrapper']}>
+          <label className={styles.label}>Email</label>
+          <input
+            className={styles.input}
+            type="email"
+            {...register('email', {
+              required: ValidationErrors.emptyEmail,
+              pattern: {
+                value: VALID_EMAIL,
+                message: ValidationErrors.email,
+              },
+            })}
+          />
+        </div>
+        <div className={styles['input-wrapper']}>
+          <label className={styles.label}>Password</label>
+          <input
+            className={styles.input}
+            type="password"
+            {...register('password', {
+              required: ValidationErrors.emptyPassword,
+              validate: {
+                minLength: (value) => value.length >= 8 || ValidationErrors.passwordLength,
+                oneLetter: (value) =>
+                  PASSWORD_LETTERS.test(value) || ValidationErrors.passwordLetters,
+                oneDigit: (value) => PASSWORD_DIGIT.test(value) || ValidationErrors.passwordDigit,
+                oneSpecialChar: (value) =>
+                  PASSWORD_SPECIAL_CHAR.test(value) || ValidationErrors.passwordSpecialChar,
+              },
+            })}
+          />
+        </div>
       </div>
 
       <div>
-        <input
-          className={styles.submit}
-          type="submit"
-          value="submit"
-          data-testid="submit"
-          data-cy="submit"
-        />
+        <input className={styles.submit} type="submit" value="submit" />
       </div>
+      {errors.email?.types && <ErrorMessage message={errors.email.message} />}
+      {errors.password?.types && <ErrorMessage message={errors.password.message} />}
+      {error && <ErrorMessage message={error} />}
     </form>
   );
 };
