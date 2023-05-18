@@ -1,7 +1,7 @@
 .container {
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto;
   gap: 1%;
   align-items: center;
 }
@@ -10,13 +10,6 @@
   width: 100%;
   display: flex;
   gap: 1%;
-  padding: 0 3rem;
-  box-sizing: border-box;
-}
-
-.aside-section {
-  width: 100%;
-  display: flex;
   padding: 0 3rem;
   box-sizing: border-box;
 }
