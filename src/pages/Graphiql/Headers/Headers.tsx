@@ -1,46 +1,95 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from 'store/store';
+import React, { useEffect, useState } from 'react';
 import styles from './Headers.module.css';
-import { setVariables } from '../../../store/variablesReducer';
 import cross from '../../../assets/cross.svg';
+import ErrorBoundary from '../../../components/ErrorBoundary/ErrorBoundary';
+import { isValidJsonString } from '../utils';
+
+interface ValidationState {
+  showValidation: boolean;
+  errorMessage: string;
+}
 
 const Headers: React.FC = (): JSX.Element => {
-  const [showHeaders, setShowHeaders] = useState(false);
-  const headers = JSON.parse(localStorage.getItem('headers') || '{}');
-  const [headersValue, setHeadersValue] = useState<string>(JSON.stringify(headers));
+  const headersFromLS = localStorage.getItem('headersValueLS');
+  const headers = JSON.parse(headersFromLS || '{}');
+  const [showHeaders, setShowHeaders] = useState(!!headersFromLS);
+  const [validationState, setValidationState] = useState<ValidationState>({
+    showValidation: false,
+    errorMessage: '',
+  });
+  const isEmptyHeaders = Object.keys(headers).length === 0 && headers.constructor === Object;
+  const [headersValue, setHeadersValue] = useState<string>(
+    isEmptyHeaders ? '' : JSON.stringify(headers)
+  );
 
-  function handleVariablesChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
-    const newVariables = event.target.value;
-    setHeadersValue(newVariables);
-    localStorage.setItem('headers', newVariables);
-  }
+  useEffect(() => {
+    const { isValid, errorMessage } = isValidJsonString(headersValue);
 
-  function changeShowVariables() {
+    if (isValid) {
+      localStorage.setItem('headersValueLS', headersValue);
+      setValidationState({ showValidation: false, errorMessage: '' });
+    } else {
+      setValidationState({
+        showValidation: true,
+        errorMessage: `Invalid headers format: ${errorMessage}`,
+      });
+    }
+  }, [headersValue]);
+
+  const handleHeadersChange = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
+    const newHeaders = event.target.value;
+    setHeadersValue(newHeaders);
+  };
+
+  const handleCloseValidation = (): void => {
+    setValidationState({ showValidation: false, errorMessage: '' });
+    handleClearHeaders();
+    setShowHeaders(false);
+  };
+
+  const changeShowHeaders = (): void => {
     const updatedShowStatus = !showHeaders;
     setShowHeaders(updatedShowStatus);
-  }
+  };
+
+  const handleClearHeaders = (): void => {
+    localStorage.removeItem('headersValueLS');
+    setHeadersValue('');
+  };
+
+  const handleCut = (): void => {
+    handleClearHeaders();
+  };
 
   return (
-    <section className={styles['variables-section']}>
+    <section className={styles['headers-section']}>
       {showHeaders ? (
-        <div className={styles['variables-container']}>
-          <textarea
-            className={styles.textarea}
-            value={headersValue || ''}
-            onChange={(e) => handleVariablesChange(e)}
-            placeholder="Enter variables in JSON format"
-          />
-          <button className={styles['button-cross']} onClick={() => changeShowVariables()}>
-            <img className={styles.cross} src={cross} alt="cross" />
-          </button>
-        </div>
+        <ErrorBoundary fallback="Can't get data from API with these headers">
+          <div className={styles['headers-container']}>
+            <textarea
+              className={styles.textarea}
+              value={headersValue || ''}
+              onChange={(e) => handleHeadersChange(e)}
+              onCut={() => handleCut()}
+              placeholder="Enter headers in JSON format"
+            />
+            <button className={styles['button-cross']} onClick={() => handleCloseValidation()}>
+              <img className={styles.cross} src={cross} alt="cross" />
+            </button>
+          </div>
+          {validationState.showValidation && headersValue && (
+            <div className={styles.errorContainer}>
+              <p className={styles.error}>{validationState.errorMessage}</p>
+            </div>
+          )}
+        </ErrorBoundary>
       ) : (
-        <button className={styles.title} onClick={() => changeShowVariables()}>
+        <button className={styles.title} onClick={() => changeShowHeaders()}>
           Headers
         </button>
       )}
     </section>
   );
 };
+
 export default Headers;
