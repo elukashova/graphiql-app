@@ -1,19 +1,19 @@
 .error-wrapper {
   display: flex;
-  gap: .3em;
+  gap: 0.3em;
   align-items: center;
 }
 
 .error,
 .exclamation {
-  margin-top: .3em;
+  margin-top: 0.3em;
   text-transform: uppercase;
   font-weight: 600;
-  font-size: calc(.4em + .3vw);
+  font-size: calc(0.4em + 0.3vw);
 }
 
 .error {
-  color: #89B0AE;
+  color: #89b0ae;
 }
 
 .exclamation {

@@ -23,9 +23,99 @@
   justify-content: space-between;
 }
 
+.logo-block {
+  position: relative;
+}
+
 .logo {
-  width: 4rem;
-  height: 4rem;
+  height: 5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.first-circle {
+  background-color: var(--purple-dark);
+  width: 1rem;
+  height: 1rem;
+  left: 8rem;
+  top: 2.5rem;
+  transform: translate(-50%, -50%) rotate(-45deg) translate(260%, 0%) rotate(-45deg);
+}
+
+.second-circle {
+  background-color: var(--yellow);
+  width: 0.8rem;
+  height: 0.8rem;
+  top: 2.5rem;
+  left: 8rem;
+  transform: translate(-50%, -50%) rotate(-45deg) translate(260%, 0%) rotate(-45deg);
+}
+
+.logo-block:hover .first-circle {
+  transition: all 1s ease-in-out;
+  animation: ovalAnimationRight 5.5s infinite;
+}
+
+.logo-block:hover .second-circle {
+  transition: all 1s ease-in-out;
+  animation: ovalAnimationLeft 5s infinite;
+}
+
+@keyframes ovalAnimationRight {
+  0% {
+    transform: translate(-50%, -50%) rotate(-45deg) translate(260%, 0%) rotate(-45deg);
+    z-index: 1;
+  }
+  25% {
+    transform: translate(-50%, -50%) rotate(45deg) translate(0%, 260%) rotate(45deg);
+    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+    z-index: 3;
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(135deg) translate(-260%, 0%) rotate(135deg);
+    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+    z-index: 1;
+  }
+  75% {
+    transform: translate(-50%, -50%) rotate(225deg) translate(0%, -260%) rotate(225deg);
+    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+    z-index: 3;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(315deg) translate(260%, 0%) rotate(315deg);
+    z-index: 1;
+  }
+}
+
+@keyframes ovalAnimationLeft {
+  0% {
+    transform: translate(-50%, -50%) rotate(-45deg) translate(260%, 0%) rotate(-45deg) scale(1);
+    z-index: 0;
+  }
+  25% {
+    transform: translate(-50%, -50%) rotate(45deg) translate(0%, 260%) rotate(45deg) scale(1.2);
+    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+    z-index: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(135deg) translate(-260%, 0%) rotate(135deg) scale(1);
+    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+    z-index: 0;
+  }
+  75% {
+    transform: translate(-50%, -50%) rotate(225deg) translate(0%, -260%) rotate(225deg) scale(1.2);
+    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+    z-index: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(315deg) translate(260%, 0%) rotate(315deg) scale(1);
+    z-index: 0;
+  }
 }
 
 .nav {
