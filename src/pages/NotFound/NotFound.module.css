@@ -4,20 +4,28 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: '../../assets/404.png';
+  background-size: cover;
   position: relative;
+  height: 100vh;
 }
 
 .background {
   box-sizing: border-box;
   max-height: 30rem;
+  width: 100%;
+  height: auto;
+  margin-bottom: 2rem;
+  max-width: 100%;
 }
 
 .text {
   position: absolute;
-  font-size: 2rem;
+  font-size: calc(1rem + 1vw);
   line-height: 200%;
   transform-style: preserve-3d;
+  text-align: center;
+  width: 80%;
+  max-width: 30rem;
 }
 
 .highlight {
