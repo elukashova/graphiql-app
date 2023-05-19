@@ -1,5 +1,24 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+export interface Variables {
+  [key: string]: unknown;
+}
+
+export interface Headers {
+  [key: string]: unknown;
+}
+
+export interface FetchFormResponseArgs {
+  query: string;
+  url: string;
+  variables?: Variables;
+  headers?: Headers;
+}
+
+export interface FetchFormResponseResult {
+  formResponse: string;
+}
+
 export interface EditorState {
   formValue: string;
   formResponse: string;
@@ -14,28 +33,30 @@ const initialState: EditorState = {
   error: null,
 };
 
-export const fetchFormResponse = createAsyncThunk(
+export const fetchFormResponse = createAsyncThunk<FetchFormResponseResult, FetchFormResponseArgs>(
   'editor/fetchFormResponse',
   async ({
     query,
     url,
     variables,
-  }: {
-    query: string;
-    url: string;
-    variables?: Record<string, unknown>;
-  }) => {
-    const body = variables ? JSON.stringify({ query, variables }) : JSON.stringify({ query });
-    const res = await fetch(url, {
+    headers,
+  }): Promise<{
+    formResponse: string;
+  }> => {
+    const body: string = variables
+      ? JSON.stringify({ query, variables })
+      : JSON.stringify({ query });
+    const res: Response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
         'Access-Control-Allow-Origin': '*',
+        ...headers,
       },
       body,
     });
     const result = await res.json();
-    return JSON.stringify(result);
+    return { formResponse: JSON.stringify(result) };
   }
 );
 
@@ -54,7 +75,8 @@ export const editorSlice = createSlice({
       })
       .addCase(fetchFormResponse.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.formResponse = action.payload;
+        state.formResponse = action.payload.formResponse;
+        console.log(action.payload.formResponse);
       })
       .addCase(fetchFormResponse.rejected, (state, action) => {
         state.status = 'failed';
