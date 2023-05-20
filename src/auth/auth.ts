@@ -8,14 +8,15 @@ import {
   signOut,
   AuthError,
   User,
+  UserCredential,
 } from 'firebase/auth';
 import firebaseApp from './firebase.config';
 
 const auth = getAuth(firebaseApp);
 
 export async function signUp(email: string, password: string) {
-  let result = null;
-  let error = null;
+  let result: UserCredential | null = null;
+  let error: AuthError | null = null;
 
   try {
     result = await createUserWithEmailAndPassword(auth, email, password);
@@ -27,8 +28,8 @@ export async function signUp(email: string, password: string) {
 }
 
 export async function signIn(email: string, password: string) {
-  let result = null;
-  let error = null;
+  let result: UserCredential | null = null;
+  let error: AuthError | null = null;
 
   try {
     result = await signInWithEmailAndPassword(auth, email, password);
@@ -40,8 +41,8 @@ export async function signIn(email: string, password: string) {
 }
 
 export async function logOut() {
-  let result = null;
-  let error = null;
+  let result: boolean | null = null;
+  let error: AuthError | null = null;
 
   try {
     await signOut(auth);
