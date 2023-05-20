@@ -1,0 +1,21 @@
+.query {
+  color: blue;
+}
+.title {
+  cursor: pointer;
+  color: orange;
+}
+
+.name {
+  cursor: pointer;
+  color: plum;
+}
+
+.arg {
+  color: red;
+}
+
+.type {
+  cursor: pointer;
+  color: orange;
+}
