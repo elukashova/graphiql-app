@@ -13,9 +13,6 @@
 }
 
 .error {
-  color: #89b0ae;
-}
-
-.exclamation {
-  color: red;
+  background-color: var(--yellow);
+  padding: 0.3rem 0.7rem;
 }

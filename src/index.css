@@ -1,5 +1,7 @@
-html {
-  height: 100vw;
+html,
+body {
+  height: 100%;
+  transition: all 2s ease-in-out;
 }
 
 :root {
@@ -45,7 +47,6 @@ body {
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
   background-color: var(--background-light);
   color: var(--background-dark);
 }
