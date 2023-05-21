@@ -1,4 +1,4 @@
-.variables-section {
+.headers-section {
   width: 100%;
 }
 
@@ -6,7 +6,7 @@
   min-width: max-content;
 }
 
-.variables-container {
+.headers-container {
   width: 100%;
   display: grid;
   grid-template-columns: auto 2rem;
@@ -15,16 +15,13 @@
 }
 
 .textarea {
-  width: 100%;
   resize: none;
   min-height: max-content;
-  height: auto;
   padding: 15px;
   cursor: text;
 }
 
 .button-cross {
-  width: 100%;
   background-color: transparent;
   padding: 0.3rem;
   margin: 0;
