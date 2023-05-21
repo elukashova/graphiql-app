@@ -30,29 +30,25 @@ const AuthForm = (): JSX.Element => {
   });
   const { isSignUp } = useAppSelector(selectRoute);
   const dispatch = useAppDispatch();
-  const [error, setError] = useState<string | undefined>(undefined);
+  const [error, setError] = useState<string>('');
 
-  const onSubmit: SubmitHandler<UserData> = ({ email, password }: UserData) => {
+  const onSubmit: SubmitHandler<UserData> = async ({ email, password }: UserData) => {
     const authorizeUser = isSignUp ? signUp : signIn;
-
-    dispatch(setIsLoading(true));
-    authorizeUser(email, password)
-      .then((userCredential) => {
-        const authError: AuthError | null = userCredential.error;
-        if (authError) {
-          const errorCode: string = authError.code;
-          const message: string = defineErrorMessage(errorCode);
-          setError(message);
-          setTimeout(() => setError(undefined), 1500);
-        }
-      })
-      .catch(() => {
-        setError(FirebaseErrors.genericMessage);
-        setTimeout(() => setError(undefined), 1500);
-      })
-      .finally(() => {
-        dispatch(setIsLoading(false));
-      });
+    try {
+      const userCredential = await authorizeUser(email, password);
+      dispatch(setIsLoading(true));
+      const authError: AuthError | null = userCredential.error;
+      if (authError) {
+        const errorCode: string = authError.code;
+        setError(defineErrorMessage(errorCode));
+        setTimeout(() => setError(''), 1500);
+      }
+    } catch {
+      setError(FirebaseErrors.genericMessage);
+      setTimeout(() => setError(''), 1500);
+    } finally {
+      dispatch(setIsLoading(false));
+    }
   };
 
   return (

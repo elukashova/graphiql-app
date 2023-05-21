@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './NotFound.module.css';
-import notFound from '../../assets/auth-background2.png';
+import notFound from '../../assets/auth-background.png';
 
 const NotFound = (): JSX.Element => {
   return (

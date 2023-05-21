@@ -33,15 +33,15 @@
   padding: 0.2rem;
   color: var(--background-dark);
   text-decoration: none;
-  transform: rotate(0deg);
   display: inline-block;
   transform: rotate(7deg);
+  transition: transform 0.3s ease-in-out;
 }
 
 main:hover .highlight {
   transform: rotate(-10deg);
   color: var(--background-dark);
-  transition: all 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 }
 
 .container {

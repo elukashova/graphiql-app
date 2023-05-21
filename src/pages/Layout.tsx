@@ -37,7 +37,6 @@ const Layout = (props: props): JSX.Element => {
   useEffect(() => {
     if (isAuth) {
       setAuthStatus(true);
-      console.log(authStatus);
     }
   }, [isAuth, authStatus]);
 
