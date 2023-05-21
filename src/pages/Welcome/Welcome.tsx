@@ -10,8 +10,8 @@ const WelcomePage = (): JSX.Element => {
     <section className={styles.section}>
       <div className={styles.wrapper}>
         <div className={styles.top}>
-          <h2>Welcome to</h2>
-          <h2>GraphiQL</h2>
+          <h2 className={styles.title}>Welcome to</h2>
+          <h2 className={styles.name}>GraphiQL</h2>
         </div>
         <div className={styles.bottom}>
           <InfoCard

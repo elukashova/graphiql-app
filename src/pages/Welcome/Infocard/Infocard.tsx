@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Infocard.module.css';
 
 type Props = {
@@ -9,25 +9,29 @@ type Props = {
 };
 
 const InfoCard = ({ title, text, urls, names }: Props): JSX.Element => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <div className={styles.card}>
+    <div className={isOpen ? styles['card-open'] : styles.card}>
       <div className={styles.wrapper}>
         <div className={styles.top}>
           <h2 className={styles.title}>{title}</h2>
-          <div className={styles.triangle}></div>
+          <div className={styles.triangle} onClick={handleClick}></div>
         </div>
-        <div className={styles.bottom}>
+        <div className={isOpen ? styles.bottom : styles.hidden}>
           {text && <p className={styles.text}>{text}</p>}
           {urls &&
             names &&
             urls.map((url: string, idx: number) => {
               return (
-                <>
-                  <div className={styles.author}>
-                    <img className={styles.img} src={url} alt={names[idx]} />
-                    <p className={styles.name}>{names[idx]}</p>
-                  </div>
-                </>
+                <div className={styles.author} key={idx}>
+                  <img className={styles.img} src={url} alt={names[idx]} />
+                  <p className={styles.name}>{names[idx]}</p>
+                </div>
               );
             })}
         </div>
