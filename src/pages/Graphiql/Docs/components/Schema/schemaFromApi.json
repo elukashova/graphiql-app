@@ -1,0 +1,732 @@
+{
+  "data": {
+    "__schema": {
+      "types": [
+        {
+          "name": "Network",
+          "kind": "OBJECT",
+          "description": "{\"en\":\"The network object.\",\"ru\":\"Объект сети.\"}",
+          "fields": [
+            {
+              "name": "id",
+              "description": "{\"en\":\"The network ID.\",\"ru\":\"ID сети.\"}",
+              "args": []
+            },
+            {
+              "name": "network",
+              "description": "{\"en\":\"The network range.\",\"ru\":\"Диапазон сети.\"}",
+              "args": []
+            },
+            {
+              "name": "latitude",
+              "description": "{\"en\":\"The latitude of the location associated with the network.\",\"ru\":\"Широта местоположения, связанного с сетью.\"}",
+              "args": []
+            },
+            {
+              "name": "longitude",
+              "description": "{\"en\":\"The longitude of the location associated with the network.\",\"ru\":\"Долгота местоположения, связанного с сетью.\"}",
+              "args": []
+            },
+            {
+              "name": "accuracyRadius",
+              "description": "{\"en\":\"The radius in kilometers around the specified location where the IP address is likely to be.\",\"ru\":\"Радиус в километрах вокруг указанного местоположения, в котором, вероятно, будет находиться IP-адрес.\"}",
+              "args": []
+            },
+            {
+              "name": "region",
+              "description": "{\"en\":\"The region in which the network is located.\",\"ru\":\"Регион, в котором расположена сеть.\"}",
+              "args": []
+            }
+          ]
+        },
+        {
+          "name": "Node",
+          "kind": "INTERFACE",
+          "description": null,
+          "fields": [{ "name": "id", "description": null, "args": [] }]
+        },
+        {
+          "name": "ID",
+          "kind": "SCALAR",
+          "description": "The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `\"4\"`) or integer (such as `4`) input value will be accepted as an ID.",
+          "fields": null
+        },
+        {
+          "name": "String",
+          "kind": "SCALAR",
+          "description": "The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.",
+          "fields": null
+        },
+        {
+          "name": "Float",
+          "kind": "SCALAR",
+          "description": "The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).",
+          "fields": null
+        },
+        {
+          "name": "Int",
+          "kind": "SCALAR",
+          "description": "The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.",
+          "fields": null
+        },
+        {
+          "name": "Region",
+          "kind": "OBJECT",
+          "description": "{\"en\":\"The region object.\",\"ru\":\"Объект региона.\"}",
+          "fields": [
+            {
+              "name": "id",
+              "description": "{\"en\":\"The region ID.\",\"ru\":\"ID региона.\"}",
+              "args": []
+            },
+            {
+              "name": "name",
+              "description": "{\"en\":\"The name of the region in the specified language.\",\"ru\":\"Название региона на указанном языке.\"}",
+              "args": []
+            },
+            {
+              "name": "latitude",
+              "description": "{\"en\":\"The latitude of the region location.\",\"ru\":\"Широта местоположения региона.\"}",
+              "args": []
+            },
+            {
+              "name": "longitude",
+              "description": "{\"en\":\"The longitude of the region location.\",\"ru\":\"Долгота местоположения региона.\"}",
+              "args": []
+            },
+            {
+              "name": "type",
+              "description": "{\"en\":\"The type of the region. Possible values: continent, country, division1, division2, division3, division4, city.\",\"ru\":\"Тип региона. Возможные значения: continent, country, division1, division2, division3, division4, city.\"}",
+              "args": []
+            },
+            {
+              "name": "continentCode",
+              "description": "{\"en\":\"The code of the continent. Possible values: AF (Africa), AS (Asia), EU (Europe), NA (North America), SA (South America), OC (Oceania), AN (Antarctica).\",\"ru\":\"Код континента. Возможные значения: AF (Африка), AS (Азия), EU (Европа), NA (Северная Америка), SA (Южная Америка), OC (Океания), AN (Антарктида).\"}",
+              "args": []
+            },
+            {
+              "name": "countryCode",
+              "description": "{\"en\":\"The code of the country (ISO-639-1).\",\"ru\":\"Код страны (ISO-639-1).\"}",
+              "args": []
+            },
+            {
+              "name": "division1Code",
+              "description": "{\"en\":\"The code of the first-order country division.\",\"ru\":\"Код подразделения страны первого порядка.\"}",
+              "args": []
+            },
+            {
+              "name": "division2Code",
+              "description": "{\"en\":\"The code of the second-order country division.\",\"ru\":\"Код подразделения страны второго порядка.\"}",
+              "args": []
+            },
+            {
+              "name": "division3Code",
+              "description": "{\"en\":\"The code of the third-order country division.\",\"ru\":\"Код подразделения страны третьего порядка.\"}",
+              "args": []
+            },
+            {
+              "name": "division4Code",
+              "description": "{\"en\":\"The code of the fourth-order country division.\",\"ru\":\"Код подразделения страны четвертого порядка.\"}",
+              "args": []
+            },
+            {
+              "name": "population",
+              "description": "{\"en\":\"The population of the region.\",\"ru\":\"Население региона.\"}",
+              "args": []
+            },
+            {
+              "name": "timezone",
+              "description": "{\"en\":\"The time zone of the region.\",\"ru\":\"Часовой пояс региона.\"}",
+              "args": []
+            },
+            {
+              "name": "parentRegions",
+              "description": "{\"en\":\"Parent regions that the region belongs to.\",\"ru\":\"Родительские регионы, к которым относится регион.\"}",
+              "args": []
+            }
+          ]
+        },
+        {
+          "name": "ParentRegion",
+          "kind": "OBJECT",
+          "description": "{\"en\":\"The parent region.\",\"ru\":\"Родительский регион.\"}",
+          "fields": [
+            {
+              "name": "id",
+              "description": "{\"en\":\"The region ID.\",\"ru\":\"ID региона.\"}",
+              "args": []
+            },
+            {
+              "name": "name",
+              "description": "{\"en\":\"The name of the region in the specified language.\",\"ru\":\"Название региона на указанном языке.\"}",
+              "args": []
+            }
+          ]
+        },
+        {
+          "name": "ApiKey",
+          "kind": "OBJECT",
+          "description": null,
+          "fields": [
+            { "name": "id", "description": null, "args": [] },
+            {
+              "name": "createdAt",
+              "description": "{\"en\":\"The date the object was created.\",\"ru\":\"Дата создания объекта.\"}",
+              "args": []
+            },
+            {
+              "name": "updatedAt",
+              "description": "{\"en\":\"The date of the last update of the object.\",\"ru\":\"Дата последнего обновления объекта.\"}",
+              "args": []
+            },
+            {
+              "name": "deletedAt",
+              "description": "{\"en\":\"The date the object was deleted.\",\"ru\":\"Дата удаления объекта.\"}",
+              "args": []
+            },
+            { "name": "name", "description": null, "args": [] },
+            { "name": "value", "description": null, "args": [] }
+          ]
+        },
+        {
+          "name": "Long",
+          "kind": "SCALAR",
+          "description": "The `Long` scalar type represents non-fractional signed whole numeric values. Long can represent values between -(2^53 - 1) and 2^53 - 1.",
+          "fields": null
+        },
+        {
+          "name": "DailyStats",
+          "kind": "OBJECT",
+          "description": null,
+          "fields": [
+            { "name": "id", "description": null, "args": [] },
+            {
+              "name": "createdAt",
+              "description": "{\"en\":\"The date the object was created.\",\"ru\":\"Дата создания объекта.\"}",
+              "args": []
+            },
+            {
+              "name": "updatedAt",
+              "description": "{\"en\":\"The date of the last update of the object.\",\"ru\":\"Дата последнего обновления объекта.\"}",
+              "args": []
+            },
+            { "name": "count", "description": null, "args": [] }
+          ]
+        },
+        {
+          "name": "RegionLocale",
+          "kind": "OBJECT",
+          "description": null,
+          "fields": [{ "name": "id", "description": null, "args": [] }]
+        },
+        {
+          "name": "User",
+          "kind": "OBJECT",
+          "description": null,
+          "fields": [
+            { "name": "id", "description": null, "args": [] },
+            {
+              "name": "createdAt",
+              "description": "{\"en\":\"The date the object was created.\",\"ru\":\"Дата создания объекта.\"}",
+              "args": []
+            },
+            {
+              "name": "updatedAt",
+              "description": "{\"en\":\"The date of the last update of the object.\",\"ru\":\"Дата последнего обновления объекта.\"}",
+              "args": []
+            },
+            { "name": "email", "description": null, "args": [] },
+            { "name": "firstName", "description": null, "args": [] },
+            { "name": "lastName", "description": null, "args": [] },
+            { "name": "avatar", "description": null, "args": [] },
+            { "name": "locale", "description": null, "args": [] },
+            { "name": "registeredFrom", "description": null, "args": [] }
+          ]
+        },
+        {
+          "name": "Query",
+          "kind": "OBJECT",
+          "description": null,
+          "fields": [
+            {
+              "name": "status",
+              "description": "{\"en\":\"Determines whether the request is authorized.\",\"ru\":\"Определяет, является ли запрос авторизованным.\"}",
+              "args": []
+            },
+            {
+              "name": "region",
+              "description": "{\"en\":\"Returns the region by ID.\",\"ru\":\"Возвращает регион по ID.\"}",
+              "args": [
+                {
+                  "name": "id",
+                  "description": "{\"en\":\"The region ID.\",\"ru\":\"ID региона.\"}",
+                  "type": {
+                    "name": null,
+                    "kind": "NON_NULL",
+                    "ofType": { "name": "Int", "kind": "SCALAR" }
+                  }
+                }
+              ]
+            },
+            {
+              "name": "continents",
+              "description": "{\"en\":\"Returns a list of all continents.\",\"ru\":\"Возвращает список всех континентов.\"}",
+              "args": []
+            },
+            {
+              "name": "countries",
+              "description": "{\"en\":\"Returns a list of all countries.\",\"ru\":\"Возвращает список всех стран.\"}",
+              "args": []
+            },
+            {
+              "name": "regions",
+              "description": "{\"en\":\"Returns a list of regions.\",\"ru\":\"Возвращает список регионов.\"}",
+              "args": [
+                {
+                  "name": "first",
+                  "description": "{\"en\":\"The number of items on the page. Used for forward pagination.\",\"ru\":\"Количество элементов на странице. Используется для навигации вперед.\"}",
+                  "type": { "name": "Int", "kind": "SCALAR", "ofType": null }
+                },
+                {
+                  "name": "after",
+                  "description": "{\"en\":\"The cursor of the item relative to which the next items should be returned. Used for forward pagination.\",\"ru\":\"Курсор элемента, относительно которого должны быть возвращены следующие элементы. Используется для навигации вперед.\"}",
+                  "type": { "name": "String", "kind": "SCALAR", "ofType": null }
+                },
+                {
+                  "name": "last",
+                  "description": "{\"en\":\"The number of items on the page. Used for backward pagination.\",\"ru\":\"Количество элементов на странице. Используется для навигации назад.\"}",
+                  "type": { "name": "Int", "kind": "SCALAR", "ofType": null }
+                },
+                {
+                  "name": "before",
+                  "description": "{\"en\":\"The cursor of the item relative to which the previous items should be returned. Used for backward pagination.\",\"ru\":\"Курсор элемента, относительно которого должны быть возвращены предыдущие элементы. Используется для навигации назад.\"}",
+                  "type": { "name": "String", "kind": "SCALAR", "ofType": null }
+                },
+                {
+                  "name": "type",
+                  "description": "{\"en\":\"The type of the region. Possible values: continent, country, division1, division2, division3, division4, city.\",\"ru\":\"Тип региона. Возможные значения: continent, country, division1, division2, division3, division4, city.\"}",
+                  "type": { "name": "String", "kind": "SCALAR", "ofType": null }
+                },
+                {
+                  "name": "countryCode",
+                  "description": "{\"en\":\"The code of the country (ISO-639-1).\",\"ru\":\"Код страны (ISO-639-1).\"}",
+                  "type": { "name": "String", "kind": "SCALAR", "ofType": null }
+                },
+                {
+                  "name": "division1Code",
+                  "description": "{\"en\":\"The code of the first-order country division.\",\"ru\":\"Код подразделения страны первого порядка.\"}",
+                  "type": { "name": "String", "kind": "SCALAR", "ofType": null }
+                },
+                {
+                  "name": "division2Code",
+                  "description": "{\"en\":\"The code of the second-order country division.\",\"ru\":\"Код подразделения страны второго порядка.\"}",
+                  "type": { "name": "String", "kind": "SCALAR", "ofType": null }
+                },
+                {
+                  "name": "division3Code",
+                  "description": "{\"en\":\"The code of the third-order country division.\",\"ru\":\"Код подразделения страны третьего порядка.\"}",
+                  "type": { "name": "String", "kind": "SCALAR", "ofType": null }
+                },
+                {
+                  "name": "division4Code",
+                  "description": "{\"en\":\"The code of the fourth-order country division.\",\"ru\":\"Код подразделения страны четвертого порядка.\"}",
+                  "type": { "name": "String", "kind": "SCALAR", "ofType": null }
+                }
+              ]
+            },
+            {
+              "name": "childRegions",
+              "description": "{\"en\":\"Returns a list of regions located within the specified region.\",\"ru\":\"Возвращает список регионов, расположенных внутри указанного региона.\"}",
+              "args": [
+                {
+                  "name": "first",
+                  "description": "{\"en\":\"The number of items on the page. Used for forward pagination.\",\"ru\":\"Количество элементов на странице. Используется для навигации вперед.\"}",
+                  "type": { "name": "Int", "kind": "SCALAR", "ofType": null }
+                },
+                {
+                  "name": "after",
+                  "description": "{\"en\":\"The cursor of the item relative to which the next items should be returned. Used for forward pagination.\",\"ru\":\"Курсор элемента, относительно которого должны быть возвращены следующие элементы. Используется для навигации вперед.\"}",
+                  "type": { "name": "String", "kind": "SCALAR", "ofType": null }
+                },
+                {
+                  "name": "last",
+                  "description": "{\"en\":\"The number of items on the page. Used for backward pagination.\",\"ru\":\"Количество элементов на странице. Используется для навигации назад.\"}",
+                  "type": { "name": "Int", "kind": "SCALAR", "ofType": null }
+                },
+                {
+                  "name": "before",
+                  "description": "{\"en\":\"The cursor of the item relative to which the previous items should be returned. Used for backward pagination.\",\"ru\":\"Курсор элемента, относительно которого должны быть возвращены предыдущие элементы. Используется для навигации назад.\"}",
+                  "type": { "name": "String", "kind": "SCALAR", "ofType": null }
+                },
+                {
+                  "name": "parentId",
+                  "description": "{\"en\":\"The ID of the parent region.\",\"ru\":\"ID родительского региона.\"}",
+                  "type": {
+                    "name": null,
+                    "kind": "NON_NULL",
+                    "ofType": { "name": "Int", "kind": "SCALAR" }
+                  }
+                }
+              ]
+            },
+            {
+              "name": "searchRegions",
+              "description": "{\"en\":\"Returns a list of regions by a search term.\",\"ru\":\"Возвращает список регионов по поисковому запросу.\"}",
+              "args": [
+                {
+                  "name": "searchTerm",
+                  "description": "{\"en\":\"A query used to search for regions by name.\",\"ru\":\"Запрос, используемый для поиска регионов по названию.\"}",
+                  "type": {
+                    "name": null,
+                    "kind": "NON_NULL",
+                    "ofType": { "name": "String", "kind": "SCALAR" }
+                  }
+                },
+                {
+                  "name": "first",
+                  "description": "{\"en\":\"The number of regions.\",\"ru\":\"Количество регионов.\"}",
+                  "type": { "name": "Int", "kind": "SCALAR", "ofType": null }
+                },
+                {
+                  "name": "type",
+                  "description": "{\"en\":\"The type of the region. Possible values: continent, country, division1, division2, division3, division4, city.\",\"ru\":\"Тип региона. Возможные значения: continent, country, division1, division2, division3, division4, city.\"}",
+                  "type": { "name": "String", "kind": "SCALAR", "ofType": null }
+                },
+                {
+                  "name": "countryCode",
+                  "description": "{\"en\":\"The code of the country (ISO-639-1).\",\"ru\":\"Код страны (ISO-639-1).\"}",
+                  "type": { "name": "String", "kind": "SCALAR", "ofType": null }
+                },
+                {
+                  "name": "division1Code",
+                  "description": "{\"en\":\"The code of the first-order country division.\",\"ru\":\"Код подразделения страны первого порядка.\"}",
+                  "type": { "name": "String", "kind": "SCALAR", "ofType": null }
+                },
+                {
+                  "name": "division2Code",
+                  "description": "{\"en\":\"The code of the second-order country division.\",\"ru\":\"Код подразделения страны второго порядка.\"}",
+                  "type": { "name": "String", "kind": "SCALAR", "ofType": null }
+                },
+                {
+                  "name": "division3Code",
+                  "description": "{\"en\":\"The code of the third-order country division.\",\"ru\":\"Код подразделения страны третьего порядка.\"}",
+                  "type": { "name": "String", "kind": "SCALAR", "ofType": null }
+                },
+                {
+                  "name": "division4Code",
+                  "description": "{\"en\":\"The code of the fourth-order country division.\",\"ru\":\"Код подразделения страны четвертого порядка.\"}",
+                  "type": { "name": "String", "kind": "SCALAR", "ofType": null }
+                }
+              ]
+            },
+            {
+              "name": "nearestRegions",
+              "description": "{\"en\":\"Returns a list of regions located near the specified location.\",\"ru\":\"Возвращает список регионов, расположенных рядом с указанным местоположением.\"}",
+              "args": [
+                {
+                  "name": "latitude",
+                  "description": "{\"en\":\"The latitude of the location.\",\"ru\":\"Широта местоположения.\"}",
+                  "type": { "name": "Float", "kind": "SCALAR", "ofType": null }
+                },
+                {
+                  "name": "longitude",
+                  "description": "{\"en\":\"The longitude of the location.\",\"ru\":\"Долгота местоположения.\"}",
+                  "type": { "name": "Float", "kind": "SCALAR", "ofType": null }
+                },
+                {
+                  "name": "id",
+                  "description": "{\"en\":\"The ID of the region relative to which the search will be performed.\",\"ru\":\"ID региона, относительно которого будет выполняться поиск.\"}",
+                  "type": { "name": "Int", "kind": "SCALAR", "ofType": null }
+                },
+                {
+                  "name": "first",
+                  "description": "{\"en\":\"The number of regions.\",\"ru\":\"Количество регионов.\"}",
+                  "type": { "name": "Int", "kind": "SCALAR", "ofType": null }
+                },
+                {
+                  "name": "type",
+                  "description": "{\"en\":\"The type of the region. Possible values: continent, country, division1, division2, division3, division4, city.\",\"ru\":\"Тип региона. Возможные значения: continent, country, division1, division2, division3, division4, city.\"}",
+                  "type": { "name": "String", "kind": "SCALAR", "ofType": null }
+                }
+              ]
+            },
+            {
+              "name": "network",
+              "description": "{\"en\":\"Detects the region by the IP address.\",\"ru\":\"Определяет регион по IP-адресу.\"}",
+              "args": [
+                {
+                  "name": "ip",
+                  "description": "{\"en\":\"The IP address.\",\"ru\":\"IP-адрес.\"}",
+                  "type": {
+                    "name": null,
+                    "kind": "NON_NULL",
+                    "ofType": { "name": "String", "kind": "SCALAR" }
+                  }
+                }
+              ]
+            },
+            {
+              "name": "node",
+              "description": null,
+              "args": [
+                {
+                  "name": "id",
+                  "description": null,
+                  "type": {
+                    "name": null,
+                    "kind": "NON_NULL",
+                    "ofType": { "name": "ID", "kind": "SCALAR" }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "StatusPayload",
+          "kind": "OBJECT",
+          "description": "{\"en\":\"The object that stores the status of the operation.\",\"ru\":\"Объект, в котором хранится статус операции.\"}",
+          "fields": [
+            {
+              "name": "ok",
+              "description": "{\"en\":\"Whether the operation was completed successfully.\",\"ru\":\"Была ли операция завершена успешно.\"}",
+              "args": []
+            }
+          ]
+        },
+        {
+          "name": "Boolean",
+          "kind": "SCALAR",
+          "description": "The `Boolean` scalar type represents `true` or `false`.",
+          "fields": null
+        },
+        {
+          "name": "RegionConnection",
+          "kind": "OBJECT",
+          "description": "{\"en\":\"A type that provides a standard mechanism for paginating the result set.\",\"ru\":\"Тип, обеспечивающий стандартный механизм разбиения набора результатов на страницы.\"}",
+          "fields": [
+            {
+              "name": "edges",
+              "description": "{\"en\":\"Item list.\",\"ru\":\"Список элементов.\"}",
+              "args": []
+            },
+            {
+              "name": "pageInfo",
+              "description": "{\"en\":\"Information about the current page.\",\"ru\":\"Информация о текущей странице.\"}",
+              "args": []
+            }
+          ]
+        },
+        {
+          "name": "RegionEdge",
+          "kind": "OBJECT",
+          "description": "{\"en\":\"A list item.\",\"ru\":\"Элемент списка.\"}",
+          "fields": [
+            {
+              "name": "node",
+              "description": "{\"en\":\"An object.\",\"ru\":\"Объект.\"}",
+              "args": []
+            },
+            {
+              "name": "cursor",
+              "description": "{\"en\":\"A cursor that is used to get the next page.\",\"ru\":\"Курсор, который используется для получения следующей страницы.\"}",
+              "args": []
+            }
+          ]
+        },
+        {
+          "name": "PageInfo",
+          "kind": "OBJECT",
+          "description": "{\"en\":\"Information about the current page.\",\"ru\":\"Информация о текущей странице.\"}",
+          "fields": [
+            {
+              "name": "hasNextPage",
+              "description": "{\"en\":\"Indicates whether the list items exist on the next page. Used to navigate forward.\",\"ru\":\"Показывает, существуют ли элементы списка на следующей странице. Используется для навигации вперед.\"}",
+              "args": []
+            },
+            {
+              "name": "hasPreviousPage",
+              "description": "{\"en\":\"Indicates whether the list items exist on the previous page. Used to navigate backwards.\",\"ru\":\"Существуют ли элементы списка на предыдущей странице. Используется для навигации назад.\"}",
+              "args": []
+            },
+            {
+              "name": "startCursor",
+              "description": "{\"en\":\"Indicates whether the list items exist on the previous page. Used to navigate forward.\",\"ru\":\"Существуют ли элементы списка на предыдущей странице. Используется для навигации вперед.\"}",
+              "args": []
+            },
+            {
+              "name": "endCursor",
+              "description": "{\"en\":\"Indicates whether the list items exist on the previous page. Used to navigate backwards.\",\"ru\":\"Существуют ли элементы списка на предыдущей странице. Используется для навигации назад.\"}",
+              "args": []
+            }
+          ]
+        },
+        {
+          "name": "__Schema",
+          "kind": "OBJECT",
+          "description": "A GraphQL Schema defines the capabilities of a GraphQL server. It exposes all available types and directives on the server, as well as the entry points for query, mutation, and subscription operations.",
+          "fields": [
+            { "name": "description", "description": null, "args": [] },
+            {
+              "name": "types",
+              "description": "A list of all types supported by this server.",
+              "args": []
+            },
+            {
+              "name": "queryType",
+              "description": "The type that query operations will be rooted at.",
+              "args": []
+            },
+            {
+              "name": "mutationType",
+              "description": "If this server supports mutation, the type that mutation operations will be rooted at.",
+              "args": []
+            },
+            {
+              "name": "subscriptionType",
+              "description": "If this server support subscription, the type that subscription operations will be rooted at.",
+              "args": []
+            },
+            {
+              "name": "directives",
+              "description": "A list of all directives supported by this server.",
+              "args": []
+            }
+          ]
+        },
+        {
+          "name": "__Type",
+          "kind": "OBJECT",
+          "description": "The fundamental unit of any GraphQL Schema is the type. There are many kinds of types in GraphQL as represented by the `__TypeKind` enum.\n\nDepending on the kind of a type, certain fields describe information about that type. Scalar types provide no information beyond a name, description and optional `specifiedByURL`, while Enum types provide their values. Object and Interface types provide the fields they describe. Abstract types, Union and Interface, provide the Object types possible at runtime. List and NonNull types compose other types.",
+          "fields": [
+            { "name": "kind", "description": null, "args": [] },
+            { "name": "name", "description": null, "args": [] },
+            { "name": "description", "description": null, "args": [] },
+            { "name": "specifiedByURL", "description": null, "args": [] },
+            {
+              "name": "fields",
+              "description": null,
+              "args": [
+                {
+                  "name": "includeDeprecated",
+                  "description": null,
+                  "type": { "name": "Boolean", "kind": "SCALAR", "ofType": null }
+                }
+              ]
+            },
+            { "name": "interfaces", "description": null, "args": [] },
+            { "name": "possibleTypes", "description": null, "args": [] },
+            {
+              "name": "enumValues",
+              "description": null,
+              "args": [
+                {
+                  "name": "includeDeprecated",
+                  "description": null,
+                  "type": { "name": "Boolean", "kind": "SCALAR", "ofType": null }
+                }
+              ]
+            },
+            {
+              "name": "inputFields",
+              "description": null,
+              "args": [
+                {
+                  "name": "includeDeprecated",
+                  "description": null,
+                  "type": { "name": "Boolean", "kind": "SCALAR", "ofType": null }
+                }
+              ]
+            },
+            { "name": "ofType", "description": null, "args": [] }
+          ]
+        },
+        {
+          "name": "__TypeKind",
+          "kind": "ENUM",
+          "description": "An enum describing what kind of type a given `__Type` is.",
+          "fields": null
+        },
+        {
+          "name": "__Field",
+          "kind": "OBJECT",
+          "description": "Object and Interface types are described by a list of Fields, each of which has a name, potentially a list of arguments, and a return type.",
+          "fields": [
+            { "name": "name", "description": null, "args": [] },
+            { "name": "description", "description": null, "args": [] },
+            {
+              "name": "args",
+              "description": null,
+              "args": [
+                {
+                  "name": "includeDeprecated",
+                  "description": null,
+                  "type": { "name": "Boolean", "kind": "SCALAR", "ofType": null }
+                }
+              ]
+            },
+            { "name": "type", "description": null, "args": [] },
+            { "name": "isDeprecated", "description": null, "args": [] },
+            { "name": "deprecationReason", "description": null, "args": [] }
+          ]
+        },
+        {
+          "name": "__InputValue",
+          "kind": "OBJECT",
+          "description": "Arguments provided to Fields or Directives and the input fields of an InputObject are represented as Input Values which describe their type and optionally a default value.",
+          "fields": [
+            { "name": "name", "description": null, "args": [] },
+            { "name": "description", "description": null, "args": [] },
+            { "name": "type", "description": null, "args": [] },
+            {
+              "name": "defaultValue",
+              "description": "A GraphQL-formatted string representing the default value for this input value.",
+              "args": []
+            },
+            { "name": "isDeprecated", "description": null, "args": [] },
+            { "name": "deprecationReason", "description": null, "args": [] }
+          ]
+        },
+        {
+          "name": "__EnumValue",
+          "kind": "OBJECT",
+          "description": "One possible value for a given Enum. Enum values are unique values, not a placeholder for a string or numeric value. However an Enum value is returned in a JSON response as a string.",
+          "fields": [
+            { "name": "name", "description": null, "args": [] },
+            { "name": "description", "description": null, "args": [] },
+            { "name": "isDeprecated", "description": null, "args": [] },
+            { "name": "deprecationReason", "description": null, "args": [] }
+          ]
+        },
+        {
+          "name": "__Directive",
+          "kind": "OBJECT",
+          "description": "A Directive provides a way to describe alternate runtime execution and type validation behavior in a GraphQL document.\n\nIn some cases, you need to provide options to alter GraphQL's execution behavior in ways field arguments will not suffice, such as conditionally including or skipping a field. Directives provide this by describing additional information to the executor.",
+          "fields": [
+            { "name": "name", "description": null, "args": [] },
+            { "name": "description", "description": null, "args": [] },
+            { "name": "isRepeatable", "description": null, "args": [] },
+            { "name": "locations", "description": null, "args": [] },
+            {
+              "name": "args",
+              "description": null,
+              "args": [
+                {
+                  "name": "includeDeprecated",
+                  "description": null,
+                  "type": { "name": "Boolean", "kind": "SCALAR", "ofType": null }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "__DirectiveLocation",
+          "kind": "ENUM",
+          "description": "A Directive can be adjacent to many parts of the GraphQL language, a __DirectiveLocation describes one such possible adjacencies.",
+          "fields": null
+        }
+      ]
+    }
+  }
+}

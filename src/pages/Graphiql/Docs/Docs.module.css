@@ -9,6 +9,8 @@
   margin: 0 auto;
   text-align: center;
   height: 2rem;
+  position: relative;
+  z-index: 100;
 }
 
 .docs:hover .book {
