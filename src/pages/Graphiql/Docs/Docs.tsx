@@ -9,13 +9,12 @@ import { selectDocs } from '../../../store/slices/docs';
 import Schema from './components/Schema/Schema';
 
 const Docs: React.FC = (): JSX.Element => {
-  const apiUrlFromStorage: string =
-    localStorage.getItem('apiUrl') || 'https://rickandmortyapi.com/graphql';
+  const apiUrl = 'https://data-api.oxilor.com/graphql';
   // метод запрашивает схему апи, которая была прописана в инпуте
   const [schema, setSchema] = useState<IntrospectionSchema>();
   const fetchSchema = () => {
     const query: string = getIntrospectionQuery(); // graphQL-запрос для получения схемы
-    fetch(apiUrlFromStorage, {
+    fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

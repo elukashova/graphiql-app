@@ -25,7 +25,6 @@ const Editor: React.FC = (): JSX.Element => {
     e.preventDefault();
     const variables = localStorage.getItem('variablesValueLS')?.trim() || '';
     const headers = localStorage.getItem('headersValueLS')?.trim() || '';
-    const url = localStorage.getItem('apiUrl') || 'https://rickandmortyapi.com/graphql';
     const variablesObj: Record<string, string> | undefined = variables
       ? JSON.parse(variables)
       : undefined;
@@ -34,7 +33,7 @@ const Editor: React.FC = (): JSX.Element => {
       : undefined;
     setIsLoading(true);
     dispatch(
-      fetchFormResponse({ query: formValue, url, variables: variablesObj, headers: headersObj })
+      fetchFormResponse({ query: formValue, variables: variablesObj, headers: headersObj })
     ).then(() => setIsLoading(false));
   };
 

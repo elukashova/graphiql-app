@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
+const URL = 'https://data-api.oxilor.com/graphql';
+
 export interface Variables {
   [key: string]: unknown;
 }
@@ -10,7 +12,7 @@ export interface Headers {
 
 export interface FetchFormResponseArgs {
   query: string;
-  url: string;
+  url?: string;
   variables?: Variables;
   headers?: Headers;
 }
@@ -37,7 +39,7 @@ export const fetchFormResponse = createAsyncThunk<FetchFormResponseResult, Fetch
   'editor/fetchFormResponse',
   async ({
     query,
-    url,
+    url = URL,
     variables,
     headers,
   }): Promise<{

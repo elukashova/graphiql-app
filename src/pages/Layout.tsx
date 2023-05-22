@@ -12,6 +12,7 @@ type props = {
 };
 
 const Layout = (props: props): JSX.Element => {
+  const [scroll, setScroll] = useState(false);
   const navigate = useNavigate();
   const { isAuth, isLoading } = useAppSelector(selectAuth);
   const [authStatus, setAuthStatus] = useState(false);
@@ -39,13 +40,22 @@ const Layout = (props: props): JSX.Element => {
     }
   }, [isAuth, authStatus]);
 
+  const scrollHeader = () => {
+    if (window.scrollY >= 50) setScroll(true);
+    else setScroll(false);
+  };
+
+  window.addEventListener('scroll', scrollHeader);
+
   return (
     <>
       {isLoading && <Loader />}
       {!isLoading && (
         <>
           <Header />
-          <main className={`${styles.main}`}>{props.content}</main>
+          <main className={!scroll ? `${styles.main}` : `${styles.main} ${styles.fixed}`}>
+            {props.content}
+          </main>
           <Footer />
         </>
       )}

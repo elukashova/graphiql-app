@@ -88,9 +88,8 @@ const AuthForm = (): JSX.Element => {
         </div>
       </div>
 
-      <div>
-        <input className={styles.submit} type="submit" value="submit" />
-      </div>
+      <input className={styles.submit} type="submit" value="submit" />
+
       {errors.email?.types && <ErrorMessage message={errors.email.message} />}
       {errors.password?.types && <ErrorMessage message={errors.password.message} />}
       {error && <ErrorMessage message={error} />}

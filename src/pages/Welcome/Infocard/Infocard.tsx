@@ -16,13 +16,13 @@ const InfoCard = ({ title, text, urls, names }: Props): JSX.Element => {
   };
 
   return (
-    <div className={isOpen ? styles['card-open'] : styles.card}>
+    <div className={isOpen ? styles['card-open'] : styles.card} onClick={handleClick}>
       <div className={styles.wrapper}>
         <div className={styles.top}>
           <h2 className={styles.title}>{title}</h2>
-          <div className={styles.triangle} onClick={handleClick}></div>
+          <div className={styles.triangle}></div>
         </div>
-        <div className={isOpen ? styles.bottom : styles.hidden}>
+        <div className={`${styles.hidden} ${isOpen ? styles['bottom'] : ''}`}>
           {text && <p className={styles.text}>{text}</p>}
           {urls &&
             names &&

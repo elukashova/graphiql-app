@@ -1,5 +1,6 @@
-html {
-  height: 100vw;
+html,
+body {
+  height: 100%;
 }
 
 :root {
@@ -14,11 +15,12 @@ html {
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-
   --purple-light: #c7b9ff;
   --purple-dark: #a259ff;
   --yellow: #ffc700;
+  --green: #00ff00;
+  --orange: #ffa500;
+  --pink: #ff69b4;
   --background-dark: #323232;
   --background-light: #e2e2e2;
   --white: #ffffff;
@@ -42,7 +44,6 @@ body {
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
   background-color: var(--background-light);
   color: var(--background-dark);
 }
@@ -89,14 +90,4 @@ textarea::-webkit-scrollbar {
 
 textarea::-webkit-scrollbar-thumb {
   background-color: var(--purple-light);
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
 }
