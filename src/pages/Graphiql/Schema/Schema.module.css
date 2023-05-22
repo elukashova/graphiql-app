@@ -1,8 +1,6 @@
 .modal {
   width: 100%;
   min-height: 15rem;
-  height: 100%;
-  padding: 1rem;
   box-sizing: border-box;
 }
 

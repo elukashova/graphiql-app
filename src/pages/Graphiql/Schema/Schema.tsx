@@ -6,9 +6,9 @@ const Schema = () => {
     <div className={styles.modal}>
       <iframe
         className={styles.schema}
-        src="../../../../doc/schema/index.html"
+        src="../../../../doc/scпhema/index.html"
         title="GraphQL documentation"
-      ></iframe>{' '}
+      ></iframe>
     </div>
   );
 };
