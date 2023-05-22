@@ -6,7 +6,7 @@ const Schema = () => {
     <div className={styles.modal}>
       <iframe
         className={styles.schema}
-        src="../../../../doc/schema/index.html"
+        src="/doc/schema/index.html"
         title="GraphQL documentation"
       ></iframe>
     </div>
