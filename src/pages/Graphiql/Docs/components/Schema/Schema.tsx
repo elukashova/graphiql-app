@@ -17,7 +17,7 @@ const Schema: React.FC<SchemaProps> = ({ schema }) => {
 
   return (
     <div className={styles.modal}>
-      <SchemaRoot schema={schema} onSelect={() => console.log('Hello')} />
+      <SchemaRoot schema={schema} onSelect={() => {}} />
     </div>
   );
 };

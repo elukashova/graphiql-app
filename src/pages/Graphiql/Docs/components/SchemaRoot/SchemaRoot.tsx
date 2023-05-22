@@ -37,9 +37,9 @@ export interface ListItemData {
   description: string;
 }
  */
-export const SchemaRoot: React.FC<SchemaRootProps> = ({ onSelect, schema }) => {
+export const SchemaRoot: React.FC<SchemaRootProps> = ({ schema }) => {
   const queryType = schema.getQueryType() as GraphQLObjectType;
-  const lang = 'eng';
+
   console.log(schema, queryType);
   const [showFields, setShowFields] = useState(false);
   const fields = queryType.getFields();
@@ -49,15 +49,17 @@ export const SchemaRoot: React.FC<SchemaRootProps> = ({ onSelect, schema }) => {
   };
 
   return (
-    <div>
-      <h4>Root Types:</h4>
+    <div className={styles.schema}>
       <div>
+        <h4>Root Types:</h4>
         <p className={styles.query}>
           query:
           <span className={styles.title} onClick={handleQueryTypeClick}>
             {queryType.name}
           </span>
         </p>
+      </div>
+      <div>
         {showFields && (
           <>
             <h4>Method list:</h4>

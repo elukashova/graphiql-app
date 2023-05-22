@@ -1,6 +1,13 @@
+.schema {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem;
+}
+
 .query {
   color: blue;
 }
+
 .title {
   cursor: pointer;
   color: orange;
@@ -17,5 +24,9 @@
 
 .type {
   cursor: pointer;
-  color: orange;
+  color: rgb(0, 255, 34);
+}
+
+.description {
+  color: rgb(61, 61, 61);
 }
