@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="./styles/graphdoc.css" />
+    <title>Query</title>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700" rel="stylesheet"><link type="text/css" rel="stylesheet" href="./assets/code.css" /><link type="text/css" rel="stylesheet" href="./assets/require-by.css" />
+</head>
+<body class="slds-scrollable--y">
+    <nav class="slds-grid slds-grid--vertical slds-col--rule-right">
+        <header class="slds-p-around--medium slds-col slds-shrik slds-grow-none">
+            <button class="slds-button slds-button--icon slds-float--right js-toggle-navigation less-than-medium">
+                <i class="material-icons">close</i>
+            </button>
+                <h3 class="slds-text-heading--medium"><a href="./">GraphQL Schema</a></h3>
+            <div class="slds-p-top--small">
+                <input id="type-search" type="text" placeholder="Search a type" autofocus="" class="slds-input" />
+            </div>
+        </header>
+        <div id="navication-scroll" class="slds-scrollable--y slds-col slds-grow">
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Schema</h4>
+    <ul>
+        <li class="slds-is-active" title="Query">
+            <a href="query.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Query
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Scalars</h4>
+    <ul>
+        <li  title="Boolean">
+            <a href="boolean.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Boolean
+            </a>
+        </li>
+        <li  title="Float">
+            <a href="float.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Float
+            </a>
+        </li>
+        <li  title="ID">
+            <a href="id.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ID
+            </a>
+        </li>
+        <li  title="Int">
+            <a href="int.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Int
+            </a>
+        </li>
+        <li  title="Long">
+            <a href="long.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Long
+            </a>
+        </li>
+        <li  title="String">
+            <a href="string.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                String
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Enums</h4>
+    <ul>
+        <li  title="__DirectiveLocation">
+            <a href="directivelocation.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __DirectiveLocation
+            </a>
+        </li>
+        <li  title="__TypeKind">
+            <a href="typekind.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __TypeKind
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Interfaces</h4>
+    <ul>
+        <li  title="Node">
+            <a href="node.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Node
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Objects</h4>
+    <ul>
+        <li  title="ApiKey">
+            <a href="apikey.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ApiKey
+            </a>
+        </li>
+        <li  title="DailyStats">
+            <a href="dailystats.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                DailyStats
+            </a>
+        </li>
+        <li  title="Network">
+            <a href="network.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Network
+            </a>
+        </li>
+        <li  title="PageInfo">
+            <a href="pageinfo.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                PageInfo
+            </a>
+        </li>
+        <li  title="ParentRegion">
+            <a href="parentregion.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                ParentRegion
+            </a>
+        </li>
+        <li  title="Region">
+            <a href="region.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                Region
+            </a>
+        </li>
+        <li  title="RegionConnection">
+            <a href="regionconnection.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                RegionConnection
+            </a>
+        </li>
+        <li  title="RegionEdge">
+            <a href="regionedge.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                RegionEdge
+            </a>
+        </li>
+        <li  title="RegionLocale">
+            <a href="regionlocale.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                RegionLocale
+            </a>
+        </li>
+        <li  title="StatusPayload">
+            <a href="statuspayload.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                StatusPayload
+            </a>
+        </li>
+        <li  title="User">
+            <a href="user.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                User
+            </a>
+        </li>
+        <li  title="__Directive">
+            <a href="directive.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __Directive
+            </a>
+        </li>
+        <li  title="__EnumValue">
+            <a href="enumvalue.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __EnumValue
+            </a>
+        </li>
+        <li  title="__Field">
+            <a href="field.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __Field
+            </a>
+        </li>
+        <li  title="__InputValue">
+            <a href="inputvalue.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __InputValue
+            </a>
+        </li>
+        <li  title="__Schema">
+            <a href="schema.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __Schema
+            </a>
+        </li>
+        <li  title="__Type">
+            <a href="type.spec.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                __Type
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="slds-grid slds-grid--vertical slds-navigation-list--vertical">
+    <h4 class="slds-text-title--caps slds-p-around--medium">Directives</h4>
+    <ul>
+        <li  title="deprecated">
+            <a href="deprecated.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                deprecated
+            </a>
+        </li>
+        <li  title="include">
+            <a href="include.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                include
+            </a>
+        </li>
+        <li  title="skip">
+            <a href="skip.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                skip
+            </a>
+        </li>
+        <li  title="specifiedBy">
+            <a href="specifiedby.doc.html" class="slds-navigation-list--vertical__action slds-text-link--reset slds-truncate">
+                specifiedBy
+            </a>
+        </li>
+    </ul>
+</div>
+        </div>
+    </nav>
+    <main><section class="title slds-theme--inverse">
+    <div class="container slds-grid">
+        <div>
+        <button class="slds-button js-toggle-navigation less-than-medium">
+            <i class="material-icons slds-button__icon slds-button__icon--left">menu</i>
+            <span class="slds-text-title--caps">Types<span>
+        </button>
+        </div>
+        </div>
+    </div>
+    <div class="container">
+        <p class="slds-text-title--caps slds-text-color--weak">OBJECT</p>
+        <h1 class="slds-text-heading--large">Query</h1>
+        <div class="slds-text-body--regular"></div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <h2 id="graphql-schema-definition" class="graphdoc-section__title slds-text-heading--medium slds-m-top--small">
+            <a href="#graphql-schema-definition">
+                <i class="material-icons">link</i>
+            </a>
+            GraphQL Schema definition
+        </h2>
+        <code class="highlight"><ul class="code" style="padding-left:56px"><li><span class="keyword operator ts">type</span> <span class="identifier">Query</span> {</li><li></li><li><span class="tab"><span class="comment line">#   {"en":"Determines whether the request is authorized.","ru":"Определяет, является </span></span></li><li><span class="tab"><span class="comment line">#   ли запрос авторизованным."}</span></span></li><li><span class="tab"><span class="meta">status</span>: <a class="support type" href="statuspayload.doc.html">StatusPayload</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   {"en":"Returns the region by ID.","ru":"Возвращает регион по ID."}</span></span></li><li><span class="tab"><span class="comment line"># </span></span></li><li><span class="tab"><span class="comment line"># Arguments</span></span></li><li><span class="tab"><span class="comment line">#   <strong>id</strong>: {"en":"The region ID.","ru":"ID региона."}</span></span></li><li><span class="tab"><span class="meta">region</span>(<span class="meta">id</span>: <a class="support type" href="int.doc.html">Int</a>!): <a class="support type" href="region.doc.html">Region</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   {"en":"Returns a list of all continents.","ru":"Возвращает список всех </span></span></li><li><span class="tab"><span class="comment line">#   континентов."}</span></span></li><li><span class="tab"><span class="meta">continents</span>: [<a class="support type" href="region.doc.html">Region</a>!]! </span></li><li></li><li><span class="tab"><span class="comment line">#   {"en":"Returns a list of all countries.","ru":"Возвращает список всех стран."}</span></span></li><li><span class="tab"><span class="meta">countries</span>: [<a class="support type" href="region.doc.html">Region</a>!]! </span></li><li></li><li><span class="tab"><span class="comment line">#   {"en":"Returns a list of regions.","ru":"Возвращает список регионов."}</span></span></li><li><span class="tab"><span class="comment line"># </span></span></li><li><span class="tab"><span class="comment line"># Arguments</span></span></li><li><span class="tab"><span class="comment line">#   <strong>first</strong>: {"en":"The number of items on the page. Used for forward </span></span></li><li><span class="tab"><span class="comment line">#   pagination.","ru":"Количество элементов на странице. Используется для навигации </span></span></li><li><span class="tab"><span class="comment line">#   вперед."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>after</strong>: {"en":"The cursor of the item relative to which the next </span></span></li><li><span class="tab"><span class="comment line">#   items should be returned. Used for forward pagination.","ru":"Курсор элемента, </span></span></li><li><span class="tab"><span class="comment line">#   относительно которого должны быть возвращены следующие элементы. Используется </span></span></li><li><span class="tab"><span class="comment line">#   для навигации вперед."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>last</strong>: {"en":"The number of items on the page. Used for backward </span></span></li><li><span class="tab"><span class="comment line">#   pagination.","ru":"Количество элементов на странице. Используется для навигации </span></span></li><li><span class="tab"><span class="comment line">#   назад."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>before</strong>: {"en":"The cursor of the item relative to which the </span></span></li><li><span class="tab"><span class="comment line">#   previous items should be returned. Used for backward pagination.","ru":"Курсор </span></span></li><li><span class="tab"><span class="comment line">#   элемента, относительно которого должны быть возвращены предыдущие элементы. </span></span></li><li><span class="tab"><span class="comment line">#   Используется для навигации назад."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>type</strong>: {"en":"The type of the region. Possible values: </span></span></li><li><span class="tab"><span class="comment line">#   continent, country, division1, division2, division3, division4, city.","ru":"Тип </span></span></li><li><span class="tab"><span class="comment line">#   региона. Возможные значения: continent, country, division1, division2, </span></span></li><li><span class="tab"><span class="comment line">#   division3, division4, city."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>countryCode</strong>: {"en":"The code of the country </span></span></li><li><span class="tab"><span class="comment line">#   (ISO-639-1).","ru":"Код страны (ISO-639-1)."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>division1Code</strong>: {"en":"The code of the first-order country </span></span></li><li><span class="tab"><span class="comment line">#   division.","ru":"Код подразделения страны первого порядка."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>division2Code</strong>: {"en":"The code of the second-order country </span></span></li><li><span class="tab"><span class="comment line">#   division.","ru":"Код подразделения страны второго порядка."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>division3Code</strong>: {"en":"The code of the third-order country </span></span></li><li><span class="tab"><span class="comment line">#   division.","ru":"Код подразделения страны третьего порядка."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>division4Code</strong>: {"en":"The code of the fourth-order country </span></span></li><li><span class="tab"><span class="comment line">#   division.","ru":"Код подразделения страны четвертого порядка."}</span></span></li><li><span class="tab"><span class="meta">regions</span>(</span></li><li><span class="tab"><span class="tab"><span class="meta">first</span>: <a class="support type" href="int.doc.html">Int</a>,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">after</span>: <a class="support type" href="string.doc.html">String</a>,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">last</span>: <a class="support type" href="int.doc.html">Int</a>,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">before</span>: <a class="support type" href="string.doc.html">String</a>,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">type</span>: <a class="support type" href="string.doc.html">String</a>,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">countryCode</span>: <a class="support type" href="string.doc.html">String</a>,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">division1Code</span>: <a class="support type" href="string.doc.html">String</a>,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">division2Code</span>: <a class="support type" href="string.doc.html">String</a>,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">division3Code</span>: <a class="support type" href="string.doc.html">String</a>,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">division4Code</span>: <a class="support type" href="string.doc.html">String</a></span></span></li><li><span class="tab">): <a class="support type" href="regionconnection.doc.html">RegionConnection</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   {"en":"Returns a list of regions located within the specified </span></span></li><li><span class="tab"><span class="comment line">#   region.","ru":"Возвращает список регионов, расположенных внутри указанного </span></span></li><li><span class="tab"><span class="comment line">#   региона."}</span></span></li><li><span class="tab"><span class="comment line"># </span></span></li><li><span class="tab"><span class="comment line"># Arguments</span></span></li><li><span class="tab"><span class="comment line">#   <strong>first</strong>: {"en":"The number of items on the page. Used for forward </span></span></li><li><span class="tab"><span class="comment line">#   pagination.","ru":"Количество элементов на странице. Используется для навигации </span></span></li><li><span class="tab"><span class="comment line">#   вперед."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>after</strong>: {"en":"The cursor of the item relative to which the next </span></span></li><li><span class="tab"><span class="comment line">#   items should be returned. Used for forward pagination.","ru":"Курсор элемента, </span></span></li><li><span class="tab"><span class="comment line">#   относительно которого должны быть возвращены следующие элементы. Используется </span></span></li><li><span class="tab"><span class="comment line">#   для навигации вперед."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>last</strong>: {"en":"The number of items on the page. Used for backward </span></span></li><li><span class="tab"><span class="comment line">#   pagination.","ru":"Количество элементов на странице. Используется для навигации </span></span></li><li><span class="tab"><span class="comment line">#   назад."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>before</strong>: {"en":"The cursor of the item relative to which the </span></span></li><li><span class="tab"><span class="comment line">#   previous items should be returned. Used for backward pagination.","ru":"Курсор </span></span></li><li><span class="tab"><span class="comment line">#   элемента, относительно которого должны быть возвращены предыдущие элементы. </span></span></li><li><span class="tab"><span class="comment line">#   Используется для навигации назад."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>parentId</strong>: {"en":"The ID of the parent region.","ru":"ID </span></span></li><li><span class="tab"><span class="comment line">#   родительского региона."}</span></span></li><li><span class="tab"><span class="meta">childRegions</span>(</span></li><li><span class="tab"><span class="tab"><span class="meta">first</span>: <a class="support type" href="int.doc.html">Int</a>,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">after</span>: <a class="support type" href="string.doc.html">String</a>,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">last</span>: <a class="support type" href="int.doc.html">Int</a>,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">before</span>: <a class="support type" href="string.doc.html">String</a>,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">parentId</span>: <a class="support type" href="int.doc.html">Int</a>!</span></span></li><li><span class="tab">): <a class="support type" href="regionconnection.doc.html">RegionConnection</a>! </span></li><li></li><li><span class="tab"><span class="comment line">#   {"en":"Returns a list of regions by a search term.","ru":"Возвращает список </span></span></li><li><span class="tab"><span class="comment line">#   регионов по поисковому запросу."}</span></span></li><li><span class="tab"><span class="comment line"># </span></span></li><li><span class="tab"><span class="comment line"># Arguments</span></span></li><li><span class="tab"><span class="comment line">#   <strong>searchTerm</strong>: {"en":"A query used to search for regions by </span></span></li><li><span class="tab"><span class="comment line">#   name.","ru":"Запрос, используемый для поиска регионов по названию."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>first</strong>: {"en":"The number of regions.","ru":"Количество </span></span></li><li><span class="tab"><span class="comment line">#   регионов."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>type</strong>: {"en":"The type of the region. Possible values: </span></span></li><li><span class="tab"><span class="comment line">#   continent, country, division1, division2, division3, division4, city.","ru":"Тип </span></span></li><li><span class="tab"><span class="comment line">#   региона. Возможные значения: continent, country, division1, division2, </span></span></li><li><span class="tab"><span class="comment line">#   division3, division4, city."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>countryCode</strong>: {"en":"The code of the country </span></span></li><li><span class="tab"><span class="comment line">#   (ISO-639-1).","ru":"Код страны (ISO-639-1)."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>division1Code</strong>: {"en":"The code of the first-order country </span></span></li><li><span class="tab"><span class="comment line">#   division.","ru":"Код подразделения страны первого порядка."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>division2Code</strong>: {"en":"The code of the second-order country </span></span></li><li><span class="tab"><span class="comment line">#   division.","ru":"Код подразделения страны второго порядка."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>division3Code</strong>: {"en":"The code of the third-order country </span></span></li><li><span class="tab"><span class="comment line">#   division.","ru":"Код подразделения страны третьего порядка."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>division4Code</strong>: {"en":"The code of the fourth-order country </span></span></li><li><span class="tab"><span class="comment line">#   division.","ru":"Код подразделения страны четвертого порядка."}</span></span></li><li><span class="tab"><span class="meta">searchRegions</span>(</span></li><li><span class="tab"><span class="tab"><span class="meta">searchTerm</span>: <a class="support type" href="string.doc.html">String</a>!,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">first</span>: <a class="support type" href="int.doc.html">Int</a>,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">type</span>: <a class="support type" href="string.doc.html">String</a>,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">countryCode</span>: <a class="support type" href="string.doc.html">String</a>,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">division1Code</span>: <a class="support type" href="string.doc.html">String</a>,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">division2Code</span>: <a class="support type" href="string.doc.html">String</a>,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">division3Code</span>: <a class="support type" href="string.doc.html">String</a>,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">division4Code</span>: <a class="support type" href="string.doc.html">String</a></span></span></li><li><span class="tab">): [<a class="support type" href="region.doc.html">Region</a>!]! </span></li><li></li><li><span class="tab"><span class="comment line">#   {"en":"Returns a list of regions located near the specified </span></span></li><li><span class="tab"><span class="comment line">#   location.","ru":"Возвращает список регионов, расположенных рядом с указанным </span></span></li><li><span class="tab"><span class="comment line">#   местоположением."}</span></span></li><li><span class="tab"><span class="comment line"># </span></span></li><li><span class="tab"><span class="comment line"># Arguments</span></span></li><li><span class="tab"><span class="comment line">#   <strong>latitude</strong>: {"en":"The latitude of the location.","ru":"Широта </span></span></li><li><span class="tab"><span class="comment line">#   местоположения."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>longitude</strong>: {"en":"The longitude of the location.","ru":"Долгота </span></span></li><li><span class="tab"><span class="comment line">#   местоположения."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>id</strong>: {"en":"The ID of the region relative to which the search </span></span></li><li><span class="tab"><span class="comment line">#   will be performed.","ru":"ID региона, относительно которого будет выполняться </span></span></li><li><span class="tab"><span class="comment line">#   поиск."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>first</strong>: {"en":"The number of regions.","ru":"Количество </span></span></li><li><span class="tab"><span class="comment line">#   регионов."}</span></span></li><li><span class="tab"><span class="comment line">#   <strong>type</strong>: {"en":"The type of the region. Possible values: </span></span></li><li><span class="tab"><span class="comment line">#   continent, country, division1, division2, division3, division4, city.","ru":"Тип </span></span></li><li><span class="tab"><span class="comment line">#   региона. Возможные значения: continent, country, division1, division2, </span></span></li><li><span class="tab"><span class="comment line">#   division3, division4, city."}</span></span></li><li><span class="tab"><span class="meta">nearestRegions</span>(</span></li><li><span class="tab"><span class="tab"><span class="meta">latitude</span>: <a class="support type" href="float.doc.html">Float</a>,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">longitude</span>: <a class="support type" href="float.doc.html">Float</a>,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">id</span>: <a class="support type" href="int.doc.html">Int</a>,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">first</span>: <a class="support type" href="int.doc.html">Int</a>,</span></span></li><li><span class="tab"><span class="tab"><span class="meta">type</span>: <a class="support type" href="string.doc.html">String</a></span></span></li><li><span class="tab">): [<a class="support type" href="region.doc.html">Region</a>!]! </span></li><li></li><li><span class="tab"><span class="comment line">#   {"en":"Detects the region by the IP address.","ru":"Определяет регион по </span></span></li><li><span class="tab"><span class="comment line">#   IP-адресу."}</span></span></li><li><span class="tab"><span class="comment line"># </span></span></li><li><span class="tab"><span class="comment line"># Arguments</span></span></li><li><span class="tab"><span class="comment line">#   <strong>ip</strong>: {"en":"The IP address.","ru":"IP-адрес."}</span></span></li><li><span class="tab"><span class="meta">network</span>(<span class="meta">ip</span>: <a class="support type" href="string.doc.html">String</a>!): <a class="support type" href="network.doc.html">Network</a>! </span></li><li></li><li><span class="tab"><span class="comment line"># Arguments</span></span></li><li><span class="tab"><span class="comment line">#   <strong>id</strong>: [<strong>Not documented</strong>]</span></span></li><li><span class="tab"><span class="meta">node</span>(<span class="meta">id</span>: <a class="support type" href="id.doc.html">ID</a>!): <a class="support type" href="node.doc.html">Node</a> </span></li><li>}</li></ul></code>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <h2 id="require-by" class="graphdoc-section__title slds-text-heading--medium slds-m-top--small">
+            <a href="#require-by">
+                <i class="material-icons">link</i>
+            </a>
+            Require by
+        </h2>
+        <div class="require-by anyone">This element is not required by anyone</div>
+    </div>
+</section>
+<footer>
+<div class="container slds-p-around--large">
+    <p class="slds-text-align--right slds-text-title--caps">
+        Generated with <a href="https://github.com/2fd/graphdoc#readme" target="_blank">graphdoc 2.4.0</a>
+    </p>
+</div>
+</footer>
+</main>
+    <script src="./scripts/focus-active.js"></script>
+    <script src="./scripts/filter-types.js"></script>
+    <script src="./scripts/toggle-navigation.js"></script>
+</body>
