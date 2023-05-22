@@ -1,5 +1,5 @@
 .section {
-  width: calc(50rem + 5vw);
+  width: calc(48rem + 5vw);
   height: calc(33rem + 5vw);
   display: flex;
   flex-direction: column;
@@ -9,7 +9,7 @@
   align-self: center;
   background-image: url(../../assets/auth-background.png);
   background-repeat: no-repeat;
-  background-size: calc(50rem + 5vw);
+  background-size: cover;
   background-position: center center;
 }
 
@@ -17,7 +17,7 @@
   display: flex;
   width: 10%;
   flex-direction: row;
-  gap: .5rem;
+  gap: 0.5rem;
   justify-content: center;
 }
 
@@ -28,14 +28,52 @@
 .sign,
 .title {
   margin: 0;
-  font-size: calc(1.2rem + .8vw);
+  font-size: calc(1.2rem + 0.8vw);
 }
 
 .title {
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   align-self: flex-end;
   background-color: var(--yellow);
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   color: var(--background-dark);
-  transform: rotate(-10deg);
+  transform: rotate(10deg) scale(0.8);
+  transition: all 1s;
+}
+
+main:hover .title {
+  margin-top: 0.5rem;
+  align-self: flex-end;
+  background-color: var(--yellow);
+  padding: 0.5rem 1rem;
+  color: var(--background-dark);
+  transform: rotate(-10deg) scale(1);
+}
+
+@media (max-width: 760px) {
+  .section {
+    width: 100%;
+    gap: 0.4rem;
+    background-size: contain;
+  }
+
+  .title-wrapper {
+    gap: 2vw;
+    padding: 0;
+  }
+
+  .sign,
+  .title {
+    font-size: calc(1rem + 1vw);
+  }
+
+  .title {
+    margin-top: 2vw;
+    padding: 1vw 2vw;
+  }
+
+  main:hover .title {
+    margin-top: 2vw;
+    padding: 1vw 2vw;
+  }
 }

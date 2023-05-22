@@ -77,10 +77,11 @@ const Variables: React.FC = (): JSX.Element => {
               <img className={styles.cross} src={cross} alt="cross" />
             </button>
           </div>
+
           {validationState.showValidation && variablesValue && (
-            <div className={styles.errorContainer}>
-              <p className={styles.error}>{validationState.errorMessage}</p>
-            </div>
+            <p className={`${styles.error} ${validationState.showValidation ? styles.show : ''}`}>
+              {validationState.errorMessage}
+            </p>
           )}
         </ErrorBoundary>
       ) : (

@@ -78,9 +78,9 @@ const Headers: React.FC = (): JSX.Element => {
             </button>
           </div>
           {validationState.showValidation && headersValue && (
-            <div className={styles.errorContainer}>
-              <p className={styles.error}>{validationState.errorMessage}</p>
-            </div>
+            <p className={`${styles.error} ${validationState.showValidation ? styles.show : ''}`}>
+              {validationState.errorMessage}
+            </p>
           )}
         </ErrorBoundary>
       ) : (

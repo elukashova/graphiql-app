@@ -4,27 +4,54 @@
 
 .title {
   min-width: max-content;
+  width: calc(5rem + 5vw);
+  margin-top: 0.5rem;
+  height: calc(1rem + 1.4vw);
+  border: none;
+  outline: none;
+  padding: 0.3rem 0.5rem;
+  font-size: calc(0.5rem + 0.4vw);
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: var(--background-dark);
+  color: var(--white);
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  transition: all 1s;
+}
+
+.title:hover {
+  background-color: var(--purple-dark);
 }
 
 .variables-container {
   width: 100%;
-  display: grid;
-  grid-template-columns: auto 2rem;
-  align-items: flex-start;
-  gap: 1%;
+  position: relative;
 }
 
 .textarea {
   width: 100%;
   resize: none;
   min-height: max-content;
-  height: auto;
-  padding: 15px;
+  padding: 1rem 3rem 1rem 2rem;
   cursor: text;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  word-spacing: 2px;
+  line-height: 160%;
+  min-height: 15rem;
+  height: auto;
+  cursor: text;
+  box-sizing: border-box;
+  background-color: var(--white);
+  color: var(--background-dark);
+  border: 1px solid var(--purple-light);
+  border-radius: 10px;
 }
 
 .button-cross {
-  width: 100%;
+  position: absolute;
+  top: 0.3rem;
+  right: 0.5rem;
   background-color: transparent;
   padding: 0.3rem;
   margin: 0;
@@ -47,22 +74,30 @@
 }
 
 .error {
-  color: red;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease-in-out;
   position: relative;
+  background-color: var(--yellow);
+  margin-top: 1rem;
+  padding: calc(0.2rem + 0.4vw);
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: calc(0.4rem + 0.3vw);
 }
 
-.error::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: red;
-  transition: 0s;
+.error.show {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.3s ease-in-out;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-.headers-section:hover .error::after {
-  width: 100%;
-  transition: width 1s ease-in-out;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

@@ -6,7 +6,7 @@ import { selectAuth } from '../../store/slices/auth';
 import { logOut } from '../../auth/auth';
 import useAuth from '../../hooks/authHook';
 import { NavLink, useLocation } from 'react-router-dom';
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/logo2.png';
 
 const Header = (): JSX.Element => {
   const [scroll, setScroll] = useState(false);
@@ -30,7 +30,11 @@ const Header = (): JSX.Element => {
     <header className={!scroll ? styles.header : `${styles.header} ${styles.fixed}`}>
       <div className={styles.wrapper}>
         <NavLink to="/">
-          <img className={styles.logo} src={logo} alt="logo" />
+          <div className={styles['logo-block']}>
+            <div className={`${styles.circle} ${styles['first-circle']}`}></div>
+            <img className={styles.logo} src={logo} alt="logo" />
+            <div className={`${styles.circle} ${styles['second-circle']}`}></div>
+          </div>
         </NavLink>
         <nav className={styles.nav}>
           {!isAuth && (
@@ -45,7 +49,7 @@ const Header = (): JSX.Element => {
           )}
           {isAuth && location.pathname !== '/editor' && (
             <NavLink to="/editor" className={styles.link}>
-              editor
+              Go to Main Page
             </NavLink>
           )}
           {isAuth && (
