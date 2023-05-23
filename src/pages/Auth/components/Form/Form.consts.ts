@@ -2,7 +2,7 @@ export const AuthErrors = {
   emailInUse: 'auth/email-already-in-use',
   emptyEmail: 'auth/invalid-email',
   emptyPassword: 'auth/missing-password',
-  userNotFount: 'auth/user-not-found',
+  userNotFound: 'auth/user-not-found',
   invalidPassword: 'auth/wrong-password',
 };
 

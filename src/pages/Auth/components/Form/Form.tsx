@@ -8,8 +8,7 @@ import { signIn, signUp } from '../../../../auth/auth';
 import { useAppDispatch } from '../../../Graphiql/Editor/Editor';
 import { setIsLoading } from '../../../../store/slices/auth';
 import { AuthError } from 'firebase/auth';
-import { defineErrorMessage } from './ErrorMessage/ErrorMessage.utils';
-import { FirebaseErrors, ValidationErrors } from './ErrorMessage/ErrorMessage.types';
+import { useErrorMessage } from '../../../../hooks/errorHook';
 import ErrorMessage from './ErrorMessage/ErrorMessage';
 import {
   PASSWORD_DIGIT,
@@ -17,6 +16,7 @@ import {
   PASSWORD_SPECIAL_CHAR,
   VALID_EMAIL,
 } from './Form.consts';
+import { useTranslation } from 'react-i18next';
 
 const AuthForm = (): JSX.Element => {
   const {
@@ -31,6 +31,8 @@ const AuthForm = (): JSX.Element => {
   const { isSignUp } = useAppSelector(selectRoute);
   const dispatch = useAppDispatch();
   const [error, setError] = useState<string>('');
+  const { t } = useTranslation();
+  const { defineErrorMessage } = useErrorMessage();
 
   const onSubmit: SubmitHandler<UserData> = async ({ email, password }: UserData) => {
     const authorizeUser = isSignUp ? signUp : signIn;
@@ -44,7 +46,7 @@ const AuthForm = (): JSX.Element => {
         setTimeout(() => setError(''), 1500);
       }
     } catch {
-      setError(FirebaseErrors.genericMessage);
+      setError(`${t('firebase.generic_message')}`);
       setTimeout(() => setError(''), 1500);
     } finally {
       dispatch(setIsLoading(false));
@@ -55,40 +57,41 @@ const AuthForm = (): JSX.Element => {
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
       <div className={styles.wrapper}>
         <div className={styles['input-wrapper']}>
-          <label className={styles.label}>Email</label>
+          <label className={styles.label}>{t('auth.email')}</label>
           <input
             className={styles.input}
             type="email"
             {...register('email', {
-              required: ValidationErrors.emptyEmail,
+              required: `${t('validation.empty_email')}`,
               pattern: {
                 value: VALID_EMAIL,
-                message: ValidationErrors.email,
+                message: `${t('validation.email')}`,
               },
             })}
           />
         </div>
         <div className={styles['input-wrapper']}>
-          <label className={styles.label}>Password</label>
+          <label className={styles.label}>{t('auth.password')}</label>
           <input
             className={styles.input}
             type="password"
             {...register('password', {
-              required: ValidationErrors.emptyPassword,
+              required: `${t('validation.empty_password')}`,
               validate: {
-                minLength: (value) => value.length >= 8 || ValidationErrors.passwordLength,
+                minLength: (value) => value.length >= 8 || `${t('validation.password_length')}`,
                 oneLetter: (value) =>
-                  PASSWORD_LETTERS.test(value) || ValidationErrors.passwordLetters,
-                oneDigit: (value) => PASSWORD_DIGIT.test(value) || ValidationErrors.passwordDigit,
+                  PASSWORD_LETTERS.test(value) || `${t('validation.password_letters')}`,
+                oneDigit: (value) =>
+                  PASSWORD_DIGIT.test(value) || `${t('validation.password_digit')}`,
                 oneSpecialChar: (value) =>
-                  PASSWORD_SPECIAL_CHAR.test(value) || ValidationErrors.passwordSpecialChar,
+                  PASSWORD_SPECIAL_CHAR.test(value) || `${t('validation.password_special_char')}`,
               },
             })}
           />
         </div>
       </div>
 
-      <input className={styles.submit} type="submit" value="submit" />
+      <input className={styles.submit} type="submit" value={`${t('auth.submit')}`} />
 
       {errors.email?.types && <ErrorMessage message={errors.email.message} />}
       {errors.password?.types && <ErrorMessage message={errors.password.message} />}

@@ -3,12 +3,12 @@ import styles from './ButtonLang.module.css';
 import { useTranslation } from 'react-i18next';
 
 const ButtonLang = (): JSX.Element => {
-  const languages: { en: string; ru: string } = { en: 'en', ru: 'ru' };
   const { i18n } = useTranslation();
-  const language: string | null = localStorage.getItem('i18nextLng');
+  const languages: { en: string; ru: string } = { en: 'en', ru: 'ru' };
+  const currentLanguage: string | null = localStorage.getItem('i18nextLng');
 
   const toggleLanguage = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    switch (language) {
+    switch (currentLanguage) {
       case languages.en:
         i18n.changeLanguage(languages.ru);
         break;
@@ -27,7 +27,7 @@ const ButtonLang = (): JSX.Element => {
           type="checkbox"
           id="checkbox"
           onChange={toggleLanguage}
-          checked={language === languages.ru}
+          checked={currentLanguage === languages.ru}
         />
         <div className={`${styles.slider} ${styles.round}`}></div>
       </label>
