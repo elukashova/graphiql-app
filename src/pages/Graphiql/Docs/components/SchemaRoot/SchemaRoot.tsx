@@ -51,6 +51,7 @@ export const SchemaRoot: React.FC<SchemaRootProps> = ({ schema }) => {
 
   const handleTypeClick = (type: GraphQLOutputType) => {
     if (showName && prevTypeData && JSON.stringify(type) === JSON.stringify(prevTypeData)) {
+      console.log(type);
       setShowType(true);
       setShowName(false);
       setTypeData(type);
@@ -64,10 +65,17 @@ export const SchemaRoot: React.FC<SchemaRootProps> = ({ schema }) => {
     }
   };
 
-  useEffect(() => {
-    console.log('showName:', showName);
-    console.log('showType:', showType);
-  }, [showName, showType]);
+  const handleTypeClickRecursion = (type: GraphQLOutputType) => {
+    setTypeData(null);
+    setTypePrevData(null);
+    if (type instanceof GraphQLNonNull) {
+      if (type.ofType instanceof GraphQLList) {
+        handleTypeClick(type.ofType.ofType);
+      } else {
+        handleTypeClick(type);
+      }
+    }
+  };
 
   return (
     <div className={styles.schema}>
@@ -90,7 +98,7 @@ export const SchemaRoot: React.FC<SchemaRootProps> = ({ schema }) => {
                   <ListItem
                     data={fields[fieldName]}
                     getNameData={handleNameClick}
-                    getTypeData={handleTypeClick}
+                    getTypeData={handleTypeClickRecursion}
                   />
                 </li>
               ))}
@@ -101,7 +109,6 @@ export const SchemaRoot: React.FC<SchemaRootProps> = ({ schema }) => {
       {showFields && showName && !showType && nameData && nameData.name && (
         <div>
           <>
-            {console.log(nameData)}
             <h4>{nameData.name}</h4>
             <span>{JSON.parse(nameData.description ?? '{}')?.[schemaLang]}</span>
             {nameData.args && nameData.args.length === 0 ? (
@@ -128,25 +135,28 @@ export const SchemaRoot: React.FC<SchemaRootProps> = ({ schema }) => {
       )}
       {showFields && showType && !showName && typeData && (
         <div>
-          <h4>{typeData.toString()}</h4>
-          {typeData instanceof GraphQLNonNull && typeData.ofType instanceof GraphQLObjectType && (
-            <>
-              {typeData.ofType.description && (
-                <span>{JSON.parse(typeData.ofType.description ?? '{}')?.[schemaLang]}</span>
-              )}
-              <ul>
-                {Object.values(typeData.ofType.getFields()).map((field) => (
-                  <li className={styles['arg-list']} key={field.name}>
-                    <span className={styles.arg}>{field.name}</span>
-                    <span className={styles.type}>({field.type.toString()})</span>{' '}
-                    <span className={styles.description}>
-                      {JSON.parse(field.description || '{}')?.[schemaLang]}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
+          <>
+            <h4>{typeData.toString()}</h4>
+            {console.log(typeData)}
+            {typeData instanceof GraphQLNonNull && typeData.ofType instanceof GraphQLObjectType && (
+              <>
+                {typeData.ofType.description && (
+                  <span>{JSON.parse(typeData.ofType.description ?? '{}')?.[schemaLang]}</span>
+                )}
+                <ul>
+                  {Object.values(typeData.ofType.getFields()).map((field) => (
+                    <li className={styles['arg-list']} key={field.name}>
+                      <span className={styles.arg}>{field.name}</span>
+                      <span className={styles.type}>({field.type.toString()})</span>{' '}
+                      <span className={styles.description}>
+                        {JSON.parse(field.description || '{}')?.[schemaLang]}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </>
         </div>
       )}
     </div>
