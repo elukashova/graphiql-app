@@ -3,6 +3,7 @@ import styles from './Variables.module.css';
 import cross from '../../../assets/cross.svg';
 import { isValidJsonString } from '../utils';
 import ErrorBoundary from '../../../components/ErrorBoundary/ErrorBoundary';
+import { useTranslation } from 'react-i18next';
 
 interface ValidationState {
   showValidation: boolean;
@@ -21,6 +22,7 @@ const Variables: React.FC = (): JSX.Element => {
   const [variablesValue, setVariablesValue] = useState<string>(
     isEmptyVariables ? '' : JSON.stringify(variables)
   );
+  const { t } = useTranslation();
 
   useEffect((): void => {
     const { isValid, errorMessage } = isValidJsonString(variablesValue);
@@ -31,10 +33,10 @@ const Variables: React.FC = (): JSX.Element => {
     } else {
       setValidationState({
         showValidation: true,
-        errorMessage: `Invalid variables format: ${errorMessage}`,
+        errorMessage: `${t('editor.variables_invalid')}: ${errorMessage}`,
       });
     }
-  }, [variablesValue]);
+  }, [t, variablesValue]);
 
   const handleVariablesChange = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
     const newVariables = event.target.value;
@@ -64,14 +66,14 @@ const Variables: React.FC = (): JSX.Element => {
   return (
     <section className={styles['variables-section']}>
       {showVariables ? (
-        <ErrorBoundary fallback="Can't get data from API with these variables">
+        <ErrorBoundary fallback={`${t('errorBoundary.variables_fallback')}`}>
           <div className={styles['variables-container']}>
             <textarea
               className={styles.textarea}
               value={variablesValue || ''}
               onChange={(e) => handleVariablesChange(e)}
               onCut={() => handleCut()}
-              placeholder="Enter variables in JSON format"
+              placeholder={`${t('editor.variables_placeholder')}`}
             />
             <button className={styles['button-cross']} onClick={() => handleCloseValidation()}>
               <img className={styles.cross} src={cross} alt="cross" />
@@ -86,7 +88,7 @@ const Variables: React.FC = (): JSX.Element => {
         </ErrorBoundary>
       ) : (
         <button className={styles.title} onClick={() => changeShowVariables()}>
-          Variables
+          {t('editor.variables')}
         </button>
       )}
     </section>
