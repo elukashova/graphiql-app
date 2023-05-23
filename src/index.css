@@ -98,7 +98,8 @@ li {
   padding: 0;
 }
 
-ul {
+ul,
+.p {
   display: block;
   margin: 0;
   padding: 0;

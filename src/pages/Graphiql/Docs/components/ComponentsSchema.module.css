@@ -1,32 +1,49 @@
 .schema {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: max-content 19vw 19vw 19vw;
   gap: 4rem;
 }
 
 .query {
-  color: blue;
+  color: rgb(16, 182, 211);
 }
 
 .title {
-  cursor: pointer;
-  color: orange;
+  color: rgb(16, 100, 211);
 }
 
 .name {
-  cursor: pointer;
-  color: plum;
+  color: rgb(16, 182, 211);
 }
 
 .arg {
-  color: red;
+  color: rgb(223, 9, 205);
 }
 
 .type {
-  cursor: pointer;
-  color: rgb(0, 255, 34);
+  color: var(--purple-dark);
 }
 
 .description {
   color: rgb(61, 61, 61);
+}
+
+.list-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.return-value {
+  margin: 0;
+  padding: 0;
+}
+
+.methods-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.arg-list {
+  width: 100%;
 }
