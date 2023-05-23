@@ -15,8 +15,9 @@ interface SchemaRootProps {
 }
 
 export const SchemaRoot: React.FC<SchemaRootProps> = ({ schema }) => {
+  const schemaLang = localStorage.getItem('i18nextLng') || 'en';
   const queryType = schema.getQueryType() as GraphQLObjectType;
-  const lang = 'en';
+
   const [showFields, setShowFields] = useState(false);
   const [showName, setShowName] = useState(false);
   const [nameData, setNameData] = useState<GraphQLField<unknown, unknown, unknown> | null>(null);
@@ -100,8 +101,9 @@ export const SchemaRoot: React.FC<SchemaRootProps> = ({ schema }) => {
       {showFields && showName && !showType && nameData && nameData.name && (
         <div>
           <>
+            {console.log(nameData)}
             <h4>{nameData.name}</h4>
-            <span>{JSON.parse(nameData.description ?? '{}')?.[lang]}</span>
+            <span>{JSON.parse(nameData.description ?? '{}')?.[schemaLang]}</span>
             {nameData.args && nameData.args.length === 0 ? (
               <h5>No arguments</h5>
             ) : (
@@ -114,7 +116,7 @@ export const SchemaRoot: React.FC<SchemaRootProps> = ({ schema }) => {
                         <span className={styles.arg}>{arg.name}</span>
                         <span className={styles.type}>({arg.type.toString()})</span>{' '}
                         <span className={styles.description}>
-                          {JSON.parse(arg.description ?? '{}')?.[lang]}
+                          {JSON.parse(arg.description ?? '{}')?.[schemaLang]}
                         </span>
                       </li>
                     ))}
@@ -129,14 +131,16 @@ export const SchemaRoot: React.FC<SchemaRootProps> = ({ schema }) => {
           <h4>{typeData.toString()}</h4>
           {typeData instanceof GraphQLNonNull && typeData.ofType instanceof GraphQLObjectType && (
             <>
-              {typeData.ofType.description && <p>{typeData.ofType.description}</p>}
+              {typeData.ofType.description && (
+                <span>{JSON.parse(typeData.ofType.description ?? '{}')?.[schemaLang]}</span>
+              )}
               <ul>
                 {Object.values(typeData.ofType.getFields()).map((field) => (
                   <li className={styles['arg-list']} key={field.name}>
                     <span className={styles.arg}>{field.name}</span>
                     <span className={styles.type}>({field.type.toString()})</span>{' '}
                     <span className={styles.description}>
-                      {JSON.parse(field.description || '{}')[lang]}
+                      {JSON.parse(field.description || '{}')?.[schemaLang]}
                     </span>
                   </li>
                 ))}
