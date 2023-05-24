@@ -10,6 +10,7 @@ import {
   GraphQLSchema,
 } from 'graphql';
 import ListItem, { Data } from '../Schema/ListItem';
+import { DirectivesList } from './DirectivesList/DirectivesList';
 
 interface SchemaRootProps {
   schema: GraphQLSchema;
@@ -128,13 +129,16 @@ export const SchemaRoot: React.FC<SchemaRootProps> = ({ schema }) => {
   return (
     <div className={styles.schema}>
       <div>
-        <h4>Root Types:</h4>
-        <p className={styles.query}>
-          query:
-          <span className={styles.title} onClick={handleQueryTypeClick}>
-            {queryType.name}
-          </span>
-        </p>
+        <div className={styles['root-block']}>
+          <h4>Root Types:</h4>
+          <p className={styles.query}>
+            query:{' '}
+            <span className={styles.title} onClick={handleQueryTypeClick}>
+              {queryType.name}
+            </span>
+          </p>
+        </div>
+        <DirectivesList schema={schema} />
       </div>
       <div>
         {showFields && (
@@ -185,11 +189,13 @@ export const SchemaRoot: React.FC<SchemaRootProps> = ({ schema }) => {
         <div>
           <>
             <h4>{typeData.toString()}</h4>
+
             {typeData instanceof GraphQLNonNull && typeData.ofType instanceof GraphQLObjectType && (
               <>
                 {typeData.ofType.description && (
                   <span>{JSON.parse(typeData.ofType.description ?? '{}')?.[schemaLang]}</span>
                 )}
+                <p>Types: </p>
                 <ul>
                   {Object.values(typeData.ofType.getFields()).map((field) => (
                     <li className={styles['arg-list']} key={field.name}>

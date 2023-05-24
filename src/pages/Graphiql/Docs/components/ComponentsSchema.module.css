@@ -1,15 +1,40 @@
+body {
+  position: relative;
+}
+
+.schema-block {
+  font-size: 14px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1rem 3rem;
+  text-align: left;
+  background-color: white;
+  z-index: 9998;
+}
+
 .schema {
   display: grid;
-  grid-template-columns: max-content 19vw 19vw 19vw;
+  grid-template-columns: 16vw 16vw 16vw 16vw;
   gap: 4rem;
 }
 
 .query {
   color: rgb(16, 182, 211);
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .title {
   color: rgb(16, 100, 211);
+  font-weight: 600;
+}
+
+h4,
+p {
+  margin: 0;
 }
 
 .name {
@@ -18,14 +43,21 @@
 
 .arg {
   color: rgb(223, 9, 205);
+  font-weight: 600;
 }
 
 .type {
   color: var(--purple-dark);
+  font-weight: 600;
 }
 
 .description {
   color: rgb(61, 61, 61);
+}
+
+.directive-name {
+  color: rgb(5, 201, 158);
+  font-weight: 600;
 }
 
 .list-block {
@@ -46,4 +78,39 @@
 
 .arg-list {
   width: 100%;
+}
+
+.directive-name {
+  margin: 0;
+}
+
+.directives-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.root-block {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.type-description {
+  background-color: var(--yellow);
+  padding: 5px;
+}
+
+@media (max-width: 680px) {
+  .modal {
+    padding: 1rem 7rem;
+    min-height: 100%;
+    height: max-content;
+  }
+  .schema {
+    display: grid;
+    grid-template-columns: 50vw;
+    grid-template-rows: auto auto auto auto;
+    gap: 4rem;
+  }
 }

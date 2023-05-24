@@ -1,5 +1,6 @@
 .docs-container {
   width: auto;
+  position: relative;
 }
 
 .docs {
@@ -41,4 +42,7 @@
 .docs:active,
 .docs:focus {
   outline: none;
+}
+
+@media (max-width: 680px) {
 }

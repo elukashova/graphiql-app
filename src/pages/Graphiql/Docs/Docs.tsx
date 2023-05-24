@@ -58,21 +58,24 @@ const Docs: React.FC = (): JSX.Element => {
   };
 
   return (
-    <div className={styles['docs-container']}>
-      <button className={`${styles.docs}`} type="button" onClick={handleClick}>
-        <img className={styles.book} src={book} alt="Documents" title="Docs" />
-      </button>
-      {error && <div>{error}</div>}
+    <>
+      <div className={styles['docs-container']}>
+        <button className={`${styles.docs}`} type="button" onClick={handleClick}>
+          <img className={styles.book} src={book} alt="Documents" title="Docs" />
+        </button>
+        {error && <div>{error}</div>}
+      </div>
       {isLoading ? (
         <Loading />
       ) : (
-        isDocs && (
+        isDocs &&
+        schema && (
           <Suspense fallback={<Loading />}>
             <Schema schema={schema} />
           </Suspense>
         )
       )}
-    </div>
+    </>
   );
 };
 
