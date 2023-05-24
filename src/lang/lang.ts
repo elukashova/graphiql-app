@@ -55,6 +55,7 @@ i18n
             password_letters: 'The password must contain at least 1 letter',
             password_digit: 'The password must contain at least 1 digit',
             password_special_char: 'The password must contain at least 1 special character',
+            empty_email: 'Please, provide a valid email',
             empty_password: 'Please, provide a valid password',
           },
           editor: {

@@ -22,6 +22,8 @@ const AuthForm = (): JSX.Element => {
   const {
     handleSubmit,
     register,
+    unregister,
+    trigger,
     formState: { errors },
   } = useForm<UserData>({
     criteriaMode: 'all',
@@ -31,8 +33,19 @@ const AuthForm = (): JSX.Element => {
   const { isSignUp } = useAppSelector(selectRoute);
   const dispatch = useAppDispatch();
   const [error, setError] = useState<string>('');
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { defineErrorMessage } = useErrorMessage();
+
+  i18n.on('languageChanged', () => {
+    triggerRegister('email');
+    triggerRegister('password');
+  });
+
+  const triggerRegister = (name: 'email' | 'password'): void => {
+    unregister(name);
+    register(name);
+    trigger();
+  };
 
   const onSubmit: SubmitHandler<UserData> = async ({ email, password }: UserData) => {
     const authorizeUser = isSignUp ? signUp : signIn;
