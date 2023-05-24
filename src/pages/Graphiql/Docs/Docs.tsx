@@ -11,7 +11,7 @@ import { GraphQLSchema } from 'graphql';
 
 type Error = string | null;
 
-const Schema = lazy(() => import('./components/Schema/Schema'));
+const Schema = lazy(() => import('./Schema/Schema'));
 
 const Docs: React.FC = (): JSX.Element => {
   const apiUrl = 'https://data-api.oxilor.com/graphql';

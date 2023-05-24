@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from '../ComponentsSchema.module.css';
+import styles from './ComponentsSchema.module.css';
 import {
   GraphQLField,
   GraphQLList,
@@ -9,15 +9,16 @@ import {
   GraphQLScalarType,
   GraphQLSchema,
 } from 'graphql';
-import ListItem, { Data } from '../Schema/ListItem';
-import { DirectivesList } from '../SchemaRoot/DirectivesList/DirectivesList';
-import SchemaRoot from '../SchemaRoot/SchemaRoot';
+import ListItem, { Data } from './MethodList/ListItem/ListItem';
+import SchemaRoot from './SchemaRoot/SchemaRoot';
+import { DirectivesList } from './DirectivesList/DirectivesList';
+import MethodList from './MethodList/MethodList';
 
 interface SchemaProps {
   schema: GraphQLSchema;
 }
 
-export const Schema: React.FC<SchemaProps> = ({ schema }) => {
+const Schema: React.FC<SchemaProps> = ({ schema }) => {
   const schemaLang = localStorage.getItem('i18nextLng') || 'en';
   const queryType = schema.getQueryType() as GraphQLObjectType;
 
@@ -134,25 +135,13 @@ export const Schema: React.FC<SchemaProps> = ({ schema }) => {
           <SchemaRoot queryType={queryType} handleQueryTypeClick={handleQueryTypeClick} />
           <DirectivesList schema={schema} />
         </div>
-
-        <div>
-          {showFields && (
-            <>
-              <h4>Method list:</h4>
-              <ul className={styles['methods-list']}>
-                {Object.keys(fields).map((fieldName) => (
-                  <li key={fieldName}>
-                    <ListItem
-                      data={fields[fieldName]}
-                      getNameData={handleNameClick}
-                      getTypeData={handleTypeClickRecursion}
-                    />
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
-        </div>
+        {showFields && (
+          <MethodList
+            fields={fields}
+            handleNameClick={handleNameClick}
+            handleTypeClickRecursion={handleTypeClickRecursion}
+          />
+        )}
         {showFields && showName && !showType && nameData && nameData.name && (
           <div>
             <>

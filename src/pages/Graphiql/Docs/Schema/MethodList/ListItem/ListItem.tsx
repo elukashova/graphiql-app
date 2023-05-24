@@ -1,6 +1,6 @@
 import { GraphQLField, GraphQLOutputType } from 'graphql';
 import React from 'react';
-import styles from '../ComponentsSchema.module.css';
+import styles from '../../ComponentsSchema.module.css';
 
 export type Data = GraphQLField<unknown, unknown, unknown>;
 

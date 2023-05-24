@@ -7,7 +7,7 @@ import {
   GraphQLSchema,
 } from 'graphql';
 import React, { SetStateAction, useState } from 'react';
-import styles from '../../ComponentsSchema.module.css';
+import styles from '../ComponentsSchema.module.css';
 
 interface DirectivesProps {
   schema: GraphQLSchema;
