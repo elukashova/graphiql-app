@@ -3,6 +3,7 @@ import styles from './Headers.module.css';
 import cross from '../../../assets/cross.svg';
 import ErrorBoundary from '../../../components/ErrorBoundary/ErrorBoundary';
 import { isValidJsonString } from '../utils';
+import { useTranslation } from 'react-i18next';
 
 interface ValidationState {
   showValidation: boolean;
@@ -21,6 +22,7 @@ const Headers: React.FC = (): JSX.Element => {
   const [headersValue, setHeadersValue] = useState<string>(
     isEmptyHeaders ? '' : JSON.stringify(headers)
   );
+  const { t } = useTranslation();
 
   useEffect(() => {
     const { isValid, errorMessage } = isValidJsonString(headersValue);
@@ -31,10 +33,10 @@ const Headers: React.FC = (): JSX.Element => {
     } else {
       setValidationState({
         showValidation: true,
-        errorMessage: `Invalid headers format: ${errorMessage}`,
+        errorMessage: `${t('editor.headers_invalid')}: ${errorMessage}`,
       });
     }
-  }, [headersValue]);
+  }, [headersValue, t]);
 
   const handleHeadersChange = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
     const newHeaders = event.target.value;
@@ -64,14 +66,14 @@ const Headers: React.FC = (): JSX.Element => {
   return (
     <section className={styles['headers-section']}>
       {showHeaders ? (
-        <ErrorBoundary fallback="Can't get data from API with these headers">
+        <ErrorBoundary fallback={`${t('errorBoundary.headers_fallback')}`}>
           <div className={styles['headers-container']}>
             <textarea
               className={styles.textarea}
               value={headersValue || ''}
               onChange={(e) => handleHeadersChange(e)}
               onCut={() => handleCut()}
-              placeholder="Enter headers in JSON format"
+              placeholder={`${t('editor.headers_placeholder')}`}
             />
             <button className={styles['button-cross']} onClick={() => handleCloseValidation()}>
               <img className={styles.cross} src={cross} alt="cross" />
@@ -85,7 +87,7 @@ const Headers: React.FC = (): JSX.Element => {
         </ErrorBoundary>
       ) : (
         <button className={styles.title} onClick={() => changeShowHeaders()}>
-          Headers
+          {t('editor.headers')}
         </button>
       )}
     </section>

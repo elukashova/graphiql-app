@@ -7,11 +7,13 @@ import useAuth from '../../hooks/authHook';
 import AuthLink from './components/Link/Link';
 import { selectAuth } from '../../store/slices/auth';
 import Loader from '../../components/Loader/Loader';
+import { useTranslation } from 'react-i18next';
 
 const AuthPage = (): JSX.Element => {
   const { isSignIn, isSignUp } = useAppSelector(selectRoute);
   const { isLoading } = useAppSelector(selectAuth);
   const { toggleSignUp, toggleSignIn } = useAuth();
+  const { t } = useTranslation();
 
   const handleClick: MouseEventHandler = (e) => {
     e.preventDefault();
@@ -24,25 +26,25 @@ const AuthPage = (): JSX.Element => {
 
   return (
     <section className={styles.section}>
-      {isSignUp && (
-        <div className={styles['title-wrapper']}>
-          <h2 className={styles.sign}>Sign</h2>
-          <h2 className={styles.title}>up</h2>
-        </div>
-      )}
-      {isSignIn && (
-        <div className={styles['title-wrapper']}>
-          <h2 className={styles.sign}>Sign</h2>
-          <h2 className={styles.title}>in</h2>
-        </div>
-      )}
+      <div className={styles['title-wrapper']}>
+        <h2 className={styles.sign}>{isSignUp ? t('auth.sign_up') : t('auth.sign_in')}</h2>
+        <h2 className={styles.title}>{isSignUp ? t('auth.up') : t('auth.in')}</h2>
+      </div>
       <AuthForm />
       <div>
         {isSignUp && (
-          <AuthLink text="Have an account?" label="Sign in" clickCallback={handleClick} />
+          <AuthLink
+            text={`${t('auth.have_account')}?`}
+            label={t('sign_in')}
+            clickCallback={handleClick}
+          />
         )}
         {isSignIn && (
-          <AuthLink text="Not registered?" label="Sign up" clickCallback={handleClick} />
+          <AuthLink
+            text={`${t('auth.no_account')}?`}
+            label={t('sign_up')}
+            clickCallback={handleClick}
+          />
         )}
         {isLoading && <Loader />}
       </div>
