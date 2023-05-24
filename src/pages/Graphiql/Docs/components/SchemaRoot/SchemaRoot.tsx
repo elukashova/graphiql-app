@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from '../ComponentsSchema.module.css';
 import {
   GraphQLField,
@@ -6,6 +6,7 @@ import {
   GraphQLNonNull,
   GraphQLObjectType,
   GraphQLOutputType,
+  GraphQLScalarType,
   GraphQLSchema,
 } from 'graphql';
 import ListItem, { Data } from '../Schema/ListItem';
@@ -24,9 +25,13 @@ export const SchemaRoot: React.FC<SchemaRootProps> = ({ schema }) => {
   const [prevNameData, setNamePrevData] = useState<GraphQLField<unknown, unknown, unknown> | null>(
     null
   );
+
   const [showType, setShowType] = useState(false);
   const [typeData, setTypeData] = useState<GraphQLOutputType | null>(null);
   const [prevTypeData, setTypePrevData] = useState<GraphQLOutputType | null>(null);
+
+  const [showPrimitiveType, setShowPrimitiveType] = useState(false);
+  const [primitiveType, setPrimitiveType] = useState<GraphQLOutputType | null>(null);
 
   const fields = queryType.getFields();
 
@@ -75,6 +80,49 @@ export const SchemaRoot: React.FC<SchemaRootProps> = ({ schema }) => {
         handleTypeClick(type);
       }
     }
+  };
+
+  const handleMethodTypeClick = (type: GraphQLOutputType) => {
+    if (showName && prevTypeData && JSON.stringify(type) === JSON.stringify(prevTypeData)) {
+      setShowPrimitiveType(!showPrimitiveType);
+      setPrimitiveType(type);
+    } else if (!prevTypeData || type !== prevTypeData) {
+      setShowPrimitiveType(!showPrimitiveType);
+      setPrimitiveType(type);
+    } else {
+      setShowPrimitiveType(!showPrimitiveType);
+    }
+  };
+
+  const handleMethodType = (type: GraphQLOutputType) => {
+    if (type instanceof GraphQLNonNull) {
+      if (isListOrObjectType(type.ofType)) {
+        handleMethodTypeClick(getInnerType(type.ofType));
+      } else {
+        handleMethodTypeClick(type.ofType);
+      }
+    } else if (type instanceof GraphQLList) {
+      if (isListOrObjectType(type.ofType)) {
+        handleMethodTypeClick(getInnerType(type.ofType));
+      } else {
+        handleMethodTypeClick(type.ofType);
+      }
+    } else if (type instanceof GraphQLObjectType) {
+      handleMethodTypeClick(type);
+    }
+  };
+
+  const isListOrObjectType = (type: GraphQLOutputType): boolean => {
+    return type instanceof GraphQLList || type instanceof GraphQLObjectType;
+  };
+
+  const getInnerType = (type: GraphQLOutputType): GraphQLOutputType => {
+    if (type instanceof GraphQLList || type instanceof GraphQLNonNull) {
+      return getInnerType(type.ofType);
+    } else if (type instanceof GraphQLObjectType) {
+      return type;
+    }
+    throw new Error('Invalid type');
   };
 
   return (
@@ -137,7 +185,6 @@ export const SchemaRoot: React.FC<SchemaRootProps> = ({ schema }) => {
         <div>
           <>
             <h4>{typeData.toString()}</h4>
-            {console.log(typeData)}
             {typeData instanceof GraphQLNonNull && typeData.ofType instanceof GraphQLObjectType && (
               <>
                 {typeData.ofType.description && (
@@ -146,11 +193,52 @@ export const SchemaRoot: React.FC<SchemaRootProps> = ({ schema }) => {
                 <ul>
                   {Object.values(typeData.ofType.getFields()).map((field) => (
                     <li className={styles['arg-list']} key={field.name}>
-                      <span className={styles.arg}>{field.name}</span>
-                      <span className={styles.type}>({field.type.toString()})</span>{' '}
-                      <span className={styles.description}>
-                        {JSON.parse(field.description || '{}')?.[schemaLang]}
-                      </span>
+                      <>
+                        <span className={styles.arg}>{field.name}</span>
+                        <span className={styles.type} onClick={() => handleMethodType(field.type)}>
+                          ({field.type.toString()})
+                        </span>{' '}
+                        <span className={styles.description}>
+                          {JSON.parse(field.description || '{}')?.[schemaLang]}
+                        </span>
+                      </>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </>
+        </div>
+      )}
+
+      {showPrimitiveType && primitiveType && (
+        <div>
+          <h4>{primitiveType.toString()}</h4>
+          <>
+            {console.log(primitiveType)}
+
+            {primitiveType instanceof GraphQLScalarType && (
+              <>{primitiveType && <span>{primitiveType.description ?? ''}</span>}</>
+            )}
+
+            {primitiveType instanceof GraphQLObjectType && (
+              <>
+                {console.log(primitiveType.description)}
+                {primitiveType && (
+                  <span>{JSON.parse(primitiveType.description ?? '{}')?.[schemaLang]}</span>
+                )}
+                <ul>
+                  {Object.values(primitiveType.getFields()).map((field) => (
+                    <li className={styles['arg-list']} key={field.name}>
+                      <>
+                        <span className={styles.arg}>{field.name}</span>
+                        <span className={styles.type} onClick={() => handleMethodType(field.type)}>
+                          ({field.type.toString()})
+                        </span>{' '}
+                        <span className={styles.description}>
+                          {JSON.parse(field.description || '{}')?.[schemaLang]}
+                        </span>
+                      </>
                     </li>
                   ))}
                 </ul>

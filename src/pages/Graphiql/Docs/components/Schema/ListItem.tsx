@@ -1,12 +1,5 @@
-import {
-  GraphQLField,
-  GraphQLFieldMap,
-  GraphQLList,
-  GraphQLObjectType,
-  GraphQLOutputType,
-  GraphQLScalarType,
-} from 'graphql';
-import React, { useState } from 'react';
+import { GraphQLField, GraphQLOutputType } from 'graphql';
+import React from 'react';
 import styles from '../ComponentsSchema.module.css';
 
 export type Data = GraphQLField<unknown, unknown, unknown>;
@@ -18,7 +11,7 @@ export interface ListItemProps {
 }
 
 const ListItem: React.FC<ListItemProps> = ({ data, getNameData, getTypeData }) => {
-  const { name, type, args, description } = data;
+  const { name, type, description } = data;
   const lang = 'en';
   const handleName = () => {
     getNameData(data);

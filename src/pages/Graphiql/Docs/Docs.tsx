@@ -1,4 +1,4 @@
-import { buildClientSchema, getIntrospectionQuery, IntrospectionSchema } from 'graphql/utilities';
+import { buildClientSchema, getIntrospectionQuery } from 'graphql/utilities';
 import React, { lazy, useState, Suspense } from 'react';
 import styles from './Docs.module.css';
 import book from '../../../assets/book.svg';
@@ -17,7 +17,10 @@ const Docs: React.FC = (): JSX.Element => {
   const apiUrl = 'https://data-api.oxilor.com/graphql';
   const [schema, setSchema] = useState<GraphQLSchema | null>(null);
   const [error, setError] = useState<Error>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
   const fetchSchema = async () => {
+    setIsLoading(true);
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
@@ -39,6 +42,8 @@ const Docs: React.FC = (): JSX.Element => {
       }
     } catch (error) {
       setError('Failed to fetch schema');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -58,10 +63,14 @@ const Docs: React.FC = (): JSX.Element => {
         <img className={styles.book} src={book} alt="Documents" title="Docs" />
       </button>
       {error && <div>{error}</div>}
-      {isDocs && (
-        <Suspense fallback={<Loading />}>
-          <Schema schema={schema} />
-        </Suspense>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        isDocs && (
+          <Suspense fallback={<Loading />}>
+            <Schema schema={schema} />
+          </Suspense>
+        )
       )}
     </div>
   );

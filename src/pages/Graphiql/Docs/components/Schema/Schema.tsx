@@ -13,7 +13,7 @@ const Schema: React.FC<SchemaProps> = ({ schema }) => {
   if (!schema) {
     return <div>Schema is not available</div>;
   }
-
+  console.log(schema);
   return (
     <div className={styles.modal}>
       <SchemaRoot schema={schema} />
