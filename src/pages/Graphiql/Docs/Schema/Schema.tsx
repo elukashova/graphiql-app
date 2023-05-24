@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './ComponentsSchema.module.css';
 import {
   GraphQLField,
+  GraphQLInputType,
   GraphQLList,
   GraphQLNonNull,
   GraphQLObjectType,
@@ -13,6 +14,7 @@ import ListItem, { Data } from './MethodList/ListItem/ListItem';
 import SchemaRoot from './SchemaRoot/SchemaRoot';
 import { DirectivesList } from './DirectivesList/DirectivesList';
 import MethodList from './MethodList/MethodList';
+import ArgumentsName from './ArgumentsName/ArgumentsName';
 
 interface SchemaProps {
   schema: GraphQLSchema;
@@ -40,6 +42,10 @@ const Schema: React.FC<SchemaProps> = ({ schema }) => {
 
   const handleQueryTypeClick = () => {
     setShowFields(!showFields);
+    setShowType(false);
+    setShowName(false);
+    setNameData(null);
+    setTypeData(null);
   };
 
   const handleNameClick = (data: Data) => {
@@ -76,6 +82,8 @@ const Schema: React.FC<SchemaProps> = ({ schema }) => {
   const handleTypeClickRecursion = (type: GraphQLOutputType) => {
     setTypeData(null);
     setTypePrevData(null);
+    setPrimitiveType(null);
+    setShowPrimitiveType(false);
     if (type instanceof GraphQLNonNull) {
       if (type.ofType instanceof GraphQLList) {
         handleTypeClick(type.ofType.ofType);
@@ -143,31 +151,7 @@ const Schema: React.FC<SchemaProps> = ({ schema }) => {
           />
         )}
         {showFields && showName && !showType && nameData && nameData.name && (
-          <div>
-            <>
-              <h4>{nameData.name}</h4>
-              <span>{JSON.parse(nameData.description ?? '{}')?.[schemaLang]}</span>
-              {nameData.args && nameData.args.length === 0 ? (
-                <h5>No arguments</h5>
-              ) : (
-                <>
-                  <h5>Arguments: </h5>
-                  <ul className={styles['methods-list']}>
-                    {nameData.args &&
-                      nameData.args.map((arg) => (
-                        <li className={styles['arg-list']} key={arg.name}>
-                          <span className={styles.arg}>{arg.name}</span>
-                          <span className={styles.type}>({arg.type.toString()})</span>{' '}
-                          <span className={styles.description}>
-                            {JSON.parse(arg.description ?? '{}')?.[schemaLang]}
-                          </span>
-                        </li>
-                      ))}
-                  </ul>
-                </>
-              )}
-            </>
-          </div>
+          <ArgumentsName nameData={nameData} schemaLang={schemaLang} />
         )}
         {showFields && showType && !showName && typeData && (
           <div>
