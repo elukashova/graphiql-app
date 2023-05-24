@@ -56,7 +56,11 @@ export const DirectivesList: React.FC<DirectivesProps> = ({ schema }) => {
                         <span className={styles.arg}>{arg.name}</span>
                         {arg.type && (
                           <>
-                            <span className={styles['type']} onClick={() => handleClick(arg.type)}>
+                            <span
+                              className={`${styles['type']}  ${styles['type-description-primitive']}`}
+                              onClick={() => handleClick(arg.type)}
+                            >
+                              {' '}
                               ({arg.type.toString()})
                             </span>
                           </>
@@ -70,7 +74,7 @@ export const DirectivesList: React.FC<DirectivesProps> = ({ schema }) => {
           </ul>
         </div>
       </div>
-      {typeDescription && <div className={styles['type-description']}>{typeDescription}</div>}
+      {typeDescription && <p className={styles['type-description']}>{typeDescription}</p>}
     </>
   );
 };

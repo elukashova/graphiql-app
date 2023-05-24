@@ -19,17 +19,18 @@ body {
   display: grid;
   grid-template-columns: 16vw 16vw 16vw 16vw;
   gap: 4rem;
+  margin-top: 1rem;
 }
 
 .query {
   color: rgb(16, 182, 211);
   font-weight: 600;
-  cursor: pointer;
 }
 
 .title {
   color: rgb(16, 100, 211);
   font-weight: 600;
+  cursor: pointer;
 }
 
 h4,
@@ -58,6 +59,10 @@ p {
 .directive-name {
   color: rgb(5, 201, 158);
   font-weight: 600;
+}
+
+.type-description-primitive {
+  cursor: pointer;
 }
 
 .list-block {
@@ -90,7 +95,7 @@ p {
   gap: 1rem;
 }
 
-.root-block {
+.root-and-directives {
   display: flex;
   flex-direction: column;
   gap: 1rem;

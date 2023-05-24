@@ -11,6 +11,7 @@ import {
 } from 'graphql';
 import ListItem, { Data } from '../Schema/ListItem';
 import { DirectivesList } from '../SchemaRoot/DirectivesList/DirectivesList';
+import SchemaRoot from '../SchemaRoot/SchemaRoot';
 
 interface SchemaProps {
   schema: GraphQLSchema;
@@ -129,14 +130,8 @@ export const Schema: React.FC<SchemaProps> = ({ schema }) => {
   return (
     <div className={styles['schema-block']}>
       <div className={styles.schema}>
-        <div className={styles['root-block']}>
-          <h4>Root Types:</h4>
-          <p className={styles.query}>
-            query:{' '}
-            <span className={styles.title} onClick={handleQueryTypeClick}>
-              {queryType.name}
-            </span>
-          </p>
+        <div className={styles['root-and-directives']}>
+          <SchemaRoot queryType={queryType} handleQueryTypeClick={handleQueryTypeClick} />
           <DirectivesList schema={schema} />
         </div>
 
