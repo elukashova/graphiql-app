@@ -55,10 +55,10 @@ const MethodsName: React.FC<{
         <h4>{nameData.name}</h4>
         <span>{JSON.parse(nameData.description ?? '{}')?.[schemaLang]}</span>
         {nameData.args && nameData.args.length === 0 ? (
-          <h5>No arguments</h5>
+          <h4>No arguments</h4>
         ) : (
           <>
-            <h5>Arguments: </h5>
+            <h4>Arguments: </h4>
             <ul className={styles['methods-list']}>
               {nameData.args &&
                 nameData.args.map((arg) => (

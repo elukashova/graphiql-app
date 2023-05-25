@@ -52,6 +52,9 @@ const Schema: React.FC<SchemaProps> = ({ schema }) => {
     setTypeData(null);
     setShowPrimitive(false);
     setPrimitive(null);
+    if (queryType.name === nameData?.name) {
+      setTypeData(null);
+    }
   };
 
   const handleNameClick = (data: Data) => {
@@ -115,7 +118,6 @@ const Schema: React.FC<SchemaProps> = ({ schema }) => {
   };
 
   const handleMethodType = (type: GraphQLOutputType, status: boolean) => {
-    setShowPrimitive(!showPrimitive);
     if (type instanceof GraphQLNonNull) {
       if (type.ofType instanceof GraphQLScalarType) {
         setShowPrimitive(true);
@@ -129,6 +131,8 @@ const Schema: React.FC<SchemaProps> = ({ schema }) => {
       }
     } else {
       handleMethodTypeArgs(type, status);
+      setShowPrimitive(false);
+      setPrimitive(null);
     }
   };
 
@@ -144,6 +148,7 @@ const Schema: React.FC<SchemaProps> = ({ schema }) => {
             fields={fields}
             handleNameClick={handleNameClick}
             handleTypeClickRecursion={handleTypeClickRecursion}
+            schemaLang={schemaLang}
           />
         )}
         {showFields && showName && !showType && nameData && nameData.name && (
@@ -153,12 +158,17 @@ const Schema: React.FC<SchemaProps> = ({ schema }) => {
         )}
         {showFields && !showName && (
           <>
-            {typeData && showType && !typeNotFound ? (
-              <MethodsTypes
-                schemaLang={schemaLang}
-                handleMethodType={handleMethodType}
-                typeData={typeData}
-              />
+            {console.log(typeData, showType, !typeNotFound)}
+            {!typeNotFound ? (
+              <>
+                {typeData && showType && (
+                  <MethodsTypes
+                    schemaLang={schemaLang}
+                    handleMethodType={handleMethodType}
+                    typeData={typeData}
+                  />
+                )}
+              </>
             ) : (
               <div>This type has no description.</div>
             )}

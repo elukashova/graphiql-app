@@ -7,12 +7,14 @@ interface MethodListProps {
   fields: Record<string, GraphQLField<unknown, unknown, unknown>>;
   handleNameClick: (data: Data) => void;
   handleTypeClickRecursion: (type: GraphQLOutputType) => void;
+  schemaLang: string;
 }
 
 const MethodList: React.FC<MethodListProps> = ({
   fields,
   handleNameClick,
   handleTypeClickRecursion,
+  schemaLang,
 }) => {
   return (
     <div>
@@ -24,6 +26,7 @@ const MethodList: React.FC<MethodListProps> = ({
               data={fields[fieldName]}
               getNameData={handleNameClick}
               getTypeData={handleTypeClickRecursion}
+              schemaLang={schemaLang}
             />
           </li>
         ))}

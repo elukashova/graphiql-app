@@ -8,11 +8,12 @@ export interface ListItemProps {
   data: Data;
   getNameData: (data: Data) => void;
   getTypeData: (type: GraphQLOutputType) => void;
+  schemaLang: string;
 }
 
-const ListItem: React.FC<ListItemProps> = ({ data, getNameData, getTypeData }) => {
+const ListItem: React.FC<ListItemProps> = ({ data, getNameData, getTypeData, schemaLang }) => {
   const { name, type, description } = data;
-  const lang = 'en';
+  const lang = schemaLang;
   const handleName = () => {
     getNameData(data);
   };
@@ -23,21 +24,23 @@ const ListItem: React.FC<ListItemProps> = ({ data, getNameData, getTypeData }) =
 
   return (
     <>
-      <div className={styles['list-block']}>
-        <span className={styles.title} onClick={handleName}>
-          {name}
-        </span>
-        <p className={styles['return-value']}>
-          Return value:{' '}
-          <span className={styles.type} onClick={handleType}>
-            {type.toString()}
+      {name !== 'node' && (
+        <div className={styles['list-block']}>
+          <span className={styles.title} onClick={handleName}>
+            {name}
           </span>
-        </p>
+          <p className={styles['return-value']}>
+            Return value:{' '}
+            <span className={styles.type} onClick={handleType}>
+              {type.toString()}
+            </span>
+          </p>
 
-        {description ? (
-          <span className={styles.description}>{JSON.parse(description ?? '{}')?.[lang]}</span>
-        ) : null}
-      </div>
+          {description ? (
+            <span className={styles.description}>{JSON.parse(description ?? '{}')?.[lang]}</span>
+          ) : null}
+        </div>
+      )}
     </>
   );
 };
