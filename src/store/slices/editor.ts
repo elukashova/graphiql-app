@@ -1,6 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const URL = 'https://data-api.oxilor.com/graphql';
+export const REQUEST = `query {
+  searchRegions(searchTerm: "Madeira") {
+    id
+    name
+    type
+  }
+}
+`;
 
 export interface Variables {
   [key: string]: unknown;
@@ -29,7 +37,7 @@ export interface EditorState {
 }
 
 const initialState: EditorState = {
-  formValue: 'query { characters(filter: { name: "Morty" }) { results { name status species } } }',
+  formValue: REQUEST,
   formResponse: 'Please, submit for response.',
   status: 'idle',
   error: null,
@@ -78,7 +86,6 @@ export const editorSlice = createSlice({
       .addCase(fetchFormResponse.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.formResponse = action.payload.formResponse;
-        console.log(action.payload.formResponse);
       })
       .addCase(fetchFormResponse.rejected, (state, action) => {
         state.status = 'failed';

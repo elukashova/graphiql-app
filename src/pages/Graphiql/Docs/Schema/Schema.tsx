@@ -158,7 +158,6 @@ const Schema: React.FC<SchemaProps> = ({ schema }) => {
         )}
         {showFields && !showName && (
           <>
-            {console.log(typeData, showType, !typeNotFound)}
             {!typeNotFound ? (
               <>
                 {typeData && showType && (

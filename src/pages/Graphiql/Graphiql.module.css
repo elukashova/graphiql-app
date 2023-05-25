@@ -12,7 +12,7 @@
   display: flex;
   align-items: flex-start;
   gap: 1%;
-  padding: calc(1rem + 1vw) calc(1rem + 1vw);
+  padding: calc(1rem + 1vw) calc(1rem);
   box-sizing: border-box;
 }
 
@@ -22,5 +22,6 @@
     flex-direction: column-reverse;
     justify-content: flex-start;
     gap: 3vw;
+    padding: calc(1rem + 1vw) calc(0.5rem);
   }
 }

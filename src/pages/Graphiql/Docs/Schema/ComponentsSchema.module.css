@@ -3,17 +3,18 @@ body {
 }
 
 .schema-block {
-  font-size: 14px;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  min-height: 100vh;
-  height: max-content;
+  height: 100%;
+  overflow: auto;
   padding: 1rem 3rem;
   text-align: left;
   background-color: white;
   z-index: 9998;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .schema {
@@ -108,20 +109,36 @@ p {
   background-color: var(--yellow);
   padding: 5px;
   height: max-content;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
+}
+
+@media (max-width: 1090px) {
+  .schema-block {
+    padding: 1rem 2rem 1rem 4.5rem;
+    max-width: 100%;
+    width: 100vw;
+  }
+
+  .schema {
+    width: 60%;
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto auto auto;
+    gap: 3rem;
+  }
 }
 
 @media (max-width: 680px) {
-  .modal {
-    padding: 1rem 7rem;
-    min-height: 100%;
-    height: max-content;
+  .schema-block {
+    padding: 1rem 2rem 1rem 17%;
+    max-width: 100%;
+    width: 100vw;
+    top: 0;
+    bottom: 60px;
   }
+
   .schema {
-    display: grid;
-    grid-template-columns: 50vw;
+    width: 100%;
+    grid-template-columns: 100%;
     grid-template-rows: auto auto auto auto;
-    gap: 4rem;
+    gap: 3rem;
   }
 }

@@ -45,4 +45,7 @@
 }
 
 @media (max-width: 680px) {
+  .docs-active {
+    overflow: hidden;
+  }
 }

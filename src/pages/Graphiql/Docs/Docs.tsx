@@ -1,5 +1,5 @@
 import { buildClientSchema, getIntrospectionQuery } from 'graphql/utilities';
-import React, { lazy, useState, Suspense } from 'react';
+import React, { lazy, useState, Suspense, useEffect } from 'react';
 import styles from './Docs.module.css';
 import book from '../../../assets/book.svg';
 
@@ -18,6 +18,8 @@ const Docs: React.FC = (): JSX.Element => {
   const [schema, setSchema] = useState<GraphQLSchema | null>(null);
   const [error, setError] = useState<Error>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { isDocs } = useAppSelector(selectDocs);
+  const { toggleDocs } = useDocs();
 
   const fetchSchema = async () => {
     setIsLoading(true);
@@ -47,8 +49,13 @@ const Docs: React.FC = (): JSX.Element => {
     }
   };
 
-  const { isDocs } = useAppSelector(selectDocs);
-  const { toggleDocs } = useDocs();
+  useEffect(() => {
+    if (isDocs) {
+      document.body.className = styles['docs-active'];
+    } else {
+      document.body.className = '';
+    }
+  }, [isDocs]);
 
   const handleClick = () => {
     if (!isDocs) {

@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchFormResponse } from '../../../store/slices/editor';
+import { fetchFormResponse, REQUEST } from '../../../store/slices/editor';
 import styles from './Editor.module.css';
 import { AppDispatch, RootState } from '../../../store/store';
 import submit from '../../../assets/submit.svg';
@@ -14,7 +14,7 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 const Editor: React.FC = (): JSX.Element => {
   const dispatch = useDispatch<AppDispatch>();
   const [formValue, setFormValue] = useState<string>(
-    localStorage.getItem('requestValueLS')?.trim() || ''
+    localStorage.getItem('requestValueLS')?.trim() || REQUEST
   );
 
   const formResponse = useSelector((state: RootState) => state.editor.formResponse);
