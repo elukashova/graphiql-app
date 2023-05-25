@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './ComponentsSchema.module.css';
 import {
   GraphQLField,
-  GraphQLInputType,
   GraphQLList,
   GraphQLNonNull,
   GraphQLObjectType,
@@ -10,11 +9,13 @@ import {
   GraphQLScalarType,
   GraphQLSchema,
 } from 'graphql';
-import ListItem, { Data } from './MethodList/ListItem/ListItem';
+import { Data } from './MethodList/ListItem/ListItem';
 import SchemaRoot from './SchemaRoot/SchemaRoot';
 import { DirectivesList } from './DirectivesList/DirectivesList';
 import MethodList from './MethodList/MethodList';
-import ArgumentsName from './ArgumentsName/ArgumentsName';
+import MethodsName from './MethodsName/MethodsName';
+import MethodsTypes from './MethodsTypes/MethodsTypes';
+import { Maybe } from 'graphql/jsutils/Maybe';
 
 interface SchemaProps {
   schema: GraphQLSchema;
@@ -33,10 +34,13 @@ const Schema: React.FC<SchemaProps> = ({ schema }) => {
 
   const [showType, setShowType] = useState(false);
   const [typeData, setTypeData] = useState<GraphQLOutputType | null>(null);
-  const [prevTypeData, setTypePrevData] = useState<GraphQLOutputType | null>(null);
+  const [prevTypeData, setPrevTypeData] = useState<GraphQLOutputType | null>(null);
+  const [typeNotFound, setTypeNotFound] = useState(false);
 
-  const [showPrimitiveType, setShowPrimitiveType] = useState(false);
-  const [primitiveType, setPrimitiveType] = useState<GraphQLOutputType | null>(null);
+  const [showTypesFromArgType, setShowTypesFromArgType] = useState(false);
+  const [typesFromArgType, setTypesFromArgType] = useState<GraphQLOutputType | null>(null);
+  const [showPrimitive, setShowPrimitive] = useState(false);
+  const [primitive, setPrimitive] = useState<Maybe<string> | null>(null);
 
   const fields = queryType.getFields();
 
@@ -46,6 +50,8 @@ const Schema: React.FC<SchemaProps> = ({ schema }) => {
     setShowName(false);
     setNameData(null);
     setTypeData(null);
+    setShowPrimitive(false);
+    setPrimitive(null);
   };
 
   const handleNameClick = (data: Data) => {
@@ -69,7 +75,6 @@ const Schema: React.FC<SchemaProps> = ({ schema }) => {
 
   const handleTypeClick = (type: GraphQLOutputType) => {
     if (showName && prevTypeData && JSON.stringify(type) === JSON.stringify(prevTypeData)) {
-      console.log(type);
       setShowType(true);
       setShowName(false);
       setTypeData(type);
@@ -81,67 +86,50 @@ const Schema: React.FC<SchemaProps> = ({ schema }) => {
       setShowType(true);
       setShowName(false);
       setTypeData(type);
-      setTypePrevData(type);
+      setPrevTypeData(type);
     } else {
       setShowType(!showType);
     }
   };
 
   const handleTypeClickRecursion = (type: GraphQLOutputType) => {
+    setTypeNotFound(false);
     setTypeData(null);
-    setTypePrevData(null);
-    setPrimitiveType(null);
-    setShowPrimitiveType(false);
+    setPrevTypeData(null);
+    setTypesFromArgType(null);
+    setShowTypesFromArgType(false);
     if (type instanceof GraphQLNonNull) {
       if (type.ofType instanceof GraphQLList) {
         handleTypeClick(type.ofType.ofType);
       } else {
         handleTypeClick(type);
       }
-    }
-  };
-
-  const handleMethodTypeClick = (type: GraphQLOutputType) => {
-    if (showName && prevTypeData && JSON.stringify(type) === JSON.stringify(prevTypeData)) {
-      setShowPrimitiveType(!showPrimitiveType);
-      setPrimitiveType(type);
-    } else if (!prevTypeData || type !== prevTypeData) {
-      setShowPrimitiveType(!showPrimitiveType);
-      setPrimitiveType(type);
     } else {
-      setShowPrimitiveType(!showPrimitiveType);
+      setTypeNotFound(true);
     }
   };
 
-  const handleMethodType = (type: GraphQLOutputType) => {
+  const handleMethodTypeArgs = (type: GraphQLOutputType, status: boolean) => {
+    setTypesFromArgType(type);
+    setShowTypesFromArgType(status);
+  };
+
+  const handleMethodType = (type: GraphQLOutputType, status: boolean) => {
+    setShowPrimitive(!showPrimitive);
     if (type instanceof GraphQLNonNull) {
-      if (isListOrObjectType(type.ofType)) {
-        handleMethodTypeClick(getInnerType(type.ofType));
-      } else {
-        handleMethodTypeClick(type.ofType);
+      if (type.ofType instanceof GraphQLScalarType) {
+        setShowPrimitive(true);
+        setPrimitive(type.ofType.description);
+      } else if (type.ofType instanceof GraphQLList || type.ofType instanceof GraphQLObjectType) {
+        handleMethodType(type.ofType, status);
       }
     } else if (type instanceof GraphQLList) {
-      if (isListOrObjectType(type.ofType)) {
-        handleMethodTypeClick(getInnerType(type.ofType));
-      } else {
-        handleMethodTypeClick(type.ofType);
+      if (type.ofType instanceof GraphQLNonNull) {
+        handleMethodType(type.ofType, status);
       }
-    } else if (type instanceof GraphQLObjectType) {
-      handleMethodTypeClick(type);
+    } else {
+      handleMethodTypeArgs(type, status);
     }
-  };
-
-  const isListOrObjectType = (type: GraphQLOutputType): boolean => {
-    return type instanceof GraphQLList || type instanceof GraphQLObjectType;
-  };
-
-  const getInnerType = (type: GraphQLOutputType): GraphQLOutputType => {
-    if (type instanceof GraphQLList || type instanceof GraphQLNonNull) {
-      return getInnerType(type.ofType);
-    } else if (type instanceof GraphQLObjectType) {
-      return type;
-    }
-    throw new Error('Invalid type');
   };
 
   return (
@@ -159,78 +147,52 @@ const Schema: React.FC<SchemaProps> = ({ schema }) => {
           />
         )}
         {showFields && showName && !showType && nameData && nameData.name && (
-          <ArgumentsName nameData={nameData} schemaLang={schemaLang} />
+          <>
+            <MethodsName nameData={nameData} schemaLang={schemaLang} />
+          </>
         )}
-        {showFields && showType && !showName && typeData && (
-          <div>
-            <>
-              <h4>{typeData.toString()}</h4>
-
-              {typeData instanceof GraphQLNonNull &&
-                typeData.ofType instanceof GraphQLObjectType && (
-                  <>
-                    {typeData.ofType.description && (
-                      <span>{JSON.parse(typeData.ofType.description ?? '{}')?.[schemaLang]}</span>
-                    )}
-                    <p>Types: </p>
-                    <ul>
-                      {Object.values(typeData.ofType.getFields()).map((field) => (
-                        <li className={styles['arg-list']} key={field.name}>
-                          <>
-                            <span className={styles.arg}>{field.name}</span>
-                            <span
-                              className={styles.type}
-                              onClick={() => handleMethodType(field.type)}
-                            >
-                              ({field.type.toString()})
-                            </span>{' '}
-                            <span className={styles.description}>
-                              {JSON.parse(field.description || '{}')?.[schemaLang]}
-                            </span>
-                          </>
-                        </li>
-                      ))}
-                    </ul>
-                  </>
-                )}
-            </>
-          </div>
+        {showFields && !showName && (
+          <>
+            {typeData && showType && !typeNotFound ? (
+              <MethodsTypes
+                schemaLang={schemaLang}
+                handleMethodType={handleMethodType}
+                typeData={typeData}
+              />
+            ) : (
+              <div>This type has no description.</div>
+            )}
+          </>
         )}
 
-        {showPrimitiveType && primitiveType && (
+        {typesFromArgType && showTypesFromArgType && (
           <div>
-            <h4>{primitiveType.toString()}</h4>
+            <h4>{typesFromArgType.toString()}</h4>
             <>
-              {primitiveType instanceof GraphQLScalarType && (
-                <>{primitiveType && <span>{primitiveType.description ?? ''}</span>}</>
+              {typesFromArgType instanceof GraphQLObjectType && (
+                <span>{JSON.parse(typesFromArgType.description ?? '{}')?.[schemaLang]}</span>
               )}
-
-              {primitiveType instanceof GraphQLObjectType && (
-                <>
-                  {console.log(primitiveType.description)}
-                  {primitiveType && (
-                    <span>{JSON.parse(primitiveType.description ?? '{}')?.[schemaLang]}</span>
-                  )}
-                  <ul>
-                    {Object.values(primitiveType.getFields()).map((field) => (
-                      <li className={styles['arg-list']} key={field.name}>
-                        <>
-                          <span className={styles.arg}>{field.name}</span>
-                          <span
-                            className={styles.type}
-                            onClick={() => handleMethodType(field.type)}
-                          >
-                            ({field.type.toString()})
-                          </span>{' '}
-                          <span className={styles.description}>
-                            {JSON.parse(field.description || '{}')?.[schemaLang]}
-                          </span>
-                        </>
-                      </li>
-                    ))}
-                  </ul>
-                </>
+              {typesFromArgType instanceof GraphQLObjectType && (
+                <ul>
+                  {Object.values(typesFromArgType.getFields()).map((field) => (
+                    <li className={styles['arg-list']} key={field.name}>
+                      <>
+                        <span className={styles.arg}>{field.name}</span>
+                        <span
+                          className={styles.type}
+                          onClick={() => handleMethodType(field.type, true)}
+                        >
+                          ({field.type.toString()})
+                        </span>{' '}
+                        <span className={styles.description}>
+                          {JSON.parse(field.description || '{}')?.[schemaLang]}
+                        </span>
+                      </>
+                    </li>
+                  ))}
+                </ul>
               )}
+              {showPrimitive && <p className={styles['type-description']}>{primitive}</p>}
             </>
           </div>
         )}

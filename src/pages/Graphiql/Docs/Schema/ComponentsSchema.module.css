@@ -8,7 +8,8 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
+  height: max-content;
   padding: 1rem 3rem;
   text-align: left;
   background-color: white;
@@ -107,6 +108,8 @@ p {
   background-color: var(--yellow);
   padding: 5px;
   height: max-content;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 @media (max-width: 680px) {

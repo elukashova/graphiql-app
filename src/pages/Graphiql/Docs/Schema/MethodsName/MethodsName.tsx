@@ -8,7 +8,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import styles from '../ComponentsSchema.module.css';
 
-const ArgumentsName: React.FC<{
+const MethodsName: React.FC<{
   nameData: GraphQLField<unknown, unknown, unknown>;
   schemaLang: string;
 }> = ({ nameData, schemaLang }) => {
@@ -83,4 +83,4 @@ const ArgumentsName: React.FC<{
   );
 };
 
-export default ArgumentsName;
+export default MethodsName;
