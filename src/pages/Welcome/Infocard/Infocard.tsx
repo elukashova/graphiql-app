@@ -1,9 +1,10 @@
+import { DefaultTFuncReturn } from 'i18next';
 import React, { useState } from 'react';
 import styles from './Infocard.module.css';
 
 type Props = {
   title: string;
-  text?: string;
+  text?: DefaultTFuncReturn;
   urls?: string[];
   names?: string[];
 };

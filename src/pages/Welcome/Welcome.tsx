@@ -4,29 +4,26 @@ import styles from './Welcome.module.css';
 import url1 from '../../assets/nastya.jpg';
 import url2 from '../../assets/elena.jpg';
 import url3 from '../../assets/karina.jpg';
+import { useTranslation } from 'react-i18next';
 
 const WelcomePage = (): JSX.Element => {
+  const { t } = useTranslation();
+
   return (
     <section className={styles.section}>
       <div className={styles.wrapper}>
         <div className={styles.top}>
-          <h2 className={styles.title}>Welcome to</h2>
-          <h2 className={styles.name}>GraphiQL</h2>
+          <h2 className={styles.title}>{t('home.welcome')}</h2>
+          <h2 className={styles.name}>GraphiQLike</h2>
         </div>
         <div className={styles.bottom}>
+          <InfoCard title={`${t('home.what')}?`} text={t('home.what_text')} />
           <InfoCard
-            title="What?"
-            text="GraphiQL is a tool designed for developers to test and explore GraphQL APIs: it provides an interactive platform enabling the execution and composition of GraphQL queries, examination of response data, and navigation of API documentation."
-          />
-          <InfoCard
-            title="Who?"
+            title={`${t('home.who')}?`}
             urls={[url1, url2, url3]}
-            names={['Anastasia Klimova', 'Elena Lukashova', 'Karina Timoshina']}
+            names={[t('home.who_nastya'), t('home.who_lena'), t('home.who_karina')]}
           />
-          <InfoCard
-            title="Why?"
-            text="GraphiQL clone is the final task of the RSSchool React course, the so-called 'Stage 3' in the learning path provided by the school for those willing to become front-end developers."
-          />
+          <InfoCard title={`${t('home.why')}?`} text={t('home.why_text')} />
         </div>
       </div>
     </section>

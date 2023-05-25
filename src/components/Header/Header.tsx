@@ -7,12 +7,14 @@ import { logOut } from '../../auth/auth';
 import useAuth from '../../hooks/authHook';
 import { NavLink, useLocation } from 'react-router-dom';
 import logo from '../../assets/logo2.png';
+import { useTranslation } from 'react-i18next';
 
 const Header = (): JSX.Element => {
   const [scroll, setScroll] = useState(false);
   const { isAuth } = useAppSelector(selectAuth);
   const { toggleSignUp, toggleSignIn } = useAuth();
   const location = useLocation();
+  const { t } = useTranslation();
 
   const scrollHeader = () => {
     if (window.scrollY >= 50) setScroll(true);
@@ -40,21 +42,21 @@ const Header = (): JSX.Element => {
           {!isAuth && (
             <>
               <NavLink to="/auth" onClick={toggleSignUp} className={styles.link}>
-                sign up
+                {t('sign_up')}
               </NavLink>
               <NavLink to="/auth" onClick={toggleSignIn} className={styles.link}>
-                sign in
+                {t('sign_in')}
               </NavLink>
             </>
           )}
           {isAuth && location.pathname !== '/editor' && (
             <NavLink to="/editor" className={styles.link}>
-              Go to Main Page
+              {t('header.go_to_main')}
             </NavLink>
           )}
           {isAuth && (
             <NavLink to="/" end onClick={handleLogOut} className={styles.link}>
-              log out
+              {t('header.log_out')}
             </NavLink>
           )}
           <ButtonLang />

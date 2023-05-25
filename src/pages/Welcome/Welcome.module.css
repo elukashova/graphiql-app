@@ -64,3 +64,57 @@ main:hover .name {
   transform: rotate(-10deg) scale(1);
   transition: all 1s;
 }
+
+@media (max-width: 1280px) {
+  .section {
+    background-size: 90vw;
+  }
+
+  .bottom {
+    width: 80%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .section {
+    background-size: 100vw;
+  }
+
+  .bottom {
+    width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 2rem;
+  }
+
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 1rem;
+  }
+
+  .top {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .name {
+    align-self: center;
+  }
+
+  .bottom {
+    width: 100%;
+  }
+}
