@@ -9,13 +9,13 @@
   align-self: center;
   background-image: url(../../assets/auth-background.png);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   background-position: center center;
 }
 
 .title-wrapper {
   display: flex;
-  width: 10%;
+  width: 40%;
   flex-direction: row;
   gap: 0.5rem;
   justify-content: center;
@@ -50,16 +50,23 @@ main:hover .title {
   transform: rotate(-10deg) scale(1);
 }
 
+@media (max-width: 1000px) {
+  .section {
+    width: 100%;
+  }
+}
+
 @media (max-width: 760px) {
   .section {
     width: 100%;
-    gap: 0.4rem;
-    background-size: contain;
+    gap: 1rem;
   }
 
   .title-wrapper {
+    width: 50%;
     gap: 2vw;
     padding: 0;
+    align-items: center;
   }
 
   .sign,
@@ -67,8 +74,11 @@ main:hover .title {
     font-size: calc(1rem + 1vw);
   }
 
+  .sign {
+    margin-top: .5rem;
+  }
+
   .title {
-    margin-top: 2vw;
     padding: 1vw 2vw;
   }
 
@@ -77,3 +87,4 @@ main:hover .title {
     padding: 1vw 2vw;
   }
 }
+

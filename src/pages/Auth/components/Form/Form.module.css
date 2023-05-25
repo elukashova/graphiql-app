@@ -1,10 +1,12 @@
 .form,
 .wrapper {
   width: 65%;
+  height: 10rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .input-wrapper {
@@ -15,24 +17,28 @@
   gap: 0.5rem;
 }
 
+.label {
+  font-size: calc(0.6rem + 0.5vw);
+}
+
 .input {
   width: 70%;
   padding: 0.3rem 0.5rem;
   background: var(--white);
-  border: none;
+  border: 1px solid var(--purple-light);
   outline: none;
   font-size: calc(0.6rem + 0.5vw);
   color: var(--background-dark);
 }
 
 .submit {
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   width: 65%;
   height: calc(1rem + 1.4vw);
   border: none;
   outline: none;
   padding: 0.3rem 0.5rem;
-  font-size: calc(0.5rem + 0.4vw);
+  font-size: calc(0.5rem + 0.5vw);
   text-transform: uppercase;
   cursor: pointer;
   background-color: var(--background-dark);
@@ -45,9 +51,39 @@
   background-color: var(--purple-dark);
 }
 
+.errors {
+  height: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .2rem;
+}
+
 @media (max-width: 760px) {
   .form,
   .wrapper {
     gap: 0.7rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .form,
+  .wrapper {
+    width: 70%;
+    gap: 0.7rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .form,
+  .wrapper {
+    width: 80%;
+  }
+}
+
+@media (max-width: 450px) {
+  .wrapper {
+    width: 100%;
   }
 }
