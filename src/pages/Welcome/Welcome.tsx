@@ -14,7 +14,7 @@ const WelcomePage = (): JSX.Element => {
       <div className={styles.wrapper}>
         <div className={styles.top}>
           <h2 className={styles.title}>{t('home.welcome')}</h2>
-          <h2 className={styles.name}>GraphiQL</h2>
+          <h2 className={styles.name}>GraphiQLike</h2>
         </div>
         <div className={styles.bottom}>
           <InfoCard title={`${t('home.what')}?`} text={t('home.what_text')} />

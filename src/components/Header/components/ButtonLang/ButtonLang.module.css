@@ -73,3 +73,21 @@
 .checkbox-wrapper .slider.round:before {
   border-radius: 50%;
 }
+
+@media (max-width: 640px) {
+  .checkbox-wrapper .switch {
+    height: 20px;
+    width: 40px;
+  }  
+
+  .checkbox-wrapper .slider:before {
+    background-image: url(./en.png);
+    top: -2px;
+    left: 0px;
+  }
+
+  .checkbox-wrapper input:checked + .slider:before {
+    transform: translateX(14px);
+    left: 2px;
+  }
+}

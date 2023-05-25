@@ -55,6 +55,7 @@ i18n
             password_letters: 'The password must contain at least 1 letter',
             password_digit: 'The password must contain at least 1 digit',
             password_special_char: 'The password must contain at least 1 special character',
+            empty_email: 'Please, provide a valid email',
             empty_password: 'Please, provide a valid password',
           },
           editor: {
@@ -84,7 +85,7 @@ i18n
             welcome: 'Добро пожаловать в',
             what: 'Что',
             what_text:
-              'GraphiQL - это инструмент, разработанный для разработчиков для тестирования и исследования GraphQL API. Он предоставляет интерактивную платформу, позволяющую выполнять и составлять запросы GraphQL, осуществлять проверку данных ответа и навигацию по документации API.',
+              'GraphiQL - это инструмен для тестирования и исследования GraphQL API. Он предоставляет интерактивную платформу, позволяющую выполнять и составлять запросы GraphQL, осуществлять проверку данных ответа и навигацию по документации API.',
             who: 'Кто',
             who_nastya: 'Анастасия Климова',
             who_lena: 'Елена Лукашева',
