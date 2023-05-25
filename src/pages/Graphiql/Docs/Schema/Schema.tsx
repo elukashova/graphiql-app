@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './ComponentsSchema.module.css';
 import {
   GraphQLField,
@@ -53,7 +53,11 @@ const Schema: React.FC<SchemaProps> = ({ schema }) => {
       setShowName(true);
       setShowType(false);
       setNameData(data);
-    } else if (!prevNameData || JSON.stringify(data) !== JSON.stringify(prevNameData)) {
+    } else if (
+      !prevNameData ||
+      JSON.stringify(data) !== JSON.stringify(prevNameData) ||
+      !nameData
+    ) {
       setShowName(true);
       setShowType(false);
       setNameData(data);
@@ -69,7 +73,11 @@ const Schema: React.FC<SchemaProps> = ({ schema }) => {
       setShowType(true);
       setShowName(false);
       setTypeData(type);
-    } else if (!prevTypeData || type !== prevTypeData) {
+    } else if (
+      !prevTypeData ||
+      JSON.stringify(type) !== JSON.stringify(prevTypeData) ||
+      !typeData
+    ) {
       setShowType(true);
       setShowName(false);
       setTypeData(type);
@@ -193,8 +201,6 @@ const Schema: React.FC<SchemaProps> = ({ schema }) => {
           <div>
             <h4>{primitiveType.toString()}</h4>
             <>
-              {console.log(primitiveType)}
-
               {primitiveType instanceof GraphQLScalarType && (
                 <>{primitiveType && <span>{primitiveType.description ?? ''}</span>}</>
               )}
