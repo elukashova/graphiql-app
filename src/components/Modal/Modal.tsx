@@ -2,11 +2,12 @@ import React from 'react';
 import styles from './Modal.module.css';
 
 interface Props {
+  type: 'info' | 'success' | 'warning' | 'error';
   message: string;
   onClose: () => void;
 }
 
-const Modal: React.FC<Props> = ({ message, onClose }) => {
+const Modal: React.FC<Props> = ({ type, message, onClose }): JSX.Element => {
   return (
     <div className={styles.modal}>
       <div className={styles.content}>

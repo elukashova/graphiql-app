@@ -19,6 +19,7 @@ const Editor: React.FC = (): JSX.Element => {
 
   const formResponse = useSelector((state: RootState) => state.editor.formResponse);
   const formError = useSelector((state: RootState) => state.editor.error);
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {

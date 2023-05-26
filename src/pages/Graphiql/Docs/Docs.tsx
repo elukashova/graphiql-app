@@ -8,6 +8,7 @@ import { useAppSelector } from '../../../store/hooks';
 import { selectDocs } from '../../../store/slices/docs';
 import Loading from '../../../components/Loading/Loading';
 import { GraphQLSchema } from 'graphql';
+import Modal from '../../../components/Modal/Modal';
 
 type Error = string | null;
 
@@ -17,6 +18,7 @@ const Docs: React.FC = (): JSX.Element => {
   const apiUrl = 'https://data-api.oxilor.com/graphql';
   const [schema, setSchema] = useState<GraphQLSchema | null>(null);
   const [error, setError] = useState<Error>(null);
+  const [formErrorShow, setFormErrorShow] = useState<boolean>(!!error);
   const [isLoading, setIsLoading] = useState(false);
   const { isDocs } = useAppSelector(selectDocs);
   const { toggleDocs } = useDocs();
@@ -64,13 +66,17 @@ const Docs: React.FC = (): JSX.Element => {
     toggleDocs();
   };
 
+  const onClose = () => {
+    setFormErrorShow(!formErrorShow);
+  };
+
   return (
     <>
       <div className={styles['docs-container']}>
         <button className={`${styles.docs}`} type="button" onClick={handleClick}>
           <img className={styles.book} src={book} alt="Documents" title="Docs" />
         </button>
-        {error && <div>{error}</div>}
+        {error && <Modal type="error" message={error} onClose={onClose} />}
       </div>
       {isLoading ? (
         <Loading />
