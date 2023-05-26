@@ -20,8 +20,16 @@ const Editor: React.FC = (): JSX.Element => {
 
   const formResponse = useSelector((state: RootState) => state.editor.formResponse);
   const formError = useSelector((state: RootState) => state.editor.error);
-  const [formErrorShow, setFormErrorShow] = useState<boolean>(false);
+  const [formErrorShow, setFormErrorShow] = useState<boolean>(!!formError?.length);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    setFormErrorShow(!!formError?.length);
+  }, [formError]);
+
+  useEffect(() => {
+    setFormErrorShow(!formResponse.length);
+  }, [formResponse]);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,11 +44,7 @@ const Editor: React.FC = (): JSX.Element => {
     setIsLoading(true);
     dispatch(
       fetchFormResponse({ query: formValue, variables: variablesObj, headers: headersObj })
-    ).then(() => {
-      setIsLoading(false);
-    });
-    setFormErrorShow(!!formError?.length);
-    console.log(`formResponse: ${formResponse}`, `formError: ${formError}`);
+    ).then(() => setIsLoading(false));
   };
 
   const handleFormValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -66,35 +70,33 @@ const Editor: React.FC = (): JSX.Element => {
 
   return (
     <section className={`${styles['editor-block']}`}>
-      <>
-        {formErrorShow && formError && (
-          <Modal type="error" message={getErrorMessage(formError)} onClose={onClose} />
-        )}
-        <section className={`${styles['editor-wrapper']}`}>
-          {isLoading && <Loading />}
-          <form className={`${styles['editor-section']}`} onSubmit={handleSubmit}>
-            <textarea
-              name="query"
-              defaultValue={formValue}
-              onChange={handleFormValue}
-              onCut={() => handleCut()}
-              className={`${styles.textarea}`}
-            ></textarea>
-            <section className={`${styles.response}`}>
-              <textarea className={`${styles.textarea}`} disabled value={formResponse}></textarea>
-            </section>
-            <ErrorBoundary fallback={`Error: ${formError}`}>
-              <button className={styles['button-submit']} type="submit">
-                <img className={styles.submit} src={submit} alt="submit" title="Submit" />
-              </button>
-            </ErrorBoundary>
-          </form>
-        </section>
-        <aside className={`${styles['aside-section']}`}>
-          <Variables />
-          <Headers />
-        </aside>
-      </>
+      {formErrorShow && formError && (
+        <Modal type="error" message={getErrorMessage(formError)} onClose={onClose} />
+      )}
+      <section className={`${styles['editor-wrapper']}`}>
+        {isLoading && <Loading />}
+        <form className={`${styles['editor-section']}`} onSubmit={handleSubmit}>
+          <textarea
+            name="query"
+            defaultValue={formValue}
+            onChange={handleFormValue}
+            onCut={() => handleCut()}
+            className={`${styles.textarea}`}
+          ></textarea>
+          <section className={`${styles.response}`}>
+            <textarea className={`${styles.textarea}`} disabled value={formResponse}></textarea>
+          </section>
+          <ErrorBoundary fallback={`Error: ${formError}`}>
+            <button className={styles['button-submit']} type="submit">
+              <img className={styles.submit} src={submit} alt="submit" title="Submit" />
+            </button>
+          </ErrorBoundary>
+        </form>
+      </section>
+      <aside className={`${styles['aside-section']}`}>
+        <Variables />
+        <Headers />
+      </aside>
     </section>
   );
 };
