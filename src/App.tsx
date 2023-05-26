@@ -11,7 +11,7 @@ import { selectAuth } from './store/slices/auth';
 
 const App = (): JSX.Element => {
   const { isAuth } = useAppSelector(selectAuth);
-
+  // throw new Error('Error for checking ErrorBoundary');
   return (
     <BrowserRouter>
       <Routes>
