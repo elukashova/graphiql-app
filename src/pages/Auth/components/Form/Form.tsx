@@ -24,7 +24,7 @@ const AuthForm = (): JSX.Element => {
     register,
     unregister,
     trigger,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<UserData>({
     criteriaMode: 'all',
     mode: 'onSubmit',
