@@ -1,10 +1,9 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFormResponse, REQUEST } from '../../../store/slices/editorSlice';
 import styles from './Editor.module.css';
 import { AppDispatch, RootState } from '../../../store/store';
 import submit from '../../../assets/submit.svg';
-import ErrorBoundary from '../../../components/ErrorBoundary/ErrorBoundary';
 import Loading from '../../../components/Loading/Loading';
 import Variables from '../Variables/Variables';
 import Headers from '../Headers/Headers';
@@ -23,14 +22,6 @@ const Editor: React.FC = (): JSX.Element => {
   const [formErrorShow, setFormErrorShow] = useState<boolean>(!!formError?.length);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  useEffect(() => {
-    setFormErrorShow(!!formError?.length);
-  }, [formError]);
-
-  useEffect(() => {
-    setFormErrorShow(!formResponse.length);
-  }, [formResponse]);
-
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const variables = localStorage.getItem('variablesValueLS')?.trim() || '';
@@ -44,7 +35,12 @@ const Editor: React.FC = (): JSX.Element => {
     setIsLoading(true);
     dispatch(
       fetchFormResponse({ query: formValue, variables: variablesObj, headers: headersObj })
-    ).then(() => setIsLoading(false));
+    ).then(() => {
+      setIsLoading(false);
+      if (formError !== null) {
+        setFormErrorShow(true);
+      }
+    });
   };
 
   const handleFormValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -70,6 +66,7 @@ const Editor: React.FC = (): JSX.Element => {
 
   return (
     <section className={`${styles['editor-block']}`}>
+      <>{console.log(formResponse, formError)}</>
       {formErrorShow && formError && (
         <Modal type="error" message={getErrorMessage(formError)} onClose={onClose} />
       )}
@@ -86,11 +83,9 @@ const Editor: React.FC = (): JSX.Element => {
           <section className={`${styles.response}`}>
             <textarea className={`${styles.textarea}`} disabled value={formResponse}></textarea>
           </section>
-          <ErrorBoundary fallback={`Error: ${formError}`}>
-            <button className={styles['button-submit']} type="submit">
-              <img className={styles.submit} src={submit} alt="submit" title="Submit" />
-            </button>
-          </ErrorBoundary>
+          <button className={styles['button-submit']} type="submit">
+            <img className={styles.submit} src={submit} alt="submit" title="Submit" />
+          </button>
         </form>
       </section>
       <aside className={`${styles['aside-section']}`}>
