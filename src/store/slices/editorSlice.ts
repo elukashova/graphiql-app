@@ -45,14 +45,7 @@ const initialState: EditorState = {
 
 export const fetchFormResponse = createAsyncThunk<FetchFormResponseResult, FetchFormResponseArgs>(
   'editor/fetchFormResponse',
-  async ({
-    query,
-    url = URL,
-    variables,
-    headers,
-  }): Promise<{
-    formResponse: string;
-  }> => {
+  async ({ query, url = URL, variables, headers }): Promise<FetchFormResponseResult> => {
     const body: string = variables
       ? JSON.stringify({ query, variables })
       : JSON.stringify({ query });
@@ -65,8 +58,15 @@ export const fetchFormResponse = createAsyncThunk<FetchFormResponseResult, Fetch
       },
       body,
     });
-    const result = await res.json();
-    return { formResponse: JSON.stringify(result) };
+    if (!res.ok) {
+      const errorResponse = await res.json();
+      console.log('errorResponse', errorResponse);
+      throw new Error(JSON.stringify(errorResponse));
+    } else {
+      const result = await res.json();
+      console.log('result', result);
+      return { formResponse: JSON.stringify(result) };
+    }
   }
 );
 
@@ -82,13 +82,16 @@ export const editorSlice = createSlice({
     builder
       .addCase(fetchFormResponse.pending, (state) => {
         state.status = 'loading';
+        console.log('editorSlice loading');
       })
       .addCase(fetchFormResponse.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        console.log('editorSlice succeeded', action.payload.formResponse);
         state.formResponse = action.payload.formResponse;
       })
       .addCase(fetchFormResponse.rejected, (state, action) => {
         state.status = 'failed';
+        console.log('editorSlice failed', action.error, action.error.message);
         state.error = action.error.message ?? null;
       });
   },

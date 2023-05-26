@@ -1,6 +1,6 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchFormResponse, REQUEST } from '../../../store/slices/editor';
+import { fetchFormResponse, REQUEST } from '../../../store/slices/editorSlice';
 import styles from './Editor.module.css';
 import { AppDispatch, RootState } from '../../../store/store';
 import submit from '../../../assets/submit.svg';
@@ -8,6 +8,7 @@ import ErrorBoundary from '../../../components/ErrorBoundary/ErrorBoundary';
 import Loading from '../../../components/Loading/Loading';
 import Variables from '../Variables/Variables';
 import Headers from '../Headers/Headers';
+import Modal from '../../../components/Modal/Modal';
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 
@@ -19,6 +20,7 @@ const Editor: React.FC = (): JSX.Element => {
 
   const formResponse = useSelector((state: RootState) => state.editor.formResponse);
   const formError = useSelector((state: RootState) => state.editor.error);
+  const [formErrorShow, setFormErrorShow] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -34,7 +36,11 @@ const Editor: React.FC = (): JSX.Element => {
     setIsLoading(true);
     dispatch(
       fetchFormResponse({ query: formValue, variables: variablesObj, headers: headersObj })
-    ).then(() => setIsLoading(false));
+    ).then(() => {
+      setIsLoading(false);
+    });
+    setFormErrorShow(!!formError?.length);
+    console.log(`formResponse: ${formResponse}`, `formError: ${formError}`);
   };
 
   const handleFormValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -48,32 +54,47 @@ const Editor: React.FC = (): JSX.Element => {
     setFormValue('');
   };
 
+  const getErrorMessage = (responseString: string) => {
+    const responseObject = JSON.parse(responseString);
+    const errorMessage = responseObject.errors[0].message;
+    return errorMessage;
+  };
+
+  const onClose = () => {
+    setFormErrorShow(false);
+  };
+
   return (
     <section className={`${styles['editor-block']}`}>
-      <section className={`${styles['editor-wrapper']}`}>
-        {isLoading && <Loading />}
-        <form className={`${styles['editor-section']}`} onSubmit={handleSubmit}>
-          <textarea
-            name="query"
-            defaultValue={formValue}
-            onChange={handleFormValue}
-            onCut={() => handleCut()}
-            className={`${styles.textarea}`}
-          ></textarea>
-          <section className={`${styles.response}`}>
-            <textarea className={`${styles.textarea}`} disabled value={formResponse}></textarea>
-          </section>
-          <ErrorBoundary fallback={`Error: ${formError}`}>
-            <button className={styles['button-submit']} type="submit">
-              <img className={styles.submit} src={submit} alt="submit" title="Submit" />
-            </button>
-          </ErrorBoundary>
-        </form>
-      </section>
-      <aside className={`${styles['aside-section']}`}>
-        <Variables />
-        <Headers />
-      </aside>
+      <>
+        {formErrorShow && formError && (
+          <Modal type="error" message={getErrorMessage(formError)} onClose={onClose} />
+        )}
+        <section className={`${styles['editor-wrapper']}`}>
+          {isLoading && <Loading />}
+          <form className={`${styles['editor-section']}`} onSubmit={handleSubmit}>
+            <textarea
+              name="query"
+              defaultValue={formValue}
+              onChange={handleFormValue}
+              onCut={() => handleCut()}
+              className={`${styles.textarea}`}
+            ></textarea>
+            <section className={`${styles.response}`}>
+              <textarea className={`${styles.textarea}`} disabled value={formResponse}></textarea>
+            </section>
+            <ErrorBoundary fallback={`Error: ${formError}`}>
+              <button className={styles['button-submit']} type="submit">
+                <img className={styles.submit} src={submit} alt="submit" title="Submit" />
+              </button>
+            </ErrorBoundary>
+          </form>
+        </section>
+        <aside className={`${styles['aside-section']}`}>
+          <Variables />
+          <Headers />
+        </aside>
+      </>
     </section>
   );
 };
