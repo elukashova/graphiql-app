@@ -37,8 +37,15 @@ const AuthForm = (): JSX.Element => {
   const { defineErrorMessage } = useErrorMessage();
 
   i18n.on('languageChanged', () => {
-    triggerRegister('email');
-    triggerRegister('password');
+    if (!errors.email?.message && !errors.password?.message) {
+      return;
+    }
+    if (errors.email?.message) {
+      triggerRegister('email');
+    }
+    if (errors.password?.message) {
+      triggerRegister('password');
+    }
   });
 
   const triggerRegister = (name: 'email' | 'password'): void => {
@@ -105,10 +112,11 @@ const AuthForm = (): JSX.Element => {
       </div>
 
       <input className={styles.submit} type="submit" value={`${t('auth.submit')}`} />
-
-      {errors.email?.types && <ErrorMessage message={errors.email.message} />}
-      {errors.password?.types && <ErrorMessage message={errors.password.message} />}
-      {error && <ErrorMessage message={error} />}
+      <div className={styles.errors}>
+        {errors.email?.types && <ErrorMessage message={errors.email.message} />}
+        {errors.password?.types && <ErrorMessage message={errors.password.message} />}
+        {error && <ErrorMessage message={error} />}
+      </div>
     </form>
   );
 };
