@@ -1,5 +1,6 @@
 .docs-container {
   width: auto;
+  position: relative;
 }
 
 .docs {
@@ -9,6 +10,8 @@
   margin: 0 auto;
   text-align: center;
   height: 2rem;
+  position: relative;
+  z-index: 9999;
 }
 
 .docs:hover .book {
@@ -39,4 +42,10 @@
 .docs:active,
 .docs:focus {
   outline: none;
+}
+
+@media (max-width: 680px) {
+  .docs-active {
+    overflow: hidden;
+  }
 }

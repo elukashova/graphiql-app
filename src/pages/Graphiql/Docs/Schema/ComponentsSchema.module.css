@@ -1,0 +1,144 @@
+body {
+  position: relative;
+}
+
+.schema-block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 1rem 3rem;
+  text-align: left;
+  background-color: white;
+  z-index: 9998;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.schema {
+  display: grid;
+  grid-template-columns: 16vw 16vw 16vw 16vw;
+  gap: 4rem;
+  margin-top: 1rem;
+}
+
+.query {
+  color: rgb(16, 182, 211);
+  font-weight: 600;
+}
+
+.title {
+  color: rgb(16, 100, 211);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+h4,
+h5,
+p {
+  margin: 0;
+}
+
+.name {
+  color: rgb(16, 182, 211);
+}
+
+.arg {
+  color: rgb(223, 9, 205);
+  font-weight: 600;
+}
+
+.type {
+  color: var(--purple-dark);
+  font-weight: 600;
+}
+
+.description {
+  color: rgb(61, 61, 61);
+}
+
+.directive-name {
+  color: rgb(5, 201, 158);
+  font-weight: 600;
+}
+
+.type-description-primitive {
+  cursor: pointer;
+}
+
+.list-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.return-value {
+  margin: 0;
+  padding: 0;
+}
+
+.methods-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.arg-list {
+  width: 100%;
+}
+
+.directive-name {
+  margin: 0;
+}
+
+.directives-list,
+.arguments {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.root-and-directives {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.type-description {
+  background-color: var(--yellow);
+  padding: 5px;
+  height: max-content;
+}
+
+@media (max-width: 1090px) {
+  .schema-block {
+    padding: 1rem 2rem 1rem 4.5rem;
+    max-width: 100%;
+    width: 100vw;
+  }
+
+  .schema {
+    width: 60%;
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto auto auto;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .schema-block {
+    padding: 1rem 2rem 1rem 22%;
+    max-width: 100%;
+    width: 100vw;
+    top: 0;
+    bottom: 60px;
+  }
+
+  .schema {
+    width: 100%;
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto auto auto;
+    gap: 3rem;
+  }
+}
