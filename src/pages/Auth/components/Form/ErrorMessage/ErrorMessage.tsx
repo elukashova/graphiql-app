@@ -8,9 +8,7 @@ type Props = {
 const ErrorMessage = ({ message }: Props): JSX.Element => {
   return (
     <>
-      <div data-testid="error" className={styles['error-wrapper']}>
-        <p className={styles.error}>{message}</p>
-      </div>
+      <div className={styles.error}>{message}</div>
     </>
   );
 };

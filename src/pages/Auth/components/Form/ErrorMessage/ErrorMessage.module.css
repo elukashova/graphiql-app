@@ -1,18 +1,7 @@
-.error-wrapper {
-  display: flex;
-  gap: 0.3em;
-  align-items: center;
-}
-
-.error,
-.exclamation {
-  margin-top: 0.3em;
+.error {
+  padding: 0.3rem 0.7rem;
   text-transform: uppercase;
   font-weight: 600;
   font-size: calc(0.4em + 0.3vw);
-}
-
-.error {
   background-color: var(--yellow);
-  padding: 0.3rem 0.7rem;
 }

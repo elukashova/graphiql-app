@@ -31,23 +31,21 @@ const AuthPage = (): JSX.Element => {
         <h2 className={styles.title}>{isSignUp ? t('auth.up') : t('auth.in')}</h2>
       </div>
       <AuthForm />
-      <div>
-        {isSignUp && (
-          <AuthLink
-            text={`${t('auth.have_account')}?`}
-            label={t('sign_in')}
-            clickCallback={handleClick}
-          />
-        )}
-        {isSignIn && (
-          <AuthLink
-            text={`${t('auth.no_account')}?`}
-            label={t('sign_up')}
-            clickCallback={handleClick}
-          />
-        )}
-        {isLoading && <Loader />}
-      </div>
+      {isSignUp && (
+        <AuthLink
+          text={`${t('auth.have_account')}?`}
+          label={t('sign_in')}
+          clickCallback={handleClick}
+        />
+      )}
+      {isSignIn && (
+        <AuthLink
+          text={`${t('auth.no_account')}?`}
+          label={t('sign_up')}
+          clickCallback={handleClick}
+        />
+      )}
+      {isLoading && <Loader />}
     </section>
   );
 };

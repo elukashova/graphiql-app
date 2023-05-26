@@ -71,6 +71,11 @@ i18n
             headers_fallback: "Can't get data from API with these headers",
             variables_fallback: "Can't get data from API with these variables",
           },
+          notFound: {
+            not_found: 'Page not found',
+            go: 'Go to',
+            editor: 'editor',
+          },
         },
       },
       ru: {
@@ -132,6 +137,11 @@ i18n
           errorBoundary: {
             headers_fallback: 'Не удается получить данные с API с этими заголовками',
             variables_fallback: 'Не удается получить данные с API с этими переменными',
+          },
+          notFound: {
+            not_found: 'Страница не найдена',
+            go: 'Перейти к',
+            editor: 'редактору',
           },
         },
       },
