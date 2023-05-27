@@ -9,19 +9,21 @@ interface Props {
 
 interface State {
   hasError: boolean;
+  message: string;
 }
 
 class ErrorBoundary extends Component<Props, State> {
   public state: State = {
     hasError: false,
+    message: '',
   };
 
-  public static getDerivedStateFromError(_: Error): State {
-    return { hasError: true };
+  public static getDerivedStateFromError(error: Error): State {
+    return { hasError: true, message: error.message };
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Uncaught error:', error, errorInfo);
+    this.setState({ hasError: true, message: error.message });
   }
 
   public render() {
@@ -30,7 +32,11 @@ class ErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       return (
         <div className={styles['error-boundary']}>
-          <p className={styles.text}> {fallback}</p>
+          <p className={styles.text}>
+            {fallback} <br />
+            <br />
+            <span className={styles.error}>Error information: {this.state.message}</span>
+          </p>
         </div>
       );
     }
