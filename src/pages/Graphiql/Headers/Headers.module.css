@@ -4,12 +4,12 @@
 
 .title {
   min-width: max-content;
-  width: calc(5rem + 5vw);
+  width: calc(7rem + 8vw);
   margin-top: 0.5rem;
   height: calc(1rem + 1.4vw);
   border: none;
   outline: none;
-  padding: 0.3rem 0.5rem;
+  padding: calc(0.3rem + 0.5vw);
   font-size: calc(0.5rem + 0.4vw);
   text-transform: uppercase;
   cursor: pointer;

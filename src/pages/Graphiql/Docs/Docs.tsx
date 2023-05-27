@@ -88,7 +88,7 @@ const Docs: React.FC = (): JSX.Element => {
     <>
       <div className={styles['docs-container']}>
         <button
-          className={`${styles.docs} ${schema !== null ? styles.active : ''}`}
+          className={`${styles.docs} ${isDocs ? styles.active : ''}`}
           type="button"
           onClick={handleClick}
         >

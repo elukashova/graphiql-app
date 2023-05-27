@@ -11,7 +11,7 @@
   text-align: center;
   height: 2rem;
   position: relative;
-  z-index: 9999;
+  z-index: 998;
 }
 
 .docs.active {
@@ -22,7 +22,7 @@
   text-align: center;
   height: 2rem;
   position: relative;
-  z-index: 998;
+  z-index: 9999;
 }
 
 .docs:hover .book {

@@ -24,4 +24,8 @@
     gap: 3vw;
     padding: calc(1rem + 1vw) calc(0.5rem);
   }
+
+  .container {
+    width: 90%;
+  }
 }
