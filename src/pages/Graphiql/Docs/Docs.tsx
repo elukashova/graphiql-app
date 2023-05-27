@@ -7,7 +7,7 @@ import useDocs from '../../../hooks/docsHook';
 import { useAppSelector } from '../../../store/hooks';
 import { selectDocs } from '../../../store/slices/docs';
 import { URL } from '../../../store/slices/editorSlice';
-import Loading from '../../../components/Loading/Loading';
+import Loader from '../../../components/Loader/Loader';
 import { GraphQLSchema } from 'graphql';
 import Modal from '../../../components/Modal/Modal';
 import { useTranslation } from 'react-i18next';
@@ -100,11 +100,11 @@ const Docs: React.FC = (): JSX.Element => {
         {formErrorShow && error && <Modal type="error" message={error} onClose={onClose} />}
       </div>
       {isLoading ? (
-        <Loading />
+        <Loader />
       ) : (
         isDocs &&
         schema && (
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<Loader />}>
             <Schema schema={schema} />
           </Suspense>
         )

@@ -4,7 +4,7 @@ import { fetchFormResponse, REQUEST } from '../../../store/slices/editorSlice';
 import styles from './Editor.module.css';
 import { AppDispatch, RootState } from '../../../store/store';
 import submit from '../../../assets/submit.svg';
-import Loading from '../../../components/Loading/Loading';
+import Loader from '../../../components/Loader/Loader';
 import Variables from '../Variables/Variables';
 import Headers from '../Headers/Headers';
 import Modal from '../../../components/Modal/Modal';
@@ -72,7 +72,7 @@ const Editor: React.FC = (): JSX.Element => {
         <Modal type="error" message={getErrorMessage(formError)} onClose={onClose} />
       )}
       <section className={`${styles['editor-wrapper']}`}>
-        {isLoading && <Loading />}
+        {isLoading && <Loader />}
         <form className={`${styles['editor-section']}`} onSubmit={handleSubmit}>
           <textarea
             name="query"

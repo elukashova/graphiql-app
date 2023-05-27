@@ -1,13 +1,11 @@
 import React from 'react';
 import styles from './Loader.module.css';
+import loadingGif from '../../assets/loading.gif';
 
-const Loader = (): JSX.Element => {
+const Loader: React.FC = () => {
   return (
-    <div className={styles.loader}>
-      <span className={styles.ball} />
-      <span className={styles.ball} />
-      <span className={styles.ball} />
-      <span className={styles.ball} />
+    <div className={styles.loading}>
+      <img src={loadingGif} alt="loading" />
     </div>
   );
 };
