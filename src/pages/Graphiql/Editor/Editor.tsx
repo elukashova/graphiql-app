@@ -8,10 +8,12 @@ import ErrorBoundary from '../../../components/ErrorBoundary/ErrorBoundary';
 import Loading from '../../../components/Loading/Loading';
 import Variables from '../Variables/Variables';
 import Headers from '../Headers/Headers';
+import { useTranslation } from 'react-i18next';
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 
 const Editor: React.FC = (): JSX.Element => {
+  const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
   const [formValue, setFormValue] = useState<string>(
     localStorage.getItem('requestValueLS')?.trim() || REQUEST
@@ -65,7 +67,12 @@ const Editor: React.FC = (): JSX.Element => {
           </section>
           <ErrorBoundary fallback={`Error: ${formError}`}>
             <button className={styles['button-submit']} type="submit">
-              <img className={styles.submit} src={submit} alt="submit" title="Submit" />
+              <img
+                className={styles.submit}
+                src={submit}
+                alt="submit"
+                title={`${t('editor.submit')}`}
+              />
             </button>
           </ErrorBoundary>
         </form>

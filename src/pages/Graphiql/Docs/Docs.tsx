@@ -8,12 +8,14 @@ import { useAppSelector } from '../../../store/hooks';
 import { selectDocs } from '../../../store/slices/docs';
 import Loading from '../../../components/Loading/Loading';
 import { GraphQLSchema } from 'graphql';
+import { useTranslation } from 'react-i18next';
 
 type Error = string | null;
 
 const Schema = lazy(() => import('./Schema/Schema'));
 
 const Docs: React.FC = (): JSX.Element => {
+  const { t } = useTranslation();
   const apiUrl = 'https://data-api.oxilor.com/graphql';
   const [schema, setSchema] = useState<GraphQLSchema | null>(null);
   const [error, setError] = useState<Error>(null);
@@ -68,7 +70,7 @@ const Docs: React.FC = (): JSX.Element => {
     <>
       <div className={styles['docs-container']}>
         <button className={`${styles.docs}`} type="button" onClick={handleClick}>
-          <img className={styles.book} src={book} alt="Documents" title="Docs" />
+          <img className={styles.book} src={book} alt="Documents" title={`${t('editor.docs')}`} />
         </button>
         {error && <div>{error}</div>}
       </div>
