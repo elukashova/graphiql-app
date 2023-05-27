@@ -2,7 +2,7 @@ import { buildClientSchema, getIntrospectionQuery } from 'graphql/utilities';
 import React, { lazy, useState, Suspense, useEffect } from 'react';
 import styles from './Docs.module.css';
 import book from '../../../assets/book.svg';
-
+import ok from '../../../assets/ok.svg';
 import useDocs from '../../../hooks/docsHook';
 import { useAppSelector } from '../../../store/hooks';
 import { selectDocs } from '../../../store/slices/docs';
@@ -26,6 +26,7 @@ const Docs: React.FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
   const { isDocs } = useAppSelector(selectDocs);
   const { toggleDocs } = useDocs();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const fetchSchema = async (): Promise<void> => {
     setSchema(null);
@@ -79,6 +80,7 @@ const Docs: React.FC = (): JSX.Element => {
     if (!isDocs) {
       await fetchSchema();
     }
+    setIsOpen(!isOpen);
     toggleDocs();
   };
 
@@ -95,7 +97,12 @@ const Docs: React.FC = (): JSX.Element => {
           type="button"
           onClick={handleClick}
         >
-          <img className={styles.book} src={book} alt="Documents" title={`${t('editor.docs')}`} />
+          <img
+            className={styles.book}
+            src={isOpen ? ok : book}
+            alt="Documents"
+            title={`${t('editor.docs')}`}
+          />
         </button>
         {formErrorShow && error && <Modal type="error" message={error} onClose={onClose} />}
       </div>
