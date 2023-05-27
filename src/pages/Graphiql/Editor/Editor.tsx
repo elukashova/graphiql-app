@@ -66,7 +66,6 @@ const Editor: React.FC = (): JSX.Element => {
 
   return (
     <section className={`${styles['editor-block']}`}>
-      <>{console.log(formResponse, formError)}</>
       {formErrorShow && formError && (
         <Modal type="error" message={getErrorMessage(formError)} onClose={onClose} />
       )}

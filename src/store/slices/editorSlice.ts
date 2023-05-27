@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const URL = 'https://data-api.oxilor.com/graphql';
+export const URL = 'https://data-api.oxilor.com/graphql';
 export const REQUEST = `query {
   searchRegions(searchTerm: "Madeira") {
     id
