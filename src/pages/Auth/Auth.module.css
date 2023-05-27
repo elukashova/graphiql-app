@@ -72,10 +72,11 @@ main:hover .title {
   .sign,
   .title {
     font-size: calc(1rem + 1vw);
+    white-space: nowrap;
   }
 
   .sign {
-    margin-top: .5rem;
+    margin-top: 0.5rem;
   }
 
   .title {
@@ -87,4 +88,3 @@ main:hover .title {
     padding: 1vw 2vw;
   }
 }
-

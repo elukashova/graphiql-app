@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const URL = 'https://data-api.oxilor.com/graphql';
+export const URL = 'https://data-api.oxilor.com/graphql';
 export const REQUEST = `query {
   searchRegions(searchTerm: "Madeira") {
     id
@@ -65,8 +65,13 @@ export const fetchFormResponse = createAsyncThunk<FetchFormResponseResult, Fetch
       },
       body,
     });
-    const result = await res.json();
-    return { formResponse: JSON.stringify(result) };
+    if (!res.ok) {
+      const errorResponse = await res.json();
+      throw new Error(JSON.stringify(errorResponse));
+    } else {
+      const result = await res.json();
+      return { formResponse: JSON.stringify(result) };
+    }
   }
 );
 
@@ -86,10 +91,12 @@ export const editorSlice = createSlice({
       .addCase(fetchFormResponse.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.formResponse = action.payload.formResponse;
+        state.error = null;
       })
       .addCase(fetchFormResponse.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message ?? null;
+        state.formResponse = '';
       });
   },
 });

@@ -11,6 +11,17 @@
   text-align: center;
   height: 2rem;
   position: relative;
+  z-index: 998;
+}
+
+.docs.active {
+  height: fit-content;
+  background-color: transparent;
+  padding: 0;
+  margin: 0 auto;
+  text-align: center;
+  height: 2rem;
+  position: relative;
   z-index: 9999;
 }
 

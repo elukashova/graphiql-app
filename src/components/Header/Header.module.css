@@ -131,7 +131,7 @@
 }
 
 .link {
-  font-size: calc(0.6rem + 0.5vw);
+  font-size: calc(0.375vw + 12.80px);
   height: fit-content;
   font-weight: bold;
   color: var(--background-dark);

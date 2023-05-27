@@ -66,6 +66,8 @@ i18n
             headers_placeholder: 'Enter headers in JSON format',
             headers_invalid: 'Invalid variables format',
             cta: 'Please, submit for response',
+            submit: 'Submit',
+            docs: 'Docs',
           },
           errorBoundary: {
             headers_fallback: "Can't get data from API with these headers",
@@ -133,6 +135,8 @@ i18n
             headers_placeholder: 'Введите заголовки в формате JSON',
             headers_invalid: 'Неверный формат заголовков',
             cta: 'Пожалуйста, отправьте запрос для получения ответа',
+            submit: 'Отправить запрос',
+            docs: 'Документация',
           },
           errorBoundary: {
             headers_fallback: 'Не удается получить данные с API с этими заголовками',

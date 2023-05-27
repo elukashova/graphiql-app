@@ -4,13 +4,13 @@
 
 .title {
   min-width: max-content;
-  width: calc(5rem + 5vw);
+  width: calc(7rem + 8vw);
   margin-top: 0.5rem;
-  height: calc(1rem + 1.4vw);
+  height: calc(1.5rem + 1.4vw);
   border: none;
   outline: none;
   padding: 0.3rem 0.5rem;
-  font-size: calc(0.5rem + 0.4vw);
+  font-size: calc(0.125vw + 13.6px);
   text-transform: uppercase;
   cursor: pointer;
   background-color: var(--background-dark);
@@ -36,6 +36,7 @@
   cursor: text;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 400;
+  font-size: 14px;
   word-spacing: 2px;
   line-height: 160%;
   min-height: 15rem;

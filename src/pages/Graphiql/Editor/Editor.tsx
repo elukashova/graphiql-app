@@ -1,17 +1,19 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchFormResponse, REQUEST } from '../../../store/slices/editor';
+import { fetchFormResponse, REQUEST } from '../../../store/slices/editorSlice';
 import styles from './Editor.module.css';
 import { AppDispatch, RootState } from '../../../store/store';
 import submit from '../../../assets/submit.svg';
-import ErrorBoundary from '../../../components/ErrorBoundary/ErrorBoundary';
 import Loading from '../../../components/Loading/Loading';
 import Variables from '../Variables/Variables';
 import Headers from '../Headers/Headers';
+import Modal from '../../../components/Modal/Modal';
+import { useTranslation } from 'react-i18next';
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 
 const Editor: React.FC = (): JSX.Element => {
+  const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
   const [formValue, setFormValue] = useState<string>(
     localStorage.getItem('requestValueLS')?.trim() || REQUEST
@@ -19,6 +21,7 @@ const Editor: React.FC = (): JSX.Element => {
 
   const formResponse = useSelector((state: RootState) => state.editor.formResponse);
   const formError = useSelector((state: RootState) => state.editor.error);
+  const [formErrorShow, setFormErrorShow] = useState<boolean>(!!formError?.length);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -34,7 +37,12 @@ const Editor: React.FC = (): JSX.Element => {
     setIsLoading(true);
     dispatch(
       fetchFormResponse({ query: formValue, variables: variablesObj, headers: headersObj })
-    ).then(() => setIsLoading(false));
+    ).then(() => {
+      setIsLoading(false);
+      if (formError !== null) {
+        setFormErrorShow(true);
+      }
+    });
   };
 
   const handleFormValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -48,8 +56,21 @@ const Editor: React.FC = (): JSX.Element => {
     setFormValue('');
   };
 
+  const getErrorMessage = (responseString: string) => {
+    const responseObject = JSON.parse(responseString);
+    const errorMessage = responseObject.errors[0].message;
+    return errorMessage;
+  };
+
+  const onClose = () => {
+    setFormErrorShow(false);
+  };
+
   return (
     <section className={`${styles['editor-block']}`}>
+      {formErrorShow && formError && (
+        <Modal type="error" message={getErrorMessage(formError)} onClose={onClose} />
+      )}
       <section className={`${styles['editor-wrapper']}`}>
         {isLoading && <Loading />}
         <form className={`${styles['editor-section']}`} onSubmit={handleSubmit}>
@@ -63,11 +84,14 @@ const Editor: React.FC = (): JSX.Element => {
           <section className={`${styles.response}`}>
             <textarea className={`${styles.textarea}`} disabled value={formResponse}></textarea>
           </section>
-          <ErrorBoundary fallback={`Error: ${formError}`}>
-            <button className={styles['button-submit']} type="submit">
-              <img className={styles.submit} src={submit} alt="submit" title="Submit" />
-            </button>
-          </ErrorBoundary>
+          <button className={styles['button-submit']} type="submit">
+            <img
+              className={styles.submit}
+              src={submit}
+              alt="submit"
+              title={`${t('editor.submit')}`}
+            />
+          </button>
         </form>
       </section>
       <aside className={`${styles['aside-section']}`}>
