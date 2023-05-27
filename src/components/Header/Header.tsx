@@ -41,10 +41,10 @@ const Header = (): JSX.Element => {
         <nav className={styles.nav}>
           {!isAuth && (
             <>
-              <NavLink to="/auth" onClick={toggleSignUp} className={styles.link}>
+              <NavLink to="/signup" onClick={toggleSignUp} className={styles.link}>
                 {t('sign_up')}
               </NavLink>
-              <NavLink to="/auth" onClick={toggleSignIn} className={styles.link}>
+              <NavLink to="/signin" onClick={toggleSignIn} className={styles.link}>
                 {t('sign_in')}
               </NavLink>
             </>
