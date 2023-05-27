@@ -32,7 +32,7 @@ const Footer = (): JSX.Element => {
           </a>
         </div>
         <div className={styles.year}>&copy; 2023</div>
-        <a className={styles.rss} href="https://rs.school/js/" target="_blank" rel="noreferrer">
+        <a className={styles.rss} href="https://rs.school/react/" target="_blank" rel="noreferrer">
           rs school course js
         </a>
       </div>

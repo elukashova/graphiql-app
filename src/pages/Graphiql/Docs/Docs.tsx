@@ -10,6 +10,7 @@ import { URL } from '../../../store/slices/editorSlice';
 import Loading from '../../../components/Loading/Loading';
 import { GraphQLSchema } from 'graphql';
 import Modal from '../../../components/Modal/Modal';
+import { useTranslation } from 'react-i18next';
 
 type Error = string | null;
 
@@ -17,6 +18,8 @@ const Schema = lazy(() => import('./Schema/Schema'));
 
 const Docs: React.FC = (): JSX.Element => {
   const apiUrl = URL;
+  const { t } = useTranslation();
+
   const [schema, setSchema] = useState<GraphQLSchema | null>(null);
   const [error, setError] = useState<Error>(null);
   const [formErrorShow, setFormErrorShow] = useState<boolean>(!!error);
@@ -92,7 +95,7 @@ const Docs: React.FC = (): JSX.Element => {
           type="button"
           onClick={handleClick}
         >
-          <img className={styles.book} src={book} alt="Documents" title="Docs" />
+          <img className={styles.book} src={book} alt="Documents" title={`${t('editor.docs')}`} />
         </button>
         {formErrorShow && error && <Modal type="error" message={error} onClose={onClose} />}
       </div>
