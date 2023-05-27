@@ -13,8 +13,8 @@
   width: 90%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  padding: calc(-0.625vw + 12.00px) 0;
+  justify-content: space-between;
+  padding: 0 2rem;
 }
 
 .gitHub {
@@ -45,7 +45,7 @@
 }
 
 .year {
-  font-size: 20px;
+  font-size: 14px;
   user-select: none;
 }
 
