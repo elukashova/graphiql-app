@@ -14,6 +14,7 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 
 const Editor: React.FC = (): JSX.Element => {
   const { t } = useTranslation();
+  const responsePlaceholder = 'Please, submit for response.';
   const dispatch = useDispatch<AppDispatch>();
   const [formValue, setFormValue] = useState<string>(
     localStorage.getItem('requestValueLS')?.trim() || REQUEST
@@ -21,11 +22,12 @@ const Editor: React.FC = (): JSX.Element => {
 
   const formResponse = useSelector((state: RootState) => state.editor.formResponse);
   const formError = useSelector((state: RootState) => state.editor.error);
-  const [formErrorShow, setFormErrorShow] = useState<boolean>(!!formError?.length);
+  const [showModal, setShowModal] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     const variables = localStorage.getItem('variablesValueLS')?.trim() || '';
     const headers = localStorage.getItem('headersValueLS')?.trim() || '';
     const variablesObj: Record<string, string> | undefined = variables
@@ -34,14 +36,12 @@ const Editor: React.FC = (): JSX.Element => {
     const headersObj: Record<string, string> | undefined = headers
       ? JSON.parse(headers)
       : undefined;
-    setIsLoading(true);
+    setShowModal(true);
+
     dispatch(
       fetchFormResponse({ query: formValue, variables: variablesObj, headers: headersObj })
     ).then(() => {
       setIsLoading(false);
-      if (formError !== null) {
-        setFormErrorShow(true);
-      }
     });
   };
 
@@ -63,41 +63,53 @@ const Editor: React.FC = (): JSX.Element => {
   };
 
   const onClose = () => {
-    setFormErrorShow(false);
+    setShowModal(false);
   };
 
   return (
     <section className={`${styles['editor-block']}`}>
-      {formErrorShow && formError && (
-        <Modal type="error" message={getErrorMessage(formError)} onClose={onClose} />
-      )}
-      <section className={`${styles['editor-wrapper']}`}>
-        {isLoading && <Loading />}
-        <form className={`${styles['editor-section']}`} onSubmit={handleSubmit}>
-          <textarea
-            name="query"
-            defaultValue={formValue}
-            onChange={handleFormValue}
-            onCut={() => handleCut()}
-            className={`${styles.textarea}`}
-          ></textarea>
-          <section className={`${styles.response}`}>
-            <textarea className={`${styles.textarea}`} disabled value={formResponse}></textarea>
-          </section>
-          <button className={styles['button-submit']} type="submit">
-            <img
-              className={styles.submit}
-              src={submit}
-              alt="submit"
-              title={`${t('editor.submit')}`}
-            />
-          </button>
-        </form>
-      </section>
-      <aside className={`${styles['aside-section']}`}>
-        <Variables />
-        <Headers />
-      </aside>
+      <>
+        <section className={`${styles['editor-wrapper']}`}>
+          {isLoading && <Loading />}
+          <form className={`${styles['editor-section']}`} onSubmit={handleSubmit}>
+            <textarea
+              name="query"
+              defaultValue={formValue}
+              onChange={handleFormValue}
+              onCut={() => handleCut()}
+              className={`${styles.textarea}`}
+            ></textarea>
+            <section className={`${styles.response}`}>
+              <textarea
+                className={`${styles.textarea}`}
+                disabled
+                value={formResponse}
+                placeholder={responsePlaceholder}
+              ></textarea>
+            </section>
+            <button className={styles['button-submit']} type="submit">
+              <img
+                className={styles.submit}
+                src={submit}
+                alt="submit"
+                title={`${t('editor.submit')}`}
+              />
+            </button>
+          </form>
+        </section>
+        <aside className={`${styles['aside-section']}`}>
+          <Variables />
+          <Headers />
+        </aside>
+        {!isLoading && showModal && formError && (
+          <Modal
+            type="error"
+            message={getErrorMessage(formError)}
+            onClose={onClose}
+            show={showModal}
+          />
+        )}
+      </>
     </section>
   );
 };

@@ -38,7 +38,7 @@ export interface EditorState {
 
 const initialState: EditorState = {
   formValue: REQUEST,
-  formResponse: 'Please, submit for response.',
+  formResponse: '',
   status: 'idle',
   error: null,
 };
