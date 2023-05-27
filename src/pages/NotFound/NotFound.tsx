@@ -8,7 +8,7 @@ const NotFound = (): JSX.Element => {
 
   return (
     <div className={styles.container}>
-      <img className={styles.background} src={notFound} alt="" />
+      <img className={styles.background} src={notFound} alt="spot background" />
       <h2 className={styles.text}>
         {t('notFound.not_found')}
         <br />
