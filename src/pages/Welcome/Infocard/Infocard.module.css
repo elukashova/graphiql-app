@@ -1,0 +1,134 @@
+.card,
+.card-open {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.card-open {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px 1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  background-color: var(--white);
+}
+
+.wrapper {
+  width: 90%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.title {
+  margin: 0;
+  padding: 0;
+  font-size: calc(0.563vw + 12.20px);
+  cursor: pointer;
+  transition: all 0.3s;
+  transform: scale(1);
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 2rem solid transparent;
+  border-right: 2rem solid transparent;
+  border-top: 0.7rem solid var(--purple-dark);
+  transition: all 0.3s;
+  cursor: pointer;
+  transition: all 0.3s;
+  transform: scale(1);
+}
+
+.top:hover .triangle,
+.top:hover .title {
+  transform: scale(1.1);
+}
+
+.text,
+.name {
+  font-size: calc(0.125vw + 13.60px);
+  margin: 0;
+  height: fit-content;
+}
+
+.hidden {
+  transform: scaleY(0);
+  opacity: 0;
+  visibility: hidden;
+  height: 0;
+  transition: all 0.3s;
+}
+
+.bottom {
+  height: fit-content;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  transform: scaleY(1);
+  transition: all 0.3s ease-out;
+  opacity: 1;
+  visibility: visible;
+  transform-origin: center top;
+}
+
+.author {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.img {
+  width: calc(2rem + 1vw);
+  height: calc(2rem + 1vw);
+  border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+  .bottom {
+    width: 100%;
+    height: calc(8rem + 1vw);
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .author {
+    justify-content: center;
+    gap: .5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .wrapper {
+    width: 100%;
+    padding: .5rem;
+  }
+
+  .author {
+    justify-content: center;
+    gap: .2rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .author {
+    flex-direction: column;
+  }
+}

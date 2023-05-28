@@ -1,0 +1,83 @@
+.footer {
+  background-color: var(--purple-light);
+  color: white;
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  flex: 0 1 auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+.gitHub {
+  display: flex;
+  gap: 20px;
+  font-size: 0;
+}
+
+@media screen and (max-width: 40rem) {
+  .gitHub {
+    gap: 10px;
+  }
+}
+
+.link {
+  width: 40px;
+  height: 40px;
+  background-image: url('../../assets/github.svg');
+  background-repeat: no-repeat;
+  background-size: 40px 40px;
+  position: relative;
+  text-decoration: none;
+  color: white;
+}
+
+.link:hover {
+  filter: invert(1);
+}
+
+.year {
+  font-size: 14px;
+  user-select: none;
+}
+
+@media screen and (max-width: 40rem) {
+  .year {
+    font-size: 14px;
+  }
+}
+
+.rss {
+  font-size: 0;
+  width: 80px;
+  height: 50px;
+  background-image: url('../../assets/rss.svg');
+  background-repeat: no-repeat;
+  background-size: 80px 50px;
+}
+
+.rss:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 500px) {
+  .link {
+    width: 25px;
+    height: 25px;
+    background-size: 25px 25px;
+  }
+
+  .rss {
+    width: 60px;
+    height: 30px;
+    background-size: 60px 30px;
+  }
+}

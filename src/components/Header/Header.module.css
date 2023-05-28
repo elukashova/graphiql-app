@@ -1,0 +1,215 @@
+.header {
+  flex: 0 1 auto;
+  width: 100%;
+  display: flex;
+  height: 14vh;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--purple-light);
+  transition: all 0.3s ease;
+}
+
+.fixed {
+  top: 0;
+  height: 10vh;
+  padding-top: 0;
+  position: fixed;
+  z-index: 999;
+  transition: all 0.3s ease;
+  background-color: var(--white);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.wrapper {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-block {
+  position: relative;
+}
+
+.logo {
+  height: 5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.first-circle {
+  background-color: var(--purple-dark);
+  width: 1rem;
+  height: 1rem;
+  left: 8rem;
+  top: 2.5rem;
+  transform: translate(-50%, -50%) rotate(-45deg) translate(260%, 0%) rotate(-45deg);
+}
+
+.second-circle {
+  background-color: var(--yellow);
+  width: 0.8rem;
+  height: 0.8rem;
+  top: 2.5rem;
+  left: 8rem;
+  transform: translate(-50%, -50%) rotate(-45deg) translate(260%, 0%) rotate(-45deg);
+}
+
+.logo-block:hover .first-circle {
+  transition: all 1s ease-in-out;
+  animation: ovalAnimationRight 5.5s infinite;
+}
+
+.logo-block:hover .second-circle {
+  transition: all 1s ease-in-out;
+  animation: ovalAnimationLeft 5s infinite;
+}
+
+@keyframes ovalAnimationRight {
+  0% {
+    transform: translate(-50%, -50%) rotate(-45deg) translate(260%, 0%) rotate(-45deg);
+    z-index: 1;
+  }
+  25% {
+    transform: translate(-50%, -50%) rotate(45deg) translate(0%, 260%) rotate(45deg);
+    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+    z-index: 3;
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(135deg) translate(-260%, 0%) rotate(135deg);
+    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+    z-index: 1;
+  }
+  75% {
+    transform: translate(-50%, -50%) rotate(225deg) translate(0%, -260%) rotate(225deg);
+    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+    z-index: 3;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(315deg) translate(260%, 0%) rotate(315deg);
+    z-index: 1;
+  }
+}
+
+@keyframes ovalAnimationLeft {
+  0% {
+    transform: translate(-50%, -50%) rotate(-45deg) translate(260%, 0%) rotate(-45deg) scale(1);
+    z-index: 0;
+  }
+  25% {
+    transform: translate(-50%, -50%) rotate(45deg) translate(0%, 260%) rotate(45deg) scale(1.2);
+    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+    z-index: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(135deg) translate(-260%, 0%) rotate(135deg) scale(1);
+    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+    z-index: 0;
+  }
+  75% {
+    transform: translate(-50%, -50%) rotate(225deg) translate(0%, -260%) rotate(225deg) scale(1.2);
+    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+    z-index: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(315deg) translate(260%, 0%) rotate(315deg) scale(1);
+    z-index: 0;
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  padding: calc(1rem + 0.5vw);
+  gap: calc(1rem + 1vw);
+}
+
+.link {
+  font-size: calc(0.375vw + 12.80px);
+  height: fit-content;
+  font-weight: bold;
+  color: var(--background-dark);
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.link:hover {
+  color: var(--purple-dark);
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background-color: var(--purple-dark);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.link:hover::after {
+  transform: scaleX(1);
+}
+
+@media (max-width: 768px) {
+  .logo {
+    height: 4.5rem;
+  }
+
+  .first-circle {
+    transform: translate(-150%, -85%) rotate(-45deg) translate(240%, 0%) rotate(-45deg);
+  }
+  
+  .second-circle {
+    transform: translate(-190%, -85%) rotate(-45deg) translate(260%, 0%) rotate(-45deg);
+  }
+}
+
+@media (max-width: 640px) {
+  .top {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo {
+    height: 4rem;
+  }
+
+  .first-circle {
+    transform: translate(-200%, -85%) rotate(-45deg) translate(240%, 0%) rotate(-45deg);
+  }
+  
+  .second-circle {
+    transform: translate(-230%, -85%) rotate(-45deg) translate(260%, 0%) rotate(-45deg);
+  }
+}
+
+@media (max-width: 500px) {
+  .header {
+    height: max-content;
+    padding: 0.5rem 0;
+  }
+
+  .wrapper {
+    width: 95%;
+    flex-direction: column;
+  }
+
+  .nav {
+    padding: 0;
+    gap: calc(1rem + 1vw);
+  }
+}

@@ -1,0 +1,20 @@
+.error {
+  padding: 0.3rem 0.7rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 14px;
+  background-color: var(--yellow);
+}
+
+@media (max-width: 700px) {
+  .error {
+    font-weight: 400;
+    padding: 0.3rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .error {
+    text-transform: none;
+  }
+}

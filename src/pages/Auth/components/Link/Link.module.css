@@ -1,0 +1,36 @@
+.wrapper {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: calc(0.313vw + 13.00px);
+}
+
+.link {
+  color: var(--purple-dark);
+  text-decoration: none;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.link:hover {
+  color: var(--purple-dark);
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background-color: var(--purple-dark);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.link:hover::after {
+  transform: scaleX(1);
+}

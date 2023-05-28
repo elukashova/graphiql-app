@@ -1,0 +1,37 @@
+.modal.show {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20000;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  height: max-content;
+}
+
+.message {
+  margin: calc(1rem + 1vw);
+}
+
+.button {
+  background-color: var(--purple-light);
+  color: #fff;
+  border: none;
+  margin: calc(1rem + 1vw);
+  border-radius: 4px;
+  cursor: pointer;
+}
