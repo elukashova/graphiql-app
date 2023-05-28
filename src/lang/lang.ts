@@ -25,7 +25,7 @@ i18n
             what_text:
               'GraphiQL is a tool designed for developers to test and explore GraphQL APIs: it provides an interactive platform enabling the execution and composition of GraphQL queries, examination of response data, and navigation of API documentation.',
             who: 'Who',
-            who_nastya: 'Anastasia Klimov',
+            who_nastya: 'Anastasia Klimova',
             who_lena: 'Elena Lukashova',
             who_karina: 'Karina Timoshina',
             why: 'Why',

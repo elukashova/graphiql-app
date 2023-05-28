@@ -2,11 +2,12 @@ import { buildClientSchema, getIntrospectionQuery } from 'graphql/utilities';
 import React, { lazy, useState, Suspense, useEffect } from 'react';
 import styles from './Docs.module.css';
 import book from '../../../assets/book.svg';
+import ok from '../../../assets/ok.svg';
 import useDocs from '../../../hooks/docsHook';
 import { useAppSelector } from '../../../store/hooks';
 import { selectDocs } from '../../../store/slices/docs';
 import { URL } from '../../../store/slices/editorSlice';
-import Loading from '../../../components/Loading/Loading';
+import Loader from '../../../components/Loader/Loader';
 import { GraphQLSchema } from 'graphql';
 import Modal from '../../../components/Modal/Modal';
 import { useTranslation } from 'react-i18next';
@@ -24,6 +25,7 @@ const Docs: React.FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
   const { isDocs } = useAppSelector(selectDocs);
   const { toggleDocs } = useDocs();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const fetchSchema = async (): Promise<void> => {
     setSchema(null);
@@ -75,6 +77,7 @@ const Docs: React.FC = (): JSX.Element => {
       }
       await fetchSchema();
     }
+    setIsOpen(!isOpen);
     toggleDocs();
   };
 
@@ -91,18 +94,23 @@ const Docs: React.FC = (): JSX.Element => {
           type="button"
           onClick={handleClick}
         >
-          <img className={styles.book} src={book} alt="Documents" title={`${t('editor.docs')}`} />
+          <img
+            className={styles.book}
+            src={isOpen ? ok : book}
+            alt="Documents"
+            title={`${t('editor.docs')}`}
+          />
         </button>
         {error && !isLoading && (
           <Modal type="error" message={error} onClose={onClose} show={true} />
         )}
       </div>
       {isLoading ? (
-        <Loading />
+        <Loader />
       ) : (
         isDocs &&
         schema && (
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<Loader />}>
             <Schema schema={schema} />
           </Suspense>
         )

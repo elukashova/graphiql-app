@@ -24,7 +24,7 @@ const Layout = (props: props): JSX.Element => {
     }
 
     if (isAuth) {
-      if (location.pathname === '/auth') {
+      if (location.pathname === '/signin' || location.pathname === '/signup') {
         navigate('/editor');
       }
     } else {

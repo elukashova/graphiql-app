@@ -4,7 +4,7 @@ import { fetchFormResponse, REQUEST } from '../../../store/slices/editorSlice';
 import styles from './Editor.module.css';
 import { AppDispatch, RootState } from '../../../store/store';
 import submit from '../../../assets/submit.svg';
-import Loading from '../../../components/Loading/Loading';
+import Loader from '../../../components/Loader/Loader';
 import Variables from '../Variables/Variables';
 import Headers from '../Headers/Headers';
 import Modal from '../../../components/Modal/Modal';
@@ -14,7 +14,6 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 
 const Editor: React.FC = (): JSX.Element => {
   const { t } = useTranslation();
-  const responsePlaceholder = 'Please, submit for response.';
   const dispatch = useDispatch<AppDispatch>();
   const [formValue, setFormValue] = useState<string>(
     localStorage.getItem('requestValueLS')?.trim() || REQUEST
@@ -70,7 +69,7 @@ const Editor: React.FC = (): JSX.Element => {
     <section className={`${styles['editor-block']}`}>
       <>
         <section className={`${styles['editor-wrapper']}`}>
-          {isLoading && <Loading />}
+          {isLoading && <Loader />}
           <form className={`${styles['editor-section']}`} onSubmit={handleSubmit}>
             <textarea
               name="query"
@@ -84,7 +83,7 @@ const Editor: React.FC = (): JSX.Element => {
                 className={`${styles.textarea}`}
                 disabled
                 value={formResponse}
-                placeholder={responsePlaceholder}
+                placeholder={`${t('editor.cta')}`}
               ></textarea>
             </section>
             <button className={styles['button-submit']} type="submit">
