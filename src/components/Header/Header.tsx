@@ -25,7 +25,6 @@ const Header = (): JSX.Element => {
 
   const handleLogOut = async (): Promise<void> => {
     const response = await logOut();
-    console.log(response);
   };
 
   return (
