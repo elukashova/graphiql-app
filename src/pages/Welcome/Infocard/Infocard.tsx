@@ -21,7 +21,7 @@ const InfoCard = ({ title, text, urls, names }: Props): JSX.Element => {
       <div className={styles.wrapper}>
         <div className={styles.top}>
           <h2 className={styles.title}>{title}</h2>
-          <div className={styles.triangle}></div>
+          <span className={styles.triangle}></span>
         </div>
         <div className={`${styles.hidden} ${isOpen ? styles['bottom'] : ''}`}>
           {text && <p className={styles.text}>{text}</p>}

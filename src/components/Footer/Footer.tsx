@@ -33,7 +33,7 @@ const Footer = (): JSX.Element => {
         </div>
         <div className={styles.year}>&copy; 2023</div>
         <a className={styles.rss} href="https://rs.school/react/" target="_blank" rel="noreferrer">
-          rs school course js
+          rs school course React
         </a>
       </div>
     </footer>

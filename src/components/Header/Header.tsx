@@ -33,9 +33,9 @@ const Header = (): JSX.Element => {
       <div className={styles.wrapper}>
         <NavLink to="/">
           <div className={styles['logo-block']}>
-            <div className={`${styles.circle} ${styles['first-circle']}`}></div>
+            <span className={`${styles.circle} ${styles['first-circle']}`}></span>
             <img className={styles.logo} src={logo} alt="logo" />
-            <div className={`${styles.circle} ${styles['second-circle']}`}></div>
+            <span className={`${styles.circle} ${styles['second-circle']}`}></span>
           </div>
         </NavLink>
         <nav className={styles.nav}>

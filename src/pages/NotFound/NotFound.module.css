@@ -34,14 +34,15 @@
   color: var(--background-dark);
   text-decoration: none;
   display: inline-block;
-  transform: rotate(7deg);
-  transition: transform 0.3s ease-in-out;
+  transform: rotate(10deg) scale(0.9);
+  transition: all 1s;
 }
 
 main:hover .highlight {
   transform: rotate(-10deg);
   color: var(--background-dark);
-  transition: transform 0.3s ease-in-out;
+  transform: rotate(-10deg) scale(1.1);
+  transition: all 1s;
 }
 
 .container {
