@@ -99,7 +99,7 @@ const Docs: React.FC = (): JSX.Element => {
         >
           <img
             className={styles.book}
-            src={isOpen ? ok : book}
+            src={isDocs && !error ? ok : book}
             alt="Documents"
             title={`${t('editor.docs')}`}
           />
