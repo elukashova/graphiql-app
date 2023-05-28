@@ -2,7 +2,6 @@ import { buildClientSchema, getIntrospectionQuery } from 'graphql/utilities';
 import React, { lazy, useState, Suspense, useEffect } from 'react';
 import styles from './Docs.module.css';
 import book from '../../../assets/book.svg';
-
 import useDocs from '../../../hooks/docsHook';
 import { useAppSelector } from '../../../store/hooks';
 import { selectDocs } from '../../../store/slices/docs';
@@ -22,7 +21,6 @@ const Docs: React.FC = (): JSX.Element => {
 
   const [schema, setSchema] = useState<GraphQLSchema | null>(null);
   const [error, setError] = useState<Error>(null);
-  const [formErrorShow, setFormErrorShow] = useState<boolean>(!!error);
   const [isLoading, setIsLoading] = useState(false);
   const { isDocs } = useAppSelector(selectDocs);
   const { toggleDocs } = useDocs();
@@ -30,7 +28,6 @@ const Docs: React.FC = (): JSX.Element => {
   const fetchSchema = async (): Promise<void> => {
     setSchema(null);
     setError(null);
-    setFormErrorShow(false);
     setIsLoading(true);
     try {
       const response = await fetch(apiUrl, {
@@ -47,21 +44,17 @@ const Docs: React.FC = (): JSX.Element => {
           const responseSchema = buildClientSchema(data);
           setSchema(responseSchema);
           setError(null);
-          setFormErrorShow(false);
         } catch (error) {
           setSchema(null);
           setError(`${error}`);
-          setFormErrorShow(true);
         }
       } else {
         setError('Something went wrong with API');
-        setFormErrorShow(true);
         setSchema(null);
       }
     } catch (error) {
       setSchema(null);
       setError(`${error}`);
-      setFormErrorShow(true);
     } finally {
       setIsLoading(false);
     }
@@ -77,14 +70,17 @@ const Docs: React.FC = (): JSX.Element => {
 
   const handleClick = async () => {
     if (!isDocs) {
+      if (isLoading) {
+        return;
+      }
       await fetchSchema();
     }
     toggleDocs();
   };
 
   const onClose = () => {
-    setFormErrorShow(false);
-    setIsLoading(false);
+    setError(null);
+    toggleDocs();
   };
 
   return (
@@ -97,7 +93,9 @@ const Docs: React.FC = (): JSX.Element => {
         >
           <img className={styles.book} src={book} alt="Documents" title={`${t('editor.docs')}`} />
         </button>
-        {formErrorShow && error && <Modal type="error" message={error} onClose={onClose} />}
+        {error && !isLoading && (
+          <Modal type="error" message={error} onClose={onClose} show={true} />
+        )}
       </div>
       {isLoading ? (
         <Loading />

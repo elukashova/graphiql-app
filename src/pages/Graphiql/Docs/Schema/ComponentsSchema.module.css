@@ -54,6 +54,7 @@ p {
 .type {
   color: var(--purple-dark);
   font-weight: 600;
+  cursor: pointer;
 }
 
 .description {

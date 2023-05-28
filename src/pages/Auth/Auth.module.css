@@ -71,7 +71,7 @@ main:hover .title {
 
   .sign,
   .title {
-    font-size: calc(1rem + 1vw);
+    font-size: calc(1.3rem + 1.4vw);
     white-space: nowrap;
   }
 
