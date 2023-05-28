@@ -14,7 +14,6 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 
 const Editor: React.FC = (): JSX.Element => {
   const { t } = useTranslation();
-  const responsePlaceholder = 'Please, submit for response.';
   const dispatch = useDispatch<AppDispatch>();
   const [formValue, setFormValue] = useState<string>(
     localStorage.getItem('requestValueLS')?.trim() || REQUEST
@@ -84,7 +83,7 @@ const Editor: React.FC = (): JSX.Element => {
                 className={`${styles.textarea}`}
                 disabled
                 value={formResponse}
-                placeholder={responsePlaceholder}
+                placeholder={`${t('editor.cta')}`}
               ></textarea>
             </section>
             <button className={styles['button-submit']} type="submit">
