@@ -77,7 +77,10 @@ const Docs: React.FC = (): JSX.Element => {
       }
       await fetchSchema();
     }
-    setIsOpen(!isOpen);
+
+    if (error) {
+      setIsOpen(!isOpen);
+    }
     toggleDocs();
   };
 
