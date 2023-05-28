@@ -24,8 +24,7 @@ const Header = (): JSX.Element => {
   window.addEventListener('scroll', scrollHeader);
 
   const handleLogOut = async (): Promise<void> => {
-    const response = await logOut();
-    console.log(response);
+    await logOut();
   };
 
   return (

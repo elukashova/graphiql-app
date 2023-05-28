@@ -8,7 +8,6 @@ import NotFound from './pages/NotFound/NotFound';
 import AuthPage from './pages/Auth/Auth';
 
 const App = (): JSX.Element => {
-  // throw new Error('Error for checking ErrorBoundary');
   return (
     <BrowserRouter>
       <Routes>

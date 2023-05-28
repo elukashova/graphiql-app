@@ -7,16 +7,15 @@ import AuthLink from './components/Link/Link';
 import { selectAuth } from '../../store/slices/auth';
 import Loader from '../../components/Loader/Loader';
 import { useTranslation } from 'react-i18next';
-import { Navigate } from 'react-router-dom';
 
-const AuthPage = (): JSX.Element => {
+const AuthPage = (): JSX.Element | null => {
+  const { isAuth } = useAppSelector(selectAuth);
   const { isSignIn, isSignUp } = useAppSelector(selectRoute);
   const { isLoading } = useAppSelector(selectAuth);
-  const { isAuth } = useAppSelector(selectAuth);
   const { t } = useTranslation();
 
   if (isAuth) {
-    return <Navigate to="/editor" />;
+    return null;
   } else {
     return (
       <section className={styles.section}>
